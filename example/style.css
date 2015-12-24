@@ -4,8 +4,9 @@ body {
   font-weight: 200;
 }
 
-.example {
-  padding: 0 25px;
+.target {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 span.redux-tooltip {
