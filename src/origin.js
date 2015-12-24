@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { show, hide } from './actions';
+import { show, hide, delay } from './actions';
 
 export default class Origin extends Component {
   static get displayName() {
@@ -17,7 +17,7 @@ export default class Origin extends Component {
     const props = { ...this.props };
     if (!props.onMouseOver) {
       props.onMouseOver = e => {
-        this.props.dispatch(show(e.target));
+        this.props.dispatch(delay(show(e.target)));
       };
     }
     if (!props.onMouseOut) {
