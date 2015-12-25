@@ -9,10 +9,15 @@ export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
 export const toggle = createAction(TOGGLE);
 
-export function delay(action) {
+export function delay(action, duration=1500) {
   if (!action.meta) {
     action.meta = {};
   }
-  action.meta.delay = 1500;
+  action.meta.delay = duration;
   return action;
 }
+
+export const START_TIMEOUT = prefix('START_TIMEOUT');
+export const END_TIMEOUT = prefix('END_TIMEOUT');
+export const startTimeout = createAction(START_TIMEOUT);
+export const endTimeout = createAction(END_TIMEOUT);

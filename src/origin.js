@@ -17,12 +17,12 @@ export default class Origin extends Component {
     const props = { ...this.props };
     if (!props.onMouseOver) {
       props.onMouseOver = e => {
-        this.props.dispatch(delay(show(e.target)));
+        this.props.dispatch(show(e.target));
       };
     }
     if (!props.onMouseOut) {
       props.onMouseOut = () => {
-        this.props.dispatch(hide());
+        this.props.dispatch(delay(hide()));
       };
     }
     return (
