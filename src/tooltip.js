@@ -16,7 +16,8 @@ class Tooltip extends Component {
       el: PropTypes.object,
 
       // Props from wrapper props
-      hoge: PropTypes.func,
+      onMouseOver: PropTypes.func,
+      onMouseOut: PropTypes.func,
     };
   }
 
@@ -45,10 +46,17 @@ class Tooltip extends Component {
   }
 
   render () {
+    const { onMouseOver, onMouseOut } = this.props;
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = { visibility, ...this.state };
     return (
-      <span ref="tooltip" className="redux-tooltip" style={style}>
+      <span
+        ref="tooltip"
+        className="redux-tooltip"
+        style={style}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+      >
         {this.props.children}
       </span>
     );

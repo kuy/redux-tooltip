@@ -1,5 +1,5 @@
 import {
-  SHOW, HIDE, TOGGLE,
+  SHOW, HIDE, TOGGLE, KEEP,
   START_TIMEOUT, END_TIMEOUT
 } from './actions';
 
@@ -19,6 +19,9 @@ const handlers = {
   },
   [TOGGLE]: function (state) {
     return { ...state, show: !state.show };
+  },
+  [KEEP]: function (state) {
+    return { ...state, timeout: null };
   },
   [START_TIMEOUT]: function (state, action) {
     return { ...state, timeout: action.payload };

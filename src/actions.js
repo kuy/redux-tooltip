@@ -5,9 +5,11 @@ const prefix = (name) => `redux-tooltip/${name}`;
 export const SHOW = prefix('SHOW');
 export const HIDE = prefix('HIDE');
 export const TOGGLE = prefix('TOGGLE');
+export const KEEP = prefix('KEEP');
 export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
 export const toggle = createAction(TOGGLE);
+export const keep = createAction(KEEP);
 
 export function delay(action, duration=1500) {
   if (!action.meta) {
