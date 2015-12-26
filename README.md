@@ -29,3 +29,4 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 ### TODO
 
 + Supports multiple tooltips
++ Passing tooltip styles as 'style' props

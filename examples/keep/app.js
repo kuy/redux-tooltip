@@ -10,8 +10,8 @@ class App extends Component {
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.handleTooltipMouseOver = this.handleTooltipMouseOver.bind(this);
-    this.handleTooltipMouseOut = this.handleTooltipMouseOut.bind(this);
+    this.handleHover = this.handleHover.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
   }
 
   handleMouseOver(e) {
@@ -22,11 +22,11 @@ class App extends Component {
     this.props.dispatch(delay(hide()));
   }
 
-  handleTooltipMouseOver() {
+  handleHover() {
     this.props.dispatch(keep());
   }
 
-  handleTooltipMouseOut() {
+  handleLeave() {
     this.props.dispatch(hide());
   }
 
@@ -45,7 +45,7 @@ class App extends Component {
           This is an example for <span className="target" onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>redux-tooltip</span>.
         </p>
 
-        <Tooltip onMouseOver={this.handleTooltipMouseOver} onMouseOut={this.handleTooltipMouseOut}>
+        <Tooltip onHover={this.handleHover} onLeave={this.handleLeave}>
           Hover and keep tooltip :)
         </Tooltip>
       </div>

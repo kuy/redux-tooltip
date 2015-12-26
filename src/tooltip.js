@@ -16,8 +16,8 @@ class Tooltip extends Component {
       el: PropTypes.object,
 
       // Props from wrapper props
-      onMouseOver: PropTypes.func,
-      onMouseOut: PropTypes.func,
+      onHover: PropTypes.func,
+      onLeave: PropTypes.func,
     };
   }
 
@@ -46,7 +46,7 @@ class Tooltip extends Component {
   }
 
   render () {
-    const { onMouseOver, onMouseOut } = this.props;
+    const { onHover, onLeave } = this.props;
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = { visibility, ...this.state };
     return (
@@ -54,8 +54,8 @@ class Tooltip extends Component {
         ref="tooltip"
         className="redux-tooltip-base redux-tooltip-shadow"
         style={style}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
+        onMouseOver={onHover}
+        onMouseOut={onLeave}
       >
         <div className="redux-tooltip-content">
           {this.props.children}
