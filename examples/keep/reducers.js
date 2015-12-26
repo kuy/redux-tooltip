@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import tooltip from '../src/reducer';
+import tooltip from '../../src/reducer';
 
 function app(state = {}, action) {
   switch (action.type) {

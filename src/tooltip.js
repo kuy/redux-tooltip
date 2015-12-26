@@ -50,15 +50,20 @@ class Tooltip extends Component {
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = { visibility, ...this.state };
     return (
-      <span
+      <div
         ref="tooltip"
-        className="redux-tooltip"
+        className="redux-tooltip-base redux-tooltip-shadow"
         style={style}
         onMouseOver={onMouseOver}
         onMouseOut={onMouseOut}
       >
-        {this.props.children}
-      </span>
+        <div className="redux-tooltip-content">
+          {this.props.children}
+        </div>
+        <div className="redux-tooltip-arrow-top redux-tooltip-arrow">
+          <span className="redux-tooltip-arrow-border"></span>
+        </div>
+      </div>
     );
   }
 }
