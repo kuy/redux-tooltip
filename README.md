@@ -119,4 +119,6 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 
 ### TODO
 
++ Supports custom themes
 + Supports multiple tooltips
++ More useful props
