@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { position } from './utils';
+import * as styles from './styles';
+import * as themes from './themes';
 
 class Tooltip extends Component {
   static get displayName() {
@@ -47,20 +49,24 @@ class Tooltip extends Component {
   render () {
     const { onHover, onLeave } = this.props;
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
-    const style = { visibility, ...this.state };
+    const style = {
+      base: { ...styles.base, ...themes.simple.base, visibility, ...this.state },
+      content: { ...styles.content, ...themes.simple.content },
+      arrow: { ...styles.arrow.base },
+      border: { ...styles.border.base, ...styles.border.top, ...themes.simple.border },
+    };
     return (
       <div
         ref="tooltip"
-        className="redux-tooltip-base redux-tooltip-shadow"
-        style={style}
+        style={style.base}
         onMouseOver={onHover}
         onMouseOut={onLeave}
       >
-        <div className="redux-tooltip-content">
+        <div style={style.content}>
           {this.props.children}
         </div>
-        <div className="redux-tooltip-arrow-top redux-tooltip-arrow">
-          <span className="redux-tooltip-arrow-border"></span>
+        <div style={style.arrow}>
+          <span style={style.border}></span>
         </div>
       </div>
     );

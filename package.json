@@ -1,7 +1,7 @@
 {
   "name": "redux-tooltip",
   "version": "0.1.0",
-  "description": "A React component react-tooltip for Redux",
+  "description": "A tooltip React component for Redux",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
