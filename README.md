@@ -1,8 +1,16 @@
-# NOTICE: UNDERDEVELOPMENT
-
 # redux-tooltip
 
-A tooltip react component for Redux.
+A tooltip react component for [Redux](https://github.com/rackt/redux).
+
+## Installation
+
+```
+npm install --save redux-tooltip
+```
+
+## Examples
+
+Please check out [examples](https://github.com/kuy/redux-tooltip/tree/master/examples) directory.
 
 ## Usage
 
@@ -15,11 +23,12 @@ import { Tooltip } from 'redux-tooltip';
 class App extends React.Component {
   render() {
     return (
-      // ...
-      <Tooltip>
-        Hello Tooltip!
-      </Tooltip>
-      // ...
+      <div>
+        // ...
+        <Tooltip>
+          Hello Tooltip!
+        </Tooltip>
+      </div>
     );
   }
 }
@@ -33,7 +42,9 @@ import { Origin } from 'redux-tooltip';
 class Page extends React.Component {
   render() {
     return (
-      Please hover <Origin>here</Origin>.
+      <p>
+        Please hover <Origin>here</Origin>.
+      </p>
     );
   }
 }
@@ -47,13 +58,9 @@ import { reducer as tooltip } from 'redux-tooltip';
 // ...
 
 export default combineReducers(
-  { yours, tooltip }
+  { your, reducers, ..., tooltip }
 );
 ```
-
-## Examples
-
-Please check out `examples` directory.
 
 ## Development
 

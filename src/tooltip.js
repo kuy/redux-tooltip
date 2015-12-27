@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from './actions';
 import { position } from './utils';
 
 class Tooltip extends Component {

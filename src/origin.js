@@ -1,30 +1,31 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { show, hide } from './actions';
 
-export default class Origin extends Component {
+class Origin extends Component {
   static get displayName() {
     return 'Origin';
   }
 
-  static get propTypes() {
-    return {
-      dispatch: PropTypes.func.isRequired,
-    };
-  }
-
   render () {
     const props = { ...this.props };
+    delete props['dispatch'];
+
     if (!props.onMouseOver) {
+      // Set default hover handler
       props.onMouseOver = e => {
         this.props.dispatch(show(e.target));
       };
     }
+
     if (!props.onMouseOut) {
+      // Set default leave handler
       props.onMouseOut = () => {
         this.props.dispatch(hide());
       };
     }
+
     return (
       <span {...props}>
         {this.props.children}
@@ -32,3 +33,5 @@ export default class Origin extends Component {
     );
   }
 }
+
+export default connect()(Origin);
