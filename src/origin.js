@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { show, hide, delay } from './actions';
+import { show, hide } from './actions';
 
 export default class Origin extends Component {
   static get displayName() {
@@ -22,7 +22,7 @@ export default class Origin extends Component {
     }
     if (!props.onMouseOut) {
       props.onMouseOut = () => {
-        this.props.dispatch(delay(hide()));
+        this.props.dispatch(hide());
       };
     }
     return (

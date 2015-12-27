@@ -36,14 +36,10 @@ class App extends Component {
         <h1>Keep Example</h1>
 
         <ol>
-          <li>Hover on a text</li>
+          <li>Hover on <span className="target" onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>an origin element</span></li>
           <li>Hover on a tooltip</li>
-          <li>You can keep tooltip shown</li>
+          <li>You can keep tooltip!</li>
         </ol>
-
-        <p>
-          This is an example for <span className="target" onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>redux-tooltip</span>.
-        </p>
 
         <Tooltip onHover={this.handleHover} onLeave={this.handleLeave}>
           Hover and keep tooltip :)
