@@ -22,7 +22,7 @@ the `Tooltip` component receives changes of props and updates itself.
 The recommended setup is that a single (shared) `Tooltip` component and multiple `Origin` components.
 If you hover on `Origin` component, `Tooltip` will be shown.
 
-### 1. Put a shared `Tooltip` component to [Container component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.lek6bm8mf) with contents
+#### 1. Put a `Tooltip` component to [Container component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.lek6bm8mf) with contents
 
 ```
 import { Tooltip } from 'redux-tooltip';
@@ -41,7 +41,7 @@ class App extends React.Component {
 }
 ```
 
-### 2. Put an origin (target) element in Container or Presentatinal component.
+#### 2. Put an origin (target) element in Container or Presentatinal component
 
 ```
 import { Origin } from 'redux-tooltip';
@@ -57,7 +57,7 @@ class Page extends React.Component {
 }
 ```
 
-### 3. Combine `redux-tooltip` reducer with yours.
+#### 3. Combine `redux-tooltip` reducer with yours
 
 ```
 import { reducer as tooltip } from 'redux-tooltip';
@@ -70,6 +70,34 @@ export default combineReducers(
 ```
 
 That's it!
+
+## API
+
+### `Tooltip`
+
+A tooltip component.
+
++ `show` [`Boolean`]
++ `el` ['DOM element']
++ `onHover` ['Function']
++ `onLeave` ['Function']
+
+### `Origin`
+
+A origin component. This has default handlers of `onMouseOver` and `onMouseOut`
+which dispatches actions to show/hide tooltip.
+
+### reducer
+
+A Redux reducer must be combined with yours.
+
+### middleware
+
+Please apply this middleware if you want to use 'delay' feature.
+
+### actions
+
+WIP
 
 ## Development
 
