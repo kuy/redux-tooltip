@@ -23,9 +23,9 @@ Since both components are already connected to Redux store (this also means they
 the `Tooltip` component receives changes of props and updates itself.
 
 The recommended setup is that a single (shared) `Tooltip` component and multiple `Origin` components.
-If you hover on `Origin` component, `Tooltip` will be shown.
+If you hover on the origin element, the tooltip will be shown.
 
-#### 1. Put a `Tooltip` component to [Container component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.lek6bm8mf) with contents
+#### 1. Put a shared `Tooltip` component to [Container component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.lek6bm8mf)
 
 ```
 import { Tooltip } from 'redux-tooltip';
@@ -44,7 +44,7 @@ class App extends React.Component {
 }
 ```
 
-#### 2. Put an `Origin` component to Container or Presentatinal component
+#### 2. Wrap your content with an `Origin` component in Container or Presentatinal component
 
 ```
 import { Origin } from 'redux-tooltip';
@@ -122,14 +122,12 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 
 ### TODO
 
-+ Supports four placements
-+ Supports auto placement
-+ Adds feature to pass props from `Origin`
-+ Adds option to specify delay
 + Supports multiple tooltips
++ Supports auto placement
 + More use cases
-+ More useful props
++ Adds option to specify delay in `Origin` component
 + Supports custom themes
++ More useful props
 + Add test
 
 ## License

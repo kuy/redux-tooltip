@@ -7,7 +7,7 @@ export default function middleware(store) {
     }
 
     const token = setTimeout(() => {
-      // Don't enter if token is cleared
+      // Ignore if token is cleared
       const state = store.getState();
       if (state.tooltip.timeout !== null) {
         // Clear timeout token

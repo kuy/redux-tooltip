@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   handleMouseOver(e) {
-    this.props.dispatch(show(e.target));
+    this.props.dispatch(show({ el: e.target }));
   }
 
   handleMouseOut() {

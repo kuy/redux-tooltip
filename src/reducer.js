@@ -12,8 +12,14 @@ const initial = {
 
 const handlers = {
   [SHOW]: function (state, action) {
-    const el = action.payload || state.el;
-    return { ...state, show: true, timeout: null, el };
+    const names = ['el', 'place'];
+    const props = {};
+    names.forEach(name => {
+      if (action.payload[name]) {
+        props[name] = action.payload[name];
+      }
+    });
+    return { ...state, show: true, timeout: null, ...props };
   },
   [HIDE]: function (state) {
     return { ...state, show: false };

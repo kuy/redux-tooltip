@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { placement } from './utils';
 import * as styles from './styles';
@@ -63,8 +62,8 @@ class Tooltip extends Component {
         <div style={style.content}>
           {this.props.children}
         </div>
-        <div style={style.arrow}>
-          <span style={style.border}></span>
+        <div style={style.arrow} key={`a-${place}`}>
+          <span style={style.border} key={`b-${place}`}></span>
         </div>
       </div>
     );

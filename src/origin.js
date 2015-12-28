@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { show, hide } from './actions';
 
@@ -15,7 +14,7 @@ class Origin extends Component {
     if (!props.onMouseOver) {
       // Set default hover handler
       props.onMouseOver = e => {
-        this.props.dispatch(show(e.target));
+        this.props.dispatch(show({ ...this.props, el: e.target }));
       };
     }
 
