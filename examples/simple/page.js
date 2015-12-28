@@ -13,6 +13,23 @@ export default class Page extends Component {
         <p>
           Of course, you can also put <Origin className="target">multiple</Origin> <Origin className="target">tooltips</Origin>.
         </p>
+
+        <p>
+          <Origin>
+            <img src="http://lorempixel.com/image_output/cats-q-g-240-180-9.jpg" alt="cat" />
+          </Origin>
+          <br />
+          It can be used as a caption of images.
+        </p>
+
+        <p>
+          Form hint: <br />
+          <Origin>
+            <input type="input" placeholder="mail" />
+          </Origin>@<Origin>
+            <input type="input" placeholder="example.com" />
+          </Origin>
+        </p>
       </div>
     );
   }

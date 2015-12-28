@@ -44,7 +44,7 @@ class App extends React.Component {
 }
 ```
 
-#### 2. Put an origin (target) element in Container or Presentatinal component
+#### 2. Put an `Origin` component to Container or Presentatinal component
 
 ```
 import { Origin } from 'redux-tooltip';
@@ -122,11 +122,12 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 
 ### TODO
 
-+ More usecases
-+ More useful props
-+ Add test
-+ Supports custom themes
++ Supports 4 directions
 + Supports multiple tooltips
++ More use cases
++ More useful props
++ Supports custom themes
++ Add test
 
 ## License
 
