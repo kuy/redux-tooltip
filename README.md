@@ -1,3 +1,6 @@
+[![NPM Package][npm_img]][npm_site]
+[![Dependency Status][david_img]][david_site]
+
 # redux-tooltip
 
 A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/rackt/redux).
@@ -119,6 +122,21 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 
 ### TODO
 
++ More usecases
++ More useful props
++ Add test
 + Supports custom themes
 + Supports multiple tooltips
-+ More useful props
+
+## License
+
+MIT
+
+## Author
+
+Yuki Kodama / [@kuy](https://twitter.com/kuy)
+
+[npm_img]: https://img.shields.io/npm/v/redux-tooltip.svg
+[npm_site]: https://www.npmjs.org/package/redux-tooltip
+[david_img]: https://img.shields.io/david/kuy/redux-tooltip.svg
+[david_site]: https://david-dm.org/kuy/redux-tooltip
