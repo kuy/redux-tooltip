@@ -5,6 +5,7 @@ import {
 
 const initial = {
   show: false,
+  place: 'top',
   el: null,
   timeout: null,
 };

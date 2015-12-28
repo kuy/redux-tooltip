@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { position } from './utils';
+import { placement } from './utils';
 import * as styles from './styles';
 import * as themes from './themes';
 
@@ -14,6 +14,7 @@ class Tooltip extends Component {
     return {
       // Props from state tree
       show: PropTypes.bool.isRequired,
+      place: PropTypes.string.isRequired,
       el: PropTypes.object,
 
       // Props from wrapper props
@@ -25,6 +26,7 @@ class Tooltip extends Component {
   static get defaultProps() {
     return {
       show: false,
+      place: 'top',
     };
   }
 
@@ -35,25 +37,21 @@ class Tooltip extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    const { el } = nextProps;
+    const { el, place } = nextProps;
     if (el && this.props.el != el) {
-      const tip = position(this.refs.tooltip);
-      const pos = position(nextProps.el);
-      this.setState({
-        top: `${pos.top - tip.height - 8}px`,
-        left: `${pos.left + (pos.width / 2) - (tip.width / 2)}px`,
-      });
+      const offset = placement(place, this.refs.tooltip, el);
+      this.setState(offset);
     }
   }
 
   render () {
-    const { onHover, onLeave } = this.props;
+    const { place, onHover, onLeave } = this.props;
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = {
       base: { ...styles.base, ...themes.simple.base, visibility, ...this.state },
       content: { ...styles.content, ...themes.simple.content },
-      arrow: { ...styles.arrow.base },
-      border: { ...styles.border.base, ...styles.border.top, ...themes.simple.border },
+      arrow: { ...styles.arrow },
+      border: { ...styles.border.base, ...styles.border[place], ...themes.simple.border },
     };
     return (
       <div
