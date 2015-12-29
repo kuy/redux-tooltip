@@ -15,13 +15,15 @@ class Origin extends Component {
       // Set default hover handler
       props.onMouseOver = e => {
         this.props.dispatch(show({ ...this.props, el: e.target }));
+        this.props.onHover && this.props.onHover(e);
       };
     }
 
     if (!props.onMouseOut) {
       // Set default leave handler
-      props.onMouseOut = () => {
+      props.onMouseOut = (e) => {
         this.props.dispatch(hide());
+        this.props.onLeave && this.props.onLeave(e);
       };
     }
 

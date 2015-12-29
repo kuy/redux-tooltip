@@ -15,6 +15,7 @@ class Tooltip extends Component {
       show: PropTypes.bool.isRequired,
       place: PropTypes.string.isRequired,
       el: PropTypes.object,
+      content: PropTypes.string,
 
       // Props from wrapper props
       onHover: PropTypes.func,
@@ -37,14 +38,14 @@ class Tooltip extends Component {
 
   componentWillUpdate(nextProps) {
     const { el, place } = nextProps;
-    if (el && this.props.el != el) {
+    if (el && (this.props.el != el || this.props.place !== place)) {
       const offset = placement(place, this.refs.tooltip, el);
       this.setState(offset);
     }
   }
 
   render () {
-    const { place, onHover, onLeave } = this.props;
+    const { content, place, onHover, onLeave } = this.props;
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = {
       base: { ...styles.base, ...themes.simple.base, visibility, ...this.state },
@@ -52,6 +53,14 @@ class Tooltip extends Component {
       arrow: { ...styles.arrow },
       border: { ...styles.border.base, ...styles.border[place], ...themes.simple.border },
     };
+
+    let children;
+    if (content) {
+      children = content;
+    } else {
+      children = this.props.children;
+    }
+
     return (
       <div
         ref="tooltip"
@@ -60,7 +69,7 @@ class Tooltip extends Component {
         onMouseOut={onLeave}
       >
         <div style={style.content}>
-          {this.props.children}
+          {children}
         </div>
         <div style={style.arrow} key={`a-${place}`}>
           <span style={style.border} key={`b-${place}`}></span>

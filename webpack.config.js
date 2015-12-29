@@ -16,6 +16,7 @@ module.exports = {
     'delay': './examples/delay/index.js',
     'keep': './examples/keep/index.js',
     'remote': './examples/remote/index.js',
+    'content': './examples/content/index.js',
   },
   output: {
     path: __dirname + '/build',

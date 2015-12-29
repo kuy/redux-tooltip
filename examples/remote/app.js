@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Tooltip, actions } from '../../src/index';
 
-const { show, hide } = actions;
+const { show, hide, toggle, place } = actions;
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class App extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleShow(e) {
@@ -18,6 +19,18 @@ class App extends Component {
 
   handleHide() {
     this.props.dispatch(hide());
+  }
+
+  handleToggle() {
+    this.props.dispatch(toggle());
+  }
+
+  handleToggle() {
+    this.props.dispatch(toggle());
+  }
+
+  handlePlace(newPlace) {
+    this.props.dispatch(place(newPlace));
   }
 
   render() {
@@ -30,7 +43,17 @@ class App extends Component {
         </p>
 
         <p>
-          <input type="button" value="show" onClick={this.handleShow} /> <input type="button" value="hide" onClick={this.handleHide} />
+          <input type="button" value="Show" onClick={this.handleShow} />
+          <span> </span>
+          <input type="button" value="Hide" onClick={this.handleHide} />
+          <span> </span>
+          <input type="button" value="Toggle" onClick={this.handleToggle} />
+        </p>
+
+        <p>
+          <input type="button" value="Top" onClick={() => this.handlePlace('top')} /> <input type="button" value="Right" onClick={() => this.handlePlace('right')} />
+          <span> </span>
+          <input type="button" value="Bottom" onClick={() => this.handlePlace('bottom')} /> <input type="button" value="Left" onClick={() => this.handlePlace('left')} />
         </p>
 
         <Tooltip>
