@@ -36,7 +36,7 @@
     "babel-preset-stage-2": "^6.1.18",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "react-redux": "^4.0.5",
+    "react-redux": "^4.0.6",
     "redux": "^3.0.4",
     "redux-logger": "^2.0.4",
     "rimraf": "^2.4.3",
