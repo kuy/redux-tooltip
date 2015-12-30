@@ -69,7 +69,7 @@ class Tooltip extends Component {
         onMouseOver={onHover}
         onMouseOut={onLeave}
       >
-        <div style={style.content}>
+        <div ref="content" style={style.content}>
           {children}
         </div>
         <div style={style.arrow} key={`a-${place}`}>
