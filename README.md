@@ -125,7 +125,8 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 + Supports auto placement
 + Adds option to specify delay in `Origin` component
 + Supports custom themes
-+ Add test
++ Introduce ESLint
++ Introduce CI
 
 ## License
 
