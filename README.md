@@ -1,4 +1,5 @@
 [![NPM Package][npm_img]][npm_site]
+[![Travis][ci_img]][ci_site]
 [![Dependency Status][david_img]][david_site]
 
 # redux-tooltip
@@ -126,7 +127,6 @@ If you want to debug with React Dev Tools, `http://localhost:8080/` will be pref
 + Adds option to specify delay in `Origin` component
 + Supports custom themes
 + Introduce ESLint
-+ Introduce CI
 
 ## License
 
@@ -138,5 +138,7 @@ Yuki Kodama / [@kuy](https://twitter.com/kuy)
 
 [npm_img]: https://img.shields.io/npm/v/redux-tooltip.svg
 [npm_site]: https://www.npmjs.org/package/redux-tooltip
+[ci_img]: https://img.shields.io/travis/kuy/redux-tooltip/master.svg?style=flat-square
+[ci_site]: https://travis-ci.org/rackt/reselect
 [david_img]: https://img.shields.io/david/kuy/redux-tooltip.svg
 [david_site]: https://david-dm.org/kuy/redux-tooltip
