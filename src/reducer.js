@@ -1,3 +1,5 @@
+import { resolve } from './utils';
+
 import {
   SHOW, HIDE, TOGGLE, KEEP,
   CONTENT, PLACE,
@@ -41,14 +43,23 @@ const handlers = {
     return { ...state, place: action.payload };
   },
   [START_TIMEOUT]: function (state, action) {
-    return { ...state, timeout: action.payload };
+    return { ...state, timeout: action.payload.token };
   },
   [END_TIMEOUT]: function (state) {
     return { ...state, timeout: null };
   },
 };
 
-export default function reducer(state = initial, action) {
+function tooltip(state = initial, action) {
   const handler = handlers[action.type];
   return handler ? handler(state, action) : state;
+}
+
+export default function reducer(state = {}, action) {
+  let newState = { ...state };
+  const names = resolve(action);
+  names.forEach(name => {
+    newState = { ...newState, [name]: tooltip(newState[name], action) };
+  });
+  return newState;
 }

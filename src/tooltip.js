@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { placement } from './utils';
+import { placement, resolve } from './utils';
 import * as styles from './styles';
 import * as themes from './themes';
 
@@ -18,6 +18,7 @@ class Tooltip extends Component {
       content: PropTypes.string,
 
       // Props from wrapper props
+      name: PropTypes.string,
       onHover: PropTypes.func,
       onLeave: PropTypes.func,
     };
@@ -80,8 +81,14 @@ class Tooltip extends Component {
 }
 
 function select(state, ownProps) {
-  const { tooltip } = state;
-  return { ...ownProps, ...tooltip };
+  const { tooltip: tooltips } = state;
+  const names = resolve(ownProps);
+  if (1 < names.length) {
+    console.error(`<Tooltip> does not accept a list of names as 'name' props: ${names}`);
+  }
+  const name = names[0];
+  const tooltip = tooltips[name];
+  return { ...tooltip, ...ownProps };
 }
 
 export default connect(select)(Tooltip);

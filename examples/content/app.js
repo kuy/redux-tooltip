@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Tooltip, Origin, actions } from '../../src/index';
 
-const { show, hide, content } = actions;
+const { content } = actions;
 
 function now() {
   const now = new Date();

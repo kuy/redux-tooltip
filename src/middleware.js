@@ -1,4 +1,5 @@
 import { startTimeout, endTimeout } from './actions';
+import { resolve } from './utils';
 
 export default function middleware(store) {
   return next => action => {
@@ -6,20 +7,27 @@ export default function middleware(store) {
       return next(action);
     }
 
-    const token = setTimeout(() => {
-      // Ignore if token is cleared
-      const state = store.getState();
-      if (state.tooltip.timeout !== null) {
-        // Clear timeout token
-        next(endTimeout());
+    const names = resolve(action);
+    names.forEach(name => {
+      const token = setTimeout(() => {
+        const { tooltip: tooltips } = store.getState();
+        const tooltip = tooltips[name];
 
-        // Dispatch original action
-        delete action.meta['delay'];
-        next(action);
-      }
-    }, action.meta.delay);
+        // Ignore if token is cleared
+        if (tooltip.timeout !== null) {
+          // Clear timeout token
+          next(endTimeout({ name }));
 
-    // Set timeout token
-    return next(startTimeout(token));
+          // Dispatch original action
+          delete action.meta['delay'];
+          next(action);
+        }
+      }, action.meta.delay);
+
+      // Store timeout token
+      next(startTimeout({ name, token }));
+    });
+
+    return names;
   };
 }

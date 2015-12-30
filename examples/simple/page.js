@@ -16,7 +16,7 @@ export default class Page extends Component {
 
         <p>
           <Origin>
-            <img src="http://lorempixel.com/image_output/cats-q-g-240-180-9.jpg" alt="cat" />
+            <img src="http://placehold.it/240x180" alt="placeholder" />
           </Origin>
           <br />
           It can be used as a caption of images.

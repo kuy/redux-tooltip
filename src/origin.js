@@ -21,8 +21,8 @@ class Origin extends Component {
 
     if (!props.onMouseOut) {
       // Set default leave handler
-      props.onMouseOut = (e) => {
-        this.props.dispatch(hide());
+      props.onMouseOut = e => {
+        this.props.dispatch(hide({ ...this.props }));
         this.props.onLeave && this.props.onLeave(e);
       };
     }

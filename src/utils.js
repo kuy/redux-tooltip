@@ -1,5 +1,8 @@
 /**
- * @param {Object} el - DOM element
+ * Returns a position of given DOM element.
+ *
+ * @param {Object} el - DOM element.
+ * @return {Object}
  */
 function position(el) {
   const pos = el.getBoundingClientRect();
@@ -19,6 +22,8 @@ function position(el) {
 }
 
 /**
+ * Calculates a position of the tooltip.
+ *
  * @param {string} place - 'top', 'right', 'bottom', or 'left'.
  * @param {Object} tooltip - DOM element.
  * @param {Object} origin - DOM element.
@@ -56,4 +61,27 @@ export function placement(place, tooltip, origin) {
   }
 
   return offset;
+}
+
+/**
+ * Resolves names of target tooltip from action or props.
+ *
+ * @param {Object} action or props.
+ * @return {Array} a list of tooltip names.
+ */
+export function resolve(obj) {
+  let names;
+  if (obj && obj.payload && obj.payload.name) {
+    names = obj.payload.name;
+  } else if (obj && obj.name) {
+    names = obj.name;
+  } else {
+    names = ['default'];
+  }
+
+  if (typeof names === 'string') {
+    names = [names];
+  }
+
+  return names;
 }
