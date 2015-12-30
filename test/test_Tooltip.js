@@ -1,44 +1,38 @@
 import assert from 'power-assert';
 import React, { Component, PropTypes } from 'react';
-import { Provider, connect } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
 import TestUtils from 'react-addons-test-utils';
-import { Tooltip, actions, reducer as tooltipReducer } from '../src/index';
+import { Tooltip } from '../src/index';
 
 describe('Tooltip', () => {
-  const reducer = combineReducers({ tooltip: tooltipReducer });
+  const NakedTooltip = Tooltip.WrappedComponent;
 
-  class NakedApp extends Component {
+  class Page extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {};
+    }
+
     render() {
       return (
         <div>
-          <h1>redux-tooltip test</h1>
           <p>
-            <span ref="origin">origin</span>
+            This is a <span ref="origin">origin</span> element.
           </p>
-          <Tooltip>
+          <NakedTooltip {...this.state}>
             Hello Redux!
-          </Tooltip>
+          </NakedTooltip>
         </div>
       );
     }
   }
 
-  const App = connect()(NakedApp);
-
-  let store, tree;
-
+  let page;
   beforeEach(() => {
-    store = createStore(reducer);
-    tree = TestUtils.renderIntoDocument(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
+    page = TestUtils.renderIntoDocument(<Page />);
   });
 
   it('should be hidden by default', () => {
-    const component = TestUtils.findRenderedComponentWithType(tree, Tooltip.WrappedComponent);
+    const component = TestUtils.findRenderedComponentWithType(page, NakedTooltip);
     const tooltip = component.refs.tooltip;
     assert(tooltip._style.getPropertyValue('visibility') === 'hidden');
 
@@ -46,14 +40,17 @@ describe('Tooltip', () => {
     assert(content.innerHTML === 'Hello Redux!')
   });
 
-  it('should be shown by show action', () => {
-    const app = TestUtils.findRenderedComponentWithType(tree, NakedApp);
-    const origin = app.refs.origin;
-
-    store.dispatch(actions.show({ el: origin }));
-
-    const component = TestUtils.findRenderedComponentWithType(tree, Tooltip.WrappedComponent);
+  it('should be shown', () => {
+    page.setState({ el: page.refs.origin, show: true });
+    const component = TestUtils.findRenderedComponentWithType(page, NakedTooltip);
     const tooltip = component.refs.tooltip;
     assert(tooltip._style.getPropertyValue('visibility') === 'visible');
+  });
+
+  it('should have content from props', () => {
+    page.setState({ content: 'Hello Tooltip!' });
+    const component = TestUtils.findRenderedComponentWithType(page, NakedTooltip);
+    const content = component.refs.content;
+    assert(content.innerHTML === 'Hello Tooltip!')
   });
 });
