@@ -73,7 +73,7 @@ class Tooltip extends Component {
           {children}
         </div>
         <div style={style.arrow} key={`a-${place}`}>
-          <span style={style.border} key={`b-${place}`}></span>
+          <span ref="border" style={style.border} key={`b-${place}`}></span>
         </div>
       </div>
     );
