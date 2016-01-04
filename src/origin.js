@@ -28,7 +28,7 @@ class Origin extends Component {
     }
 
     return (
-      <span {...props}>
+      <span ref="wrapper" {...props}>
         {this.props.children}
       </span>
     );

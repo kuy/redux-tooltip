@@ -4,7 +4,7 @@
  * @param {Object} el - DOM element.
  * @return {Object}
  */
-function position(el) {
+export function position(el) {
   const pos = el.getBoundingClientRect();
   const { pageYOffset, pageXOffset } = window;
   const { scrollTop, clientTop, scrollLeft, clientLeft } = document.documentElement;

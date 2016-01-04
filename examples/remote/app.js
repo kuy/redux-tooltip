@@ -25,10 +25,6 @@ class App extends Component {
     this.props.dispatch(toggle());
   }
 
-  handleToggle() {
-    this.props.dispatch(toggle());
-  }
-
   handlePlace(newPlace) {
     this.props.dispatch(place(newPlace));
   }
