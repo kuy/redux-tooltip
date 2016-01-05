@@ -121,12 +121,36 @@ npm start
 Open `http://localhost:8080/webpack-dev-server/` for auto-reloading.
 If you want to debug with React Dev Tools, `http://localhost:8080/` will be preferred.
 
+### Run test
+
+This executes both unit and integration tests:
+
+```
+npm test
+```
+
+#### Unit test
+
+```
+npm run test:unit
+```
+
+#### Integration test
+
+```
+npm run test:feature
+```
+
 ### TODO
 
++ Options for 'delay' feature
 + Supports auto placement
-+ Adds option to specify delay in `Origin` component
 + Supports custom themes
 + Introduce ESLint
+
+## Changelog
+
+See the [Releases](https://github.com/kuy/redux-tooltip/releases) page on GitHub.
 
 ## License
 
