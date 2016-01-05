@@ -1,33 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Tooltip, actions } from '../../src/index';
+import { Tooltip, Origin, actions } from '../../src/index';
 
 const { show, hide, keep, delay } = actions;
+
+// Inject 'of' method to make curried function easily
+function inject(func, that) {
+  func.of = name => {
+    return e => {
+      return func.call(that, name, e);
+    };
+  };
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.handleHover = this.handleHover.bind(this);
-    this.handleLeave = this.handleLeave.bind(this);
+    inject(this.handleMouseOut, this);
+    inject(this.handleHover, this);
+    inject(this.handleLeave, this);
   }
 
-  handleMouseOver(e) {
-    this.props.dispatch(show({ el: e.target }));
+  handleMouseOut(name) {
+    this.props.dispatch(delay(hide({ name })));
   }
 
-  handleMouseOut() {
-    this.props.dispatch(delay(hide()));
+  handleHover(name, e) {
+    this.props.dispatch(keep({ name }));
   }
 
-  handleHover() {
-    this.props.dispatch(keep());
-  }
-
-  handleLeave() {
-    this.props.dispatch(hide());
+  handleLeave(name, e) {
+    this.props.dispatch(hide({ name }));
   }
 
   render() {
@@ -35,14 +39,28 @@ class App extends Component {
       <div>
         <h1>Keep Example</h1>
 
+        <h2>Text</h2>
         <ol>
-          <li>Hover on <span className="target" onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>an origin element</span></li>
+          <li>Hover on <Origin name="text" className="target" onMouseLeave={this.handleMouseOut.of('text')}>an origin element</Origin></li>
           <li>Hover on a tooltip</li>
           <li>You can keep tooltip!</li>
         </ol>
 
-        <Tooltip onHover={this.handleHover} onLeave={this.handleLeave}>
+        <Tooltip name="text" onHover={this.handleHover.of('text')} onLeave={this.handleLeave.of('text')}>
           Hover and keep tooltip :)
+        </Tooltip>
+
+        <h2>SVG</h2>
+        <p>
+          This tooltip has <Origin name="svg" className="target" onMouseLeave={this.handleMouseOut.of('svg')}>SVG</Origin> content.
+        </p>
+
+        <Tooltip name="svg" onHover={this.handleHover.of('svg')} onLeave={this.handleLeave.of('svg')}>
+          <div className="svg-frame">
+            <svg height="210" width="210">
+              <polygon points="100,10 40,198 190,78 10,78 160,198" style={{ fill: 'lime', stroke: 'purple', strokeWidth: 5, fillRule: 'nonzero' }} />
+            </svg>
+          </div>
         </Tooltip>
       </div>
     );
