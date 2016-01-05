@@ -98,10 +98,10 @@ describe('Tooltip', () => {
     style.cssText = tooltip.getAttribute('style');
     assert(style.getPropertyValue('visibility') === 'hidden');
 
-    // Mouse over on Origin component
+    // Mouse enter on Origin component
     const origin = TestUtils.findRenderedComponentWithType(tree, Origin.WrappedComponent);
     const wrapper = origin.refs.wrapper;
-    TestUtils.Simulate.mouseOver(wrapper);
+    TestUtils.Simulate.mouseEnter(wrapper);
 
     style.cssText = tooltip.getAttribute('style');
     assert(style.getPropertyValue('visibility') === 'visible');
