@@ -1,7 +1,7 @@
 module.exports = function(config) {
   var configuration = {
     basePath: '',
-    frameworks: ['mocha-debug', 'mocha', 'browserify'],
+    frameworks: ['mocha-debug', 'mocha'],
     files: [
       'test/features/**/*.js'
     ],
@@ -10,21 +10,33 @@ module.exports = function(config) {
       'karma-chrome-launcher',
       'karma-mocha',
       'karma-mocha-debug',
-      'karma-browserify'
+      'karma-webpack'
     ],
     preprocessors: {
-      'test/features/**/*.js': ['browserify']
+      'test/features/**/*.js': ['webpack']
     },
-    browserify: {
-      debug: true,
-      transform: [
-        [
-          'babelify', {
-            presets: ['react', 'es2015', 'stage-2'],
-            plugins: ['babel-plugin-espower']
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            loader: 'babel',
+            exclude: /node_modules/,
+            query: {
+              presets: ['react', 'es2015', 'stage-2'],
+              plugins: ['babel-plugin-espower']
+            }
+          },
+          {
+            test: /\.json$/,
+            loader: 'json'
           }
         ]
-      ]
+      },
+      node: {
+        fs: 'empty'
+      }
     },
     reporters: ['progress'],
     port: 9876,

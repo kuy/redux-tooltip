@@ -46,6 +46,7 @@
     "cssstyle": "^0.2.30",
     "espower-babel": "^4.0.1",
     "jsdom": "^7.2.2",
+    "json-loader": "^0.5.4",
     "karma": "^0.13.18",
     "karma-browserify": "^4.4.2",
     "karma-chrome-launcher": "^0.2.2",
