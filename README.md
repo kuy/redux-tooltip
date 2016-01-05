@@ -79,27 +79,31 @@ That's it!
 
 ### `Tooltip`
 
-A tooltip component.
+A tooltip component. Please wrap a content which should be shown in a tooltip.
 
 + `show` [`Boolean`]
++ `place` [`String`]
++ `content` [`String`]
 + `el` ['DOM element']
++ `name` [`String`]
 + `onHover` ['Function']
 + `onLeave` ['Function']
 
 ### `Origin`
 
-A origin component. This has default handlers of `onMouseEnter` and `onMouseLeave`
-which dispatches actions to show/hide tooltip.
+An origin component. Please wrap an element which triggers the action of showing a tooltip.
+In most cases, you may use this component without any options.
+For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
 
-### reducer
+### `reducer`
 
 A Redux reducer must be combined with yours.
 
-### middleware
+### `middleware`
 
 Please apply this middleware if you want to use 'delay' feature.
 
-### actions
+### `actions`
 
 WIP
 
@@ -147,6 +151,7 @@ npm run test:feature
 + Supports auto placement
 + Supports custom themes
 + Introduce ESLint
++ API documentation using ESDoc
 
 ## Changelog
 
