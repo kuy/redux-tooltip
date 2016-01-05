@@ -11,17 +11,17 @@ class Origin extends Component {
     const props = { ...this.props };
     delete props['dispatch'];
 
-    if (!props.onMouseOver) {
+    if (!props.onMouseEnter) {
       // Set default hover handler
-      props.onMouseOver = e => {
+      props.onMouseEnter = e => {
         this.props.dispatch(show({ ...this.props, el: e.target }));
         this.props.onHover && this.props.onHover(e);
       };
     }
 
-    if (!props.onMouseOut) {
+    if (!props.onMouseLeave) {
       // Set default leave handler
-      props.onMouseOut = e => {
+      props.onMouseLeave = e => {
         this.props.dispatch(hide({ ...this.props }));
         this.props.onLeave && this.props.onLeave(e);
       };

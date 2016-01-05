@@ -26,7 +26,7 @@ class App extends Component {
         <h1>Delay Example</h1>
 
         <p>
-          After leaving from <span className="target" onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>an origin element</span>, a tooltip will stay a while.
+          After leaving from <span className="target" onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseOut}>an origin element</span>, a tooltip will stay a while.
         </p>
 
         <Tooltip>

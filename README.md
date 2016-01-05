@@ -88,7 +88,7 @@ A tooltip component.
 
 ### `Origin`
 
-A origin component. This has default handlers of `onMouseOver` and `onMouseOut`
+A origin component. This has default handlers of `onMouseEnter` and `onMouseLeave`
 which dispatches actions to show/hide tooltip.
 
 ### reducer

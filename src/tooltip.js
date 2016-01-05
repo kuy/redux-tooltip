@@ -66,8 +66,8 @@ class Tooltip extends Component {
       <div
         ref="tooltip"
         style={style.base}
-        onMouseOver={onHover}
-        onMouseOut={onLeave}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
       >
         <div ref="content" style={style.content}>
           {children}
