@@ -3,6 +3,9 @@ import reducer from './reducers';
 import logger from 'redux-logger';
 import { middleware as tooltip } from '../../src/index';
 
-export default applyMiddleware(
-  tooltip, logger()
-)(createStore)(reducer);
+const list = [tooltip];
+if (window && !window.__karma__) {
+  list.push(logger());
+}
+
+export default applyMiddleware(...list)(createStore)(reducer);

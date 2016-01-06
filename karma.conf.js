@@ -3,17 +3,18 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha-debug', 'mocha'],
     files: [
-      'test/features/**/*.js'
+      'test/examples/simple.js'
     ],
     exclude: [],
     plugins: [
       'karma-chrome-launcher',
       'karma-mocha',
       'karma-mocha-debug',
+      'karma-mocha-reporter',
       'karma-webpack'
     ],
     preprocessors: {
-      'test/features/**/*.js': ['webpack']
+      'test/examples/simple.js': ['webpack'],
     },
     webpack: {
       devtool: 'inline-source-map',
@@ -38,7 +39,7 @@ module.exports = function(config) {
         fs: 'empty'
       }
     },
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
