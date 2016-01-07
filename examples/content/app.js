@@ -38,12 +38,12 @@ class App extends Component {
         <h1>Content Example</h1>
 
         <p>
-          If you provide a <Origin className="target" content="This is a custom content.">custom</Origin> content of tooltip via props,
-          it will be used instead of a <Origin className="target">default</Origin> content of Tooltip component.
+          If you provide a <Origin className="target custom" content="This is a custom content.">custom</Origin> content of tooltip via props,
+          it will be used instead of a <Origin className="target default">default</Origin> content of Tooltip component.
         </p>
 
         <p>
-          What time is it <Origin className="target" place="right" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
+          What time is it <Origin className="target time" place="right" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
         </p>
 
         <Tooltip>
