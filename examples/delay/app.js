@@ -1,21 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Tooltip, actions } from '../../src/index';
+import { Tooltip, Origin, actions } from '../../src/index';
 
-const { show, hide, delay } = actions;
+const { hide, delay } = actions;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-  }
-
-  handleMouseOver(e) {
-    this.props.dispatch(show({ el: e.target }));
-  }
-
   handleMouseOut() {
     this.props.dispatch(delay(hide()));
   }
@@ -26,7 +15,7 @@ class App extends Component {
         <h1>Delay Example</h1>
 
         <p>
-          After leaving from <span className="target" onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseOut}>an origin element</span>, a tooltip will stay a while.
+          After leaving from <Origin className="target" onMouseLeave={this.handleMouseOut.bind(this)}>an origin element</Origin>, a tooltip will stay a while.
         </p>
 
         <Tooltip>

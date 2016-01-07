@@ -141,6 +141,9 @@ npm run test:unit
 
 #### Integration test
 
+We're currently use Google Chrome for testing environment.
+Following command will launch Chrome browser and run test suite.
+
 ```
 npm run test:feature
 ```
@@ -148,6 +151,7 @@ npm run test:feature
 ### TODO
 
 + Options for 'delay' feature
++ Options to change offsets
 + Supports auto placement
 + Supports custom themes
 + Introduce ESLint
