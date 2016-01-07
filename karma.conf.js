@@ -1,9 +1,9 @@
 module.exports = function(config) {
   var configuration = {
     basePath: '',
-    frameworks: ['mocha-debug', 'mocha'],
+    frameworks: ['mocha-debug', 'mocha', 'sinon'],
     files: [
-      'test/examples/simple.js'
+      'test/examples/*.js'
     ],
     exclude: [],
     plugins: [
@@ -11,10 +11,11 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-mocha-debug',
       'karma-mocha-reporter',
+      'karma-sinon',
       'karma-webpack'
     ],
     preprocessors: {
-      'test/examples/simple.js': ['webpack'],
+      'test/examples/*.js': ['webpack'],
     },
     webpack: {
       devtool: 'inline-source-map',

@@ -50,6 +50,7 @@
     "karma-mocha": "^0.2.1",
     "karma-mocha-debug": "^0.1.2",
     "karma-mocha-reporter": "^1.1.5",
+    "karma-sinon": "^1.0.4",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
     "power-assert": "^1.2.0",
@@ -60,6 +61,7 @@
     "redux": "^3.0.4",
     "redux-logger": "^2.0.4",
     "rimraf": "^2.4.3",
+    "sinon": "^1.17.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.12.1"
   }
