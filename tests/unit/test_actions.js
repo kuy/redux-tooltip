@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import * as actions from '../src/actions';
+import * as actions from '../../src/actions';
 
 describe('actions', () => {
   describe('.delay', () => {

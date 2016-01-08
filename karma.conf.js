@@ -3,7 +3,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha-debug', 'mocha', 'sinon'],
     files: [
-      'test/examples/*.js'
+      'tests/feature/*.js'
     ],
     exclude: [],
     plugins: [
@@ -15,7 +15,7 @@ module.exports = function(config) {
       'karma-webpack'
     ],
     preprocessors: {
-      'test/examples/*.js': ['webpack'],
+      'tests/feature/*.js': ['webpack'],
     },
     webpack: {
       devtool: 'inline-source-map',

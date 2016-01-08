@@ -13,7 +13,7 @@
     "start": "./node_modules/.bin/webpack-dev-server --progress --color --host 0.0.0.0 --content-base examples/",
     "build": "./node_modules/.bin/babel src --out-dir lib",
     "test": "npm run test:unit && npm run test:feature:ci",
-    "test:unit": "./node_modules/.bin/mocha --compilers js:espower-babel/guess --recursive test/test_*.js",
+    "test:unit": "./node_modules/.bin/mocha --compilers js:espower-babel/guess --recursive tests/unit/test_*.js",
     "test:feature": "./node_modules/.bin/karma start",
     "test:feature:ci": "./node_modules/.bin/karma start karma.conf.js --single-run",
     "clean": "./node_modules/.bin/rimraf lib",

@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import * as utils from '../src/utils';
+import * as utils from '../../src/utils';
 
 describe('utils', () => {
   describe('.resolve', () => {
