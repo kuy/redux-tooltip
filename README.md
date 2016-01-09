@@ -175,6 +175,6 @@ Yuki Kodama / [@kuy](https://twitter.com/kuy)
 [npm_img]: https://img.shields.io/npm/v/redux-tooltip.svg
 [npm_site]: https://www.npmjs.org/package/redux-tooltip
 [ci_img]: https://img.shields.io/travis/kuy/redux-tooltip/master.svg?style=flat-square
-[ci_site]: https://travis-ci.org/rackt/reselect
+[ci_site]: https://travis-ci.org/kuy/redux-tooltip
 [david_img]: https://img.shields.io/david/kuy/redux-tooltip.svg
 [david_site]: https://david-dm.org/kuy/redux-tooltip
