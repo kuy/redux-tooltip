@@ -1,5 +1,4 @@
 import assert from 'power-assert';
-import { CSSStyleDeclaration } from 'cssstyle';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -8,13 +7,12 @@ import { Tooltip, Origin, utils } from '../../src/index';
 import App from '../../examples/simple/app';
 import Page from '../../examples/simple/page';
 import store from '../../examples/common/store';
+import { firstComponent, getStyleValue } from '../helpers';
 
 const { position } = utils;
 
 describe('Simple Example', () => {
-  let style;
   before(() => {
-    style = new CSSStyleDeclaration();
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
@@ -42,15 +40,13 @@ describe('Simple Example', () => {
       const origin = document.querySelector('p.basic .target');
       TestUtils.Simulate.mouseEnter(origin);
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(position(tooltip).top < position(origin).top);
       assert(tooltip.innerText === 'This is a tooltip.\n');
 
       // Mouse Leave
       TestUtils.Simulate.mouseLeave(origin);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'hidden');
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden');
     });
   });
 
@@ -60,9 +56,7 @@ describe('Simple Example', () => {
       const first = document.querySelector('p.multiple .target.first');
       const second = document.querySelector('p.multiple .target.second');
       TestUtils.Simulate.mouseEnter(first);
-
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
       const firstPos = position(first);
       const secondPos = position(second);
@@ -72,9 +66,7 @@ describe('Simple Example', () => {
 
       // Mouse Enter (second origin)
       TestUtils.Simulate.mouseEnter(second);
-
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
       const secondTipPos = position(tooltip);
       assert(secondTipPos.top < secondPos.top, 'tooltip should be located on top of second origin');
@@ -88,9 +80,8 @@ describe('Simple Example', () => {
       // Mouse Enter
       const origin = document.querySelector('p.image > span');
       TestUtils.Simulate.mouseEnter(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
       const oriPos = position(origin);
       const tipPos = position(tooltip);
       assert(tipPos.top < oriPos.top);
@@ -104,9 +95,8 @@ describe('Simple Example', () => {
       // Mouse Enter (right origin)
       const right = document.querySelector('p.placement .target.right');
       TestUtils.Simulate.mouseEnter(right);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
       const rightOri = position(right);
       const rightTip = position(tooltip);
       assert(tooltip.innerText === 'This is a tooltip.\n');
@@ -115,9 +105,8 @@ describe('Simple Example', () => {
       // Mouse Enter (bottom origin)
       const bottom = document.querySelector('p.placement .target.bottom');
       TestUtils.Simulate.mouseEnter(bottom);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
       const bottomOri = position(bottom);
       const bottomTip = position(tooltip);
       assert(tooltip.innerText === 'This is a tooltip.\n');
@@ -126,9 +115,8 @@ describe('Simple Example', () => {
       // Mouse Enter (left origin)
       const left = document.querySelector('p.placement .target.left');
       TestUtils.Simulate.mouseEnter(left);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
       const leftOri = position(left);
       const leftTip = position(tooltip);
       assert(tooltip.innerText === 'This is a tooltip.\n');
@@ -137,9 +125,8 @@ describe('Simple Example', () => {
       // Mouse Enter (top origin)
       const top = document.querySelector('p.placement .target.top');
       TestUtils.Simulate.mouseEnter(top);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
       const topOri = position(top);
       const topTip = position(tooltip);
       assert(tooltip.innerText === 'This is a tooltip.\n');

@@ -13,7 +13,7 @@ describe('Content Example', () => {
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
-  let tree, tooltip, clock;
+  let tree, clock;
   beforeEach(() => {
     tree = ReactDOM.render(
       <Provider store={store}>

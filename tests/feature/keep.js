@@ -1,5 +1,4 @@
 import assert from 'power-assert';
-import { CSSStyleDeclaration } from 'cssstyle';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -7,14 +6,12 @@ import { Provider } from 'react-redux';
 import { Tooltip, Origin } from '../../src/index';
 import App from '../../examples/keep/app';
 import store from '../../examples/common/store';
-import { firstComponent } from '../helpers';
+import { firstComponent, getStyleValue } from '../helpers';
 
 // NOTE: Required to simulate both mouseover/out and mouseenter/leave events.
 
 describe('Keep Example', () => {
-  let style;
   before(() => {
-    style = new CSSStyleDeclaration();
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
@@ -46,28 +43,23 @@ describe('Keep Example', () => {
 
       // TODO: firstComponent(tree, 'Tooltip[name="text"]')
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'text' }).refs.tooltip;
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       // Mouseout from origin and mouseover to tooltip
       TestUtils.Simulate.mouseOut(origin);
       TestUtils.Simulate.mouseLeave(origin);
       TestUtils.Simulate.mouseEnter(tooltip);
       TestUtils.Simulate.mouseOver(tooltip);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
       // A few moments later
       clock.tick(2000);
-
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be stil shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be stil shown');
 
       // Mouseout from tooltip
       TestUtils.Simulate.mouseOut(tooltip);
       TestUtils.Simulate.mouseLeave(tooltip);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'hidden', 'tooltip should be hidden');
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
     });
   });
 
@@ -80,16 +72,14 @@ describe('Keep Example', () => {
 
       // TODO: firstComponent(tree, 'Tooltip[name="svg"]')
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'svg' }).refs.tooltip;
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       // Mouseout from origin and mouseover to tooltip
       TestUtils.Simulate.mouseOut(origin);
       TestUtils.Simulate.mouseLeave(origin);
       TestUtils.Simulate.mouseEnter(tooltip);
       TestUtils.Simulate.mouseOver(tooltip);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
       // Mouseout from tooltip base and mouseover to SVG
       const svg = document.querySelector('.svg-frame');
@@ -99,17 +89,14 @@ describe('Keep Example', () => {
 
       // A few moments later
       clock.tick(2000);
-
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be stil shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be stil shown');
 
       // Mouseout from tooltip
       TestUtils.Simulate.mouseOut(svg);
       TestUtils.Simulate.mouseLeave(svg);
       TestUtils.Simulate.mouseOut(tooltip);
       TestUtils.Simulate.mouseLeave(tooltip);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'hidden', 'tooltip should be hidden');
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
     });
   });
 });
