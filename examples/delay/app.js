@@ -5,10 +5,6 @@ import { Tooltip, Origin, actions } from '../../src/index';
 const { hide, delay } = actions;
 
 class App extends Component {
-  handleMouseOut() {
-    this.props.dispatch(delay(hide()));
-  }
-
   render() {
     return (
       <div>
