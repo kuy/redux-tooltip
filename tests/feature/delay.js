@@ -1,5 +1,4 @@
 import assert from 'power-assert';
-import { CSSStyleDeclaration } from 'cssstyle';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';

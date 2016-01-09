@@ -43,7 +43,7 @@ class App extends Component {
         </p>
 
         <p>
-          What time is it <Origin className="target time" place="right" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
+          What time is it <Origin className="target" place="right" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
         </p>
 
         <Tooltip>

@@ -1,5 +1,4 @@
 import assert from 'power-assert';
-import { CSSStyleDeclaration } from 'cssstyle';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -7,26 +6,20 @@ import { Provider } from 'react-redux';
 import { Tooltip, Origin } from '../../src/index';
 import App from '../../examples/content/app';
 import store from '../../examples/common/store';
+import { firstComponent, getStyleValue } from '../helpers';
 
 describe('Content Example', () => {
-  let style;
   before(() => {
-    style = new CSSStyleDeclaration();
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
-  let app, tooltip, clock;
+  let tree, tooltip, clock;
   beforeEach(() => {
-    const tree = ReactDOM.render(
+    tree = ReactDOM.render(
       <Provider store={store}>
         <App />
       </Provider>,
     document.getElementById('container'));
-
-    app = TestUtils.findRenderedComponentWithType(tree, App.WrappedComponent);
-    let component = TestUtils.findRenderedComponentWithType(tree, Tooltip.WrappedComponent);
-    tooltip = component.refs.tooltip;
-
     clock = new sinon.useFakeTimers();
   });
 
@@ -37,36 +30,36 @@ describe('Content Example', () => {
 
   describe('default content', () => {
     it('should be worked', () => {
-      // Mouse Enter
-      const origin = document.querySelector('p .target.default');
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target default' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a default content.\n', 'should be default content');
     });
   });
 
   describe('custom content', () => {
     it('should be worked', () => {
-      // Mouse Enter
-      const origin = document.querySelector('p .target.custom');
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target custom' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a custom content.\n', 'should be custom content');
     });
   });
 
   describe('continuous updating content', () => {
     it('should be worked', () => {
-      // Mouse Enter
-      const origin = document.querySelector('p .target.time');
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { place: 'right' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       let first = tooltip.innerText;
 
       clock.tick(1100);
