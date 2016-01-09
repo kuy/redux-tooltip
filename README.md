@@ -148,6 +148,12 @@ Following command will launch Chrome browser and run test suite.
 npm run test:feature
 ```
 
+If you prefer 'single-run', which means that the browser is closed after testing, try following command:
+
+```
+npm run test:feature:ci
+```
+
 ### TODO
 
 + Options to change offsets
@@ -155,10 +161,6 @@ npm run test:feature
 + Supports custom themes
 + Introduce ESLint
 + API documentation using ESDoc
-
-### Memo
-
-+ When using delay feature, `onHover` and `onLeave` handlers should be called on triggered.
 
 ## Changelog
 

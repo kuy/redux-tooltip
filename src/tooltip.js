@@ -40,9 +40,20 @@ class Tooltip extends Component {
   componentWillUpdate(nextProps) {
     const { el, place } = nextProps;
     if (el && (this.props.el != el || this.props.place !== place)) {
-      const offset = placement(place, this.refs.tooltip, el);
-      this.setState(offset);
+      this.updatePosition(nextProps);
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { content } = prevProps;
+    if (this.props.content !== content) {
+      this.updatePosition(this.props);
+    }
+  }
+
+  updatePosition(props) {
+    const offset = placement(props.place, this.refs.tooltip, props.el);
+    this.setState(offset);
   }
 
   render () {
