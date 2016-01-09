@@ -7,24 +7,24 @@ export default class Page extends Component {
   render() {
     return (
       <div>
-        <p className="basic">
+        <p>
           This is an example for redux-tooltip.<br />
           You can put a tooltip on <Origin className="target">a text</Origin>.
         </p>
 
-        <p className="multiple">
+        <p>
           Of course, you can also put <Origin className="target first">multiple</Origin> <Origin className="target second">tooltips</Origin>.
         </p>
 
-        <p className="image">
-          <Origin>
+        <p>
+          <Origin className="image">
             <img src={PIXEL} width="240" height="180" alt="placeholder" />
           </Origin>
           <br />
           It can be used as a caption of images.
         </p>
 
-        <p className="form">
+        <p>
           Form hint: <br />
           <Origin className="user">
             <input type="input" placeholder="mail" />
@@ -33,7 +33,7 @@ export default class Page extends Component {
           </Origin>
         </p>
 
-        <p className="placement">
+        <p>
           Choose tooltip placement from: <Origin className="target top" place="top">Top</Origin>, <Origin className="target right" place="right">Right</Origin>, <Origin className="target bottom" place="bottom">Bottom</Origin>, and <Origin className="target left" place="left">Left</Origin>.
         </p>
       </div>

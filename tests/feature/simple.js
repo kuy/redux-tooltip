@@ -16,18 +16,13 @@ describe('Simple Example', () => {
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
-  let app, page, tooltip;
+  let tree;
   beforeEach(() => {
-    const tree = ReactDOM.render(
+    tree = ReactDOM.render(
       <Provider store={store}>
         <App />
       </Provider>,
     document.getElementById('container'));
-
-    app = TestUtils.findRenderedComponentWithType(tree, App.WrappedComponent);
-    page = TestUtils.findRenderedComponentWithType(tree, Page);
-    const component = TestUtils.findRenderedComponentWithType(tree, Tooltip.WrappedComponent);
-    tooltip = component.refs.tooltip;
   });
 
   afterEach(() => {
@@ -37,9 +32,10 @@ describe('Simple Example', () => {
   describe('basic tooltip', () => {
     it('should be worked', () => {
       // Mouse Enter
-      const origin = document.querySelector('p.basic .target');
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(position(tooltip).top < position(origin).top);
       assert(tooltip.innerText === 'This is a tooltip.\n');
@@ -53,8 +49,9 @@ describe('Simple Example', () => {
   describe('multiple tooltips', () => {
     it('should be worked', () => {
       // Mouse Enter (first origin)
-      const first = document.querySelector('p.multiple .target.first');
-      const second = document.querySelector('p.multiple .target.second');
+      const first = firstComponent(tree, Origin.WrappedComponent, { className: 'target first' }).refs.wrapper;
+      const second = firstComponent(tree, Origin.WrappedComponent, { className: 'target second' }).refs.wrapper;
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       TestUtils.Simulate.mouseEnter(first);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
@@ -78,7 +75,8 @@ describe('Simple Example', () => {
   describe('image tooltip', () => {
     it('should be worked', () => {
       // Mouse Enter
-      const origin = document.querySelector('p.image > span');
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'image' }).refs.wrapper;
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       TestUtils.Simulate.mouseEnter(origin);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
@@ -93,7 +91,8 @@ describe('Simple Example', () => {
   describe('placement tooltips', () => {
     it('should be worked', () => {
       // Mouse Enter (right origin)
-      const right = document.querySelector('p.placement .target.right');
+      const right = firstComponent(tree, Origin.WrappedComponent, { className: 'target right' }).refs.wrapper;
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       TestUtils.Simulate.mouseEnter(right);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
@@ -103,7 +102,7 @@ describe('Simple Example', () => {
       assert(rightOri.left < rightTip.left);
 
       // Mouse Enter (bottom origin)
-      const bottom = document.querySelector('p.placement .target.bottom');
+      const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target bottom' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(bottom);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
@@ -113,7 +112,7 @@ describe('Simple Example', () => {
       assert(bottomOri.top < bottomTip.top);
 
       // Mouse Enter (left origin)
-      const left = document.querySelector('p.placement .target.left');
+      const left = firstComponent(tree, Origin.WrappedComponent, { className: 'target left' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(left);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
@@ -123,7 +122,7 @@ describe('Simple Example', () => {
       assert(leftTip.left < leftOri.left);
 
       // Mouse Enter (top origin)
-      const top = document.querySelector('p.placement .target.top');
+      const top = firstComponent(tree, Origin.WrappedComponent, { className: 'target top' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(top);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
