@@ -23,7 +23,7 @@ class App extends Component {
         <h2>Advanced usage</h2>
         <p>
           You can specify a duration to delay hiding of a tooltip.<br />
-          For example: <Origin delay={500} className="target">0.5 second</Origin>, <Origin delay="1000" className="target">1 second</Origin>, <Origin delay={5000.0} className="target">5 seconds</Origin>
+          For example: <Origin delay={500} className="target">0.5 second</Origin>, <Origin delay="1000" className="target">1 second</Origin>, <Origin delay={2000.0} className="target">2 seconds</Origin>, <Origin delay="3000.0" className="target">3 seconds</Origin>
         </p>
 
         <Tooltip>

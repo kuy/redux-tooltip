@@ -16,11 +16,15 @@ export const keep = createAction(KEEP);
 export const content = createAction(CONTENT);
 export const place = createAction(PLACE);
 
-export function delay(action, duration=1500) {
+const DEFAULT_DURATION = 1500;
+export function delay(action, duration = DEFAULT_DURATION) {
   if (!action.meta) {
     action.meta = {};
   }
-  action.meta.delay = duration;
+  if (duration === true) {
+    duration = DEFAULT_DURATION;
+  }
+  action.meta.delay = parseInt(duration);
   return action;
 }
 

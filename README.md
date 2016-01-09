@@ -150,12 +150,15 @@ npm run test:feature
 
 ### TODO
 
-+ Options for 'delay' feature
 + Options to change offsets
 + Supports auto placement
 + Supports custom themes
 + Introduce ESLint
 + API documentation using ESDoc
+
+### Memo
+
++ When using delay feature, `onHover` and `onLeave` handlers should be called on triggered.
 
 ## Changelog
 

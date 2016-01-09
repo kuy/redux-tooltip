@@ -1,10 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { show, hide } from './actions';
+import { show, hide, delay } from './actions';
 
 class Origin extends Component {
   static get displayName() {
     return 'Origin';
+  }
+
+  createWithDelay(creator, extras = {}) {
+    const { delay: delayVal } = this.props;
+    let action = creator({ ...this.props, ...extras });
+    if (delayVal) {
+      action = delay(action, delayVal || undefined);
+    }
+    return action;
   }
 
   render () {
@@ -22,7 +31,7 @@ class Origin extends Component {
     if (!props.onMouseLeave) {
       // Set default leave handler
       props.onMouseLeave = e => {
-        this.props.dispatch(hide({ ...this.props }));
+        this.props.dispatch(this.createWithDelay(hide));
         this.props.onLeave && this.props.onLeave(e);
       };
     }
