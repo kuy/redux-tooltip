@@ -7,27 +7,20 @@ import { Provider } from 'react-redux';
 import { Tooltip, Origin } from '../../src/index';
 import App from '../../examples/delay/app';
 import store from '../../examples/common/store';
+import { firstComponent, getStyleValue } from '../helpers';
 
 describe('Delay Example', () => {
-  let style;
   before(() => {
-    style = new CSSStyleDeclaration();
     document.body.innerHTML += '<div id="container" style="position:absolute;top:0;left:0;"></div>';
   });
 
-  let app, tooltip, origin, clock;
+  let tree, clock;
   beforeEach(() => {
-    const tree = ReactDOM.render(
+    tree = ReactDOM.render(
       <Provider store={store}>
         <App />
       </Provider>,
     document.getElementById('container'));
-
-    app = TestUtils.findRenderedComponentWithType(tree, App.WrappedComponent);
-    let component = TestUtils.findRenderedComponentWithType(tree, Tooltip.WrappedComponent);
-    tooltip = component.refs.tooltip;
-    component = TestUtils.findRenderedComponentWithType(tree, Origin.WrappedComponent);
-    origin = component.refs.wrapper;
 
     // Setup fake timer
     clock = new sinon.useFakeTimers();
@@ -41,29 +34,78 @@ describe('Delay Example', () => {
   });
 
   describe('basic usage', () => {
-    it('should be worked', () => {
-      // Mouse Enter
+    it('should be worked for default duration', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { delay: true }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
-      // Mouse Leave
+      // Mouseout
       TestUtils.Simulate.mouseLeave(origin);
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible', 'tooltip should be stil shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be kept');
 
       // A bit later
       clock.tick(500);
-
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'visible');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       // Wait more
       clock.tick(1200);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
+    });
+  });
 
-      style.cssText = tooltip.getAttribute('style');
-      assert(style.getPropertyValue('visibility') === 'hidden', 'tooltip should be hidden');
+  describe('advanced usage', () => {
+    it('should be worked for 0.5 second', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { delay: true }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { delay: 500 }).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be kept');
+
+      // 0.5 second later
+      clock.tick(500);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden after 0.5 second');
+    });
+
+    it('should be worked for 1 second', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { delay: true }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { delay: '1000' }).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be kept');
+
+      // 1 second later
+      clock.tick(1000);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden after 1 second');
+    });
+
+    it('should be worked for 5 seconds', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { delay: true }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { delay: 5000.0 }).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be kept');
+
+      // 5 seconds later
+      clock.tick(5000);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden after 5 seconds');
     });
   });
 });
