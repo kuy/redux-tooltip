@@ -5,7 +5,6 @@ import TestUtils from 'react-addons-test-utils';
 import { Provider } from 'react-redux';
 import { Tooltip, Origin, utils } from '../../src/index';
 import App from '../../examples/simple/app';
-import Page from '../../examples/simple/page';
 import store from '../../examples/common/store';
 import { firstComponent, getStyleValue } from '../helpers';
 
@@ -31,7 +30,7 @@ describe('Simple Example', () => {
 
   describe('basic tooltip', () => {
     it('should be worked', () => {
-      // Mouse Enter
+      // Mouseover
       const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
@@ -40,7 +39,7 @@ describe('Simple Example', () => {
       assert(position(tooltip).top < position(origin).top);
       assert(tooltip.innerText === 'This is a tooltip.\n');
 
-      // Mouse Leave
+      // Mouseout
       TestUtils.Simulate.mouseLeave(origin);
       assert(getStyleValue(tooltip, 'visibility') === 'hidden');
     });
@@ -48,7 +47,7 @@ describe('Simple Example', () => {
 
   describe('multiple tooltips', () => {
     it('should be worked', () => {
-      // Mouse Enter (first origin)
+      // Mouseover to first
       const first = firstComponent(tree, Origin.WrappedComponent, { className: 'target first' }).refs.wrapper;
       const second = firstComponent(tree, Origin.WrappedComponent, { className: 'target second' }).refs.wrapper;
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
@@ -61,7 +60,7 @@ describe('Simple Example', () => {
       assert(firstTipPos.top < firstPos.top, 'tooltip should be located on top of first origin');
       assert(tooltip.innerText === 'This is a tooltip.\n');
 
-      // Mouse Enter (second origin)
+      // Mouseover to second
       TestUtils.Simulate.mouseEnter(second);
       assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
 
@@ -74,7 +73,7 @@ describe('Simple Example', () => {
 
   describe('image tooltip', () => {
     it('should be worked', () => {
-      // Mouse Enter
+      // Mouseover
       const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'image' }).refs.wrapper;
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       TestUtils.Simulate.mouseEnter(origin);
@@ -85,51 +84,6 @@ describe('Simple Example', () => {
       assert(tipPos.top < oriPos.top);
       assert(oriPos.left < tipPos.left);
       assert(tipPos.right < oriPos.right);
-    });
-  });
-
-  describe('placement tooltips', () => {
-    it('should be worked', () => {
-      // Mouse Enter (right origin)
-      const right = firstComponent(tree, Origin.WrappedComponent, { className: 'target right' }).refs.wrapper;
-      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
-      TestUtils.Simulate.mouseEnter(right);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
-
-      const rightOri = position(right);
-      const rightTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a tooltip.\n');
-      assert(rightOri.left < rightTip.left);
-
-      // Mouse Enter (bottom origin)
-      const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target bottom' }).refs.wrapper;
-      TestUtils.Simulate.mouseEnter(bottom);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
-
-      const bottomOri = position(bottom);
-      const bottomTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a tooltip.\n');
-      assert(bottomOri.top < bottomTip.top);
-
-      // Mouse Enter (left origin)
-      const left = firstComponent(tree, Origin.WrappedComponent, { className: 'target left' }).refs.wrapper;
-      TestUtils.Simulate.mouseEnter(left);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
-
-      const leftOri = position(left);
-      const leftTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a tooltip.\n');
-      assert(leftTip.left < leftOri.left);
-
-      // Mouse Enter (top origin)
-      const top = firstComponent(tree, Origin.WrappedComponent, { className: 'target top' }).refs.wrapper;
-      TestUtils.Simulate.mouseEnter(top);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
-
-      const topOri = position(top);
-      const topTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a tooltip.\n');
-      assert(topTip.top < topOri.top);
     });
   });
 });

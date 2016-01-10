@@ -32,10 +32,6 @@ export default class Page extends Component {
             <input type="input" placeholder="example.com" />
           </Origin>
         </p>
-
-        <p>
-          Choose tooltip placement from: <Origin className="target top" place="top">Top</Origin>, <Origin className="target right" place="right">Right</Origin>, <Origin className="target bottom" place="bottom">Bottom</Origin>, and <Origin className="target left" place="left">Left</Origin>.
-        </p>
       </div>
     );
   }
