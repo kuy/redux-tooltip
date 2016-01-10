@@ -34,6 +34,16 @@ class App extends Component {
         <Tooltip name="left" place="left">
           This is a <b>left</b> tooltip.
         </Tooltip>
+
+        <h2>Auto placement</h2>
+        <p>
+          <Origin className="target auto-basic" place="left">This tooltip</Origin> is configured to be placed <b>left</b> of the origin element, but no space to show.<br />
+          Therefore, it will be located <b>right</b> instead of <b>left</b>.
+        </p>
+        <p>
+          You can customize <Origin className="target auto-array" place={['left', 'top']}>the order</Origin> of fallback.<br />
+          The 'place' prop <Origin className="target auto-string" place="left,bottom">can</Origin> be also passed as a comma separated string.
+        </p>
       </div>
     );
   }

@@ -120,4 +120,42 @@ describe('Place Example', () => {
       assert(topTip.top < topOri.top);
     });
   });
+
+  describe('auto placement', () => {
+    it('should be worked for basic usage', () => {
+      // Mouseover
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-basic' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const tipPos = position(tooltip);
+      const oriPos = position(origin);
+      assert(oriPos.right < tipPos.left, 'tooltip should be located right of the origin');
+    });
+
+    it('should be worked for custom fallback', () => {
+      // Mouseover to array
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      const array = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-array' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(array);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const arrayTipPos = position(tooltip);
+      const arrayOriPos = position(array);
+      assert(arrayTipPos.bottom < arrayOriPos.top, 'tooltip should be located on top of the origin');
+
+      // Mouseover to string
+      const string = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-string' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(string);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const stringTipPos = position(tooltip);
+      const stringOriPos = position(string);
+      assert(stringOriPos.bottom < stringTipPos.top, 'tooltip should be located on bottom of the origin');
+    });
+  });
 });
