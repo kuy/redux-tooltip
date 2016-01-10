@@ -34,7 +34,7 @@ describe('Place Example', () => {
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       const right = firstComponent(tree, Origin.WrappedComponent, { place: 'right' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(right);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       const rightOri = position(right);
       const rightTip = position(tooltip);
@@ -44,7 +44,7 @@ describe('Place Example', () => {
       // Mouseover to bottom
       const bottom = firstComponent(tree, Origin.WrappedComponent, { place: 'bottom' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(bottom);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       const bottomOri = position(bottom);
       const bottomTip = position(tooltip);
@@ -54,7 +54,7 @@ describe('Place Example', () => {
       // Mouseover to left
       const left = firstComponent(tree, Origin.WrappedComponent, { place: 'left' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(left);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       const leftOri = position(left);
       const leftTip = position(tooltip);
@@ -64,7 +64,7 @@ describe('Place Example', () => {
       // Mouseover to top
       const top = firstComponent(tree, Origin.WrappedComponent, { place: 'top' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(top);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
 
       const topOri = position(top);
       const topTip = position(tooltip);
@@ -79,7 +79,7 @@ describe('Place Example', () => {
       const rightTooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'right' }).refs.tooltip;
       const right = firstComponent(tree, Origin.WrappedComponent, { name: 'right' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(right);
-      assert(getStyleValue(rightTooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(rightTooltip, 'visibility') === 'visible');
 
       const rightOri = position(right);
       const rightTip = position(rightTooltip);
@@ -90,7 +90,7 @@ describe('Place Example', () => {
       const bottomTooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'bottom' }).refs.tooltip;
       const bottom = firstComponent(tree, Origin.WrappedComponent, { name: 'bottom' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(bottom);
-      assert(getStyleValue(bottomTooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(bottomTooltip, 'visibility') === 'visible');
 
       const bottomOri = position(bottom);
       const bottomTip = position(bottomTooltip);
@@ -101,7 +101,7 @@ describe('Place Example', () => {
       const leftTooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'left' }).refs.tooltip;
       const left = firstComponent(tree, Origin.WrappedComponent, { name: 'left' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(left);
-      assert(getStyleValue(leftTooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(leftTooltip, 'visibility') === 'visible');
 
       const leftOri = position(left);
       const leftTip = position(leftTooltip);
@@ -112,7 +112,7 @@ describe('Place Example', () => {
       const topTooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'top' }).refs.tooltip;
       const top = firstComponent(tree, Origin.WrappedComponent, { name: 'top' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(top);
-      assert(getStyleValue(topTooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(topTooltip, 'visibility') === 'visible');
 
       const topOri = position(top);
       const topTip = position(topTooltip);
@@ -127,7 +127,7 @@ describe('Place Example', () => {
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-basic' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const tipPos = position(tooltip);
@@ -140,7 +140,7 @@ describe('Place Example', () => {
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       const array = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-array' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(array);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const arrayTipPos = position(tooltip);
@@ -150,12 +150,55 @@ describe('Place Example', () => {
       // Mouseover to string
       const string = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-string' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(string);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const stringTipPos = position(tooltip);
       const stringOriPos = position(string);
       assert(stringOriPos.bottom < stringTipPos.top, 'tooltip should be located on bottom of the origin');
+
+      // Mouseover to more
+      const more = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-more' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(more);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const moreTipPos = position(tooltip);
+      const moreOriPos = position(more);
+      assert(moreOriPos.right < moreTipPos.left, 'tooltip should be located right of the origin');
+    });
+
+    it('should be worked within specified element', () => {
+      // Mouseover to top
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      const top = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-top' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(top);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const topTipPos = position(tooltip);
+      const topOriPos = position(top);
+      assert(topOriPos.bottom < topTipPos.top, 'tooltip should be located on bottom of the origin');
+
+      // Mouseover to right
+      const right = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-right' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(right);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const rightTipPos = position(tooltip);
+      const rightOriPos = position(right);
+      assert(rightTipPos.right < rightOriPos.left, 'tooltip should be located left of the origin');
+
+      // Mouseover to bottom
+      const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-bottom' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(bottom);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+
+      const bottomTipPos = position(tooltip);
+      const bottomOriPos = position(bottom);
+      assert(bottomTipPos.bottom < bottomOriPos.top, 'tooltip should be located on top of the origin');
     });
   });
 });
