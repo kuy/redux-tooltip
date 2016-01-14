@@ -66,12 +66,19 @@ export function placement(place, tooltip, origin) {
 /**
  * Returns an opposite direction based on the given.
  *
- * @param {string} dir - 'top', 'right', 'bottom', or 'left'.
+ * @param {string|Array} dir - 'top', 'right', 'bottom', or 'left'.
  * @return {string} an opposite direction.
  * @throw
  */
 export function opposite(dir) {
-  switch (dir) {
+  let place = dir;
+
+  // Alrays use first direction if Array is passed
+  if (typeof place === 'object' && typeof place.length === 'number' && 0 < place.length) {
+    place = place[0];
+  }
+
+  switch (place) {
   case 'top':
     return 'bottom';
   case 'bottom':
@@ -81,7 +88,8 @@ export function opposite(dir) {
   case 'left':
     return 'right';
   }
-  throw new Error(`Unknown direction: ${dir}`);
+
+  throw new Error(`Unknown direction: "${dir}"`);
 }
 
 /**
@@ -175,7 +183,10 @@ export function overDirs(tip, el = null) {
  */
 export function adjust(place, tooltip, origin, auto = true) {
   if (auto && typeof place === 'string') {
-    place = [place, opposite(place)];
+    place = place.split(',').map(p => p.trim());
+  }
+  if (place.length === 1) {
+    place.push(opposite(place));
   }
 
   let props, dirs, current, first;

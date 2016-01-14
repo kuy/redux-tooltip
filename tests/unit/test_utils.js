@@ -3,17 +3,29 @@ import * as utils from '../../src/utils';
 
 describe('utils', () => {
   describe('.opposite', () => {
-    it('returns an opposite direction', () => {
-      assert(utils.opposite('top') === 'bottom');
-      assert(utils.opposite('right') === 'left');
-      assert(utils.opposite('bottom') === 'top');
-      assert(utils.opposite('left') === 'right');
+    context('with a direction', () => {
+      it('returns an opposite direction', () => {
+        assert(utils.opposite('top') === 'bottom');
+        assert(utils.opposite('right') === 'left');
+        assert(utils.opposite('bottom') === 'top');
+        assert(utils.opposite('left') === 'right');
+      });
     });
 
-    it('throws an exception', () => {
-      assert.throws(() => utils.opposite(), Error);
-      assert.throws(() => utils.opposite(''), Error);
-      assert.throws(() => utils.opposite(123), Error);
+    context('with directions as Array', () => {
+      it('returns an opposite direction', () => {
+        assert(utils.opposite(['top']) === 'bottom');
+        assert(utils.opposite(['right', 'left']) === 'left');
+      });
+    });
+
+    context('with invalid direction', () => {
+      it('throws an exception', () => {
+        assert.throws(() => utils.opposite(), Error);
+        assert.throws(() => utils.opposite(''), Error);
+        assert.throws(() => utils.opposite(123), Error);
+        assert.throws(() => utils.opposite([]), Error);
+      });
     });
   });
 
