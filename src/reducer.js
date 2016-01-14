@@ -10,6 +10,7 @@ const initial = {
   show: false,
   place: 'top',
   el: null,
+  auto: true,
   content: null,
   timeout: null,
 };

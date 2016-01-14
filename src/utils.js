@@ -27,14 +27,14 @@ export function position(el) {
  * @param {string} place - 'top', 'right', 'bottom', or 'left'.
  * @param {Object} tooltip - DOM element.
  * @param {Object} origin - DOM element.
- * @return {Object} contains 'top' and 'left' keys.
+ * @return {Object} contains 'top', 'left', and extra keys.
  */
 export function placement(place, tooltip, origin) {
   const gap = 12;
   const tip = position(tooltip);
   const pos = position(origin);
 
-  let offset = {};
+  let offset = { width: tip.width, height: tip.height };
 
   switch(place) {
   case 'top': case 'bottom':
@@ -61,6 +61,137 @@ export function placement(place, tooltip, origin) {
   }
 
   return offset;
+}
+
+/**
+ * Returns an opposite direction based on the given.
+ *
+ * @param {string} dir - 'top', 'right', 'bottom', or 'left'.
+ * @return {string} an opposite direction.
+ * @throw
+ */
+export function opposite(dir) {
+  switch (dir) {
+  case 'top':
+    return 'bottom';
+  case 'bottom':
+    return 'top';
+  case 'right':
+    return 'left';
+  case 'left':
+    return 'right';
+  }
+  throw new Error(`Unknown direction: ${dir}`);
+}
+
+/**
+ * Calculates an intersection of two areas.
+ *
+ * @param {Object} area1
+ * @param {Object} area2
+ * @return {Object} an intersection.
+ */
+export function intersection(area1, area2) {
+  let area = {};
+  area.top = Math.max(area1.top, area2.top);
+  area.right = Math.min(area1.left + area1.width, area2.left + area2.width);
+  area.bottom = Math.min(area1.top + area1.height, area2.top + area2.height);
+  area.left = Math.max(area1.left, area2.left);
+  area.height = area.bottom - area.top;
+  area.width = area.right - area.left;
+  return area;
+}
+
+// Default area is browser's content area
+function defaultArea() {
+  return {
+    height: window.innerHeight,
+    width: window.innerWidth,
+  };
+}
+
+// Strip unit string from property values and convert to float
+const STRIP_FOR = ['top', 'left', 'right', 'bottom', 'width', 'height'];
+export function strip(obj) {
+  const data = { ...obj };
+  STRIP_FOR.forEach(prop => {
+    if (typeof data[prop] === 'string') {
+      data[prop] = parseFloat(data[prop].replace('px', ''));
+    }
+  });
+  return data;
+}
+
+// Make full area data from minimum data
+export function amend(area) {
+  const data = strip(area);
+  if (typeof data.top !== 'number') {
+    data.top = 0;
+  }
+  if (typeof data.left !== 'number') {
+    data.left = 0;
+  }
+  if (typeof data.right !== 'number' && typeof data.width === 'number') {
+    data.right = data.left + data.width;
+  }
+  if (typeof data.bottom !== 'number' && typeof data.height === 'number') {
+    data.bottom = data.top + data.height;
+  }
+  return data;
+}
+
+// Returns directions which are not in target rectangle
+export function overDirs(tip, el = null) {
+  tip = amend(tip);
+  let area = amend(defaultArea());
+  if (el !== null) {
+    area = intersection(area, position(el));
+  }
+
+  const dirs = [];
+  if (tip.top < area.top) {
+    dirs.push('top');
+  }
+  if (area.right < tip.right) {
+    dirs.push('right');
+  }
+  if (area.bottom < tip.bottom) {
+    dirs.push('bottom');
+  }
+  if (tip.left < area.left) {
+    dirs.push('left');
+  }
+
+  return dirs;
+}
+
+/**
+ * Places and adjusts a tooltip.
+ *
+ * @param {string|Array} place
+ * @param {Object} tooltip - DOM element.
+ * @param {Object} origin - DOM element.
+ * @return {Object} 'offset': style data to locate, 'place': final direction of the tooltip
+ */
+export function adjust(place, tooltip, origin, auto = true) {
+  if (auto && typeof place === 'string') {
+    place = [place, opposite(place)];
+  }
+
+  let props, dirs, current, first;
+  const tries = [ ...place ];
+  while (0 < tries.length) {
+    current = tries.shift();
+    props = placement(current, tooltip, origin);
+    if (typeof first === 'undefined') {
+      first = { offset: props, place: current };
+    }
+    dirs = overDirs(props);
+    if (dirs.length === 0) {
+      return { offset: props, place: current };
+    }
+  }
+  return first;
 }
 
 /**
