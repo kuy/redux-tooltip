@@ -157,7 +157,6 @@ npm run test:feature:ci
 ### TODO
 
 + Options to change offsets
-+ Supports auto placement
 + Supports custom themes
 + Introduce ESLint
 + API documentation using ESDoc
