@@ -124,6 +124,28 @@ describe('utils', () => {
     });
   });
 
+  describe('.amend', () => {
+    it("doesn't modify input data");
+
+    context('with a minimum area data', () => {
+      it('returns a completed area data', () => {
+        const less = { height: '50px', width: '25.5px' };
+        assert.deepStrictEqual(utils.amend(less), {
+          top: 0, left: 0, bottom: 50, right: 25.5, width: 25.5, height: 50
+        });
+      });
+    });
+
+    context('with a standard area data', () => {
+      it('returns a completed area data', () => {
+        const less = { top: '-25px', left: 0, height: 50.5, width: '80px' };
+        assert.deepStrictEqual(utils.amend(less), {
+          top: -25, left: 0, bottom: 25.5, right: 80, width: 80, height: 50.5
+        });
+      });
+    });
+  });
+
   describe('.resolve', () => {
     context('with action contains no names', () => {
       const action = {

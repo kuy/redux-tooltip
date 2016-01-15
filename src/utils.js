@@ -110,9 +110,18 @@ export function intersection(area1, area2) {
   return area;
 }
 
-// Default area is browser's content area
-function defaultArea() {
+function scrollOffset() {
+  const list = [document.documentElement, document.body.parentNode, document.body];
   return {
+    top: list.map(el => el.scrollTop).reduce((p, v) => p || v),
+    left: list.map(el => el.scrollLeft).reduce((p, v) => p || v),
+  };
+}
+
+// Returns current content area
+function contentArea() {
+  return {
+    ...scrollOffset(),
     height: window.innerHeight,
     width: window.innerWidth,
   };
@@ -149,10 +158,10 @@ export function amend(area) {
 }
 
 // Returns directions which are not in target rectangle
-export function overDirs(tip, el = null) {
+export function overDirs(tip, el) {
   tip = amend(tip);
-  let area = amend(defaultArea());
-  if (el !== null) {
+  let area = amend(contentArea());
+  if (el && typeof el === 'object') {
     area = intersection(area, position(el));
   }
 
@@ -176,12 +185,14 @@ export function overDirs(tip, el = null) {
 /**
  * Places and adjusts a tooltip.
  *
- * @param {string|Array} place
  * @param {Object} tooltip - DOM element.
+ * @param {string|Array} place
  * @param {Object} origin - DOM element.
  * @return {Object} 'offset': style data to locate, 'place': final direction of the tooltip
  */
-export function adjust(place, tooltip, origin, auto = true) {
+export function adjust(tooltip, props) {
+  const { el: origin, auto, within } = props;
+  let { place } = props;
   if (auto && typeof place === 'string') {
     place = place.split(',').map(p => p.trim());
   }
@@ -189,17 +200,17 @@ export function adjust(place, tooltip, origin, auto = true) {
     place.push(opposite(place));
   }
 
-  let props, dirs, current, first;
+  let pos, dirs, current, first;
   const tries = [ ...place ];
   while (0 < tries.length) {
     current = tries.shift();
-    props = placement(current, tooltip, origin);
+    pos = placement(current, tooltip, origin);
     if (typeof first === 'undefined') {
-      first = { offset: props, place: current };
+      first = { offset: pos, place: current };
     }
-    dirs = overDirs(props);
+    dirs = overDirs(pos, within && within());
     if (dirs.length === 0) {
-      return { offset: props, place: current };
+      return { offset: pos, place: current };
     }
   }
   return first;

@@ -151,7 +151,6 @@ describe('Place Example', () => {
       const string = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-string' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(string);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const stringTipPos = position(tooltip);
       const stringOriPos = position(string);
@@ -161,7 +160,6 @@ describe('Place Example', () => {
       const more = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-more' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(more);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const moreTipPos = position(tooltip);
       const moreOriPos = position(more);
@@ -170,11 +168,11 @@ describe('Place Example', () => {
 
     it('should be worked within specified element', () => {
       // Mouseover to top
-      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'restricted' }).refs.tooltip;
       const top = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-top' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(top);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a restricted tooltip.\n');
 
       const topTipPos = position(tooltip);
       const topOriPos = position(top);
@@ -184,7 +182,6 @@ describe('Place Example', () => {
       const right = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-right' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(right);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const rightTipPos = position(tooltip);
       const rightOriPos = position(right);
@@ -194,11 +191,12 @@ describe('Place Example', () => {
       const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-bottom' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(bottom);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
 
       const bottomTipPos = position(tooltip);
       const bottomOriPos = position(bottom);
       assert(bottomTipPos.bottom < bottomOriPos.top, 'tooltip should be located on top of the origin');
     });
+
+    it("should be disabled if auto={false}");
   });
 });

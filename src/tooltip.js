@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { adjust as placement, resolve } from './utils';
+import { adjust, resolve } from './utils';
 import * as styles from './styles';
 import * as themes from './themes';
 
@@ -19,6 +19,7 @@ class Tooltip extends Component {
       el: PropTypes.object,
       content: PropTypes.string,
       auto: PropTypes.bool.isRequired,
+      within: PropTypes.func,
 
       // Props from wrapper props
       name: PropTypes.string,
@@ -56,7 +57,7 @@ class Tooltip extends Component {
   }
 
   updatePosition(props) {
-    const state = placement(props.place, this.refs.tooltip, props.el);
+    const state = adjust(this.refs.tooltip, props);
     this.setState(state);
   }
 
