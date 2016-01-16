@@ -46,20 +46,32 @@ class App extends Component {
           The 'place' prop <Origin className="target auto-string" place="left,bottom">can</Origin> be also passed as a comma separated string.
         </p>
 
-        <div ref="box" style={{ width: '320px', height: '160px', backgroundColor: 'lightgray', padding: '10px', position: 'relative' }}>
+        <div ref="restricted" style={{ width: '360px', height: '160px', backgroundColor: 'lightgray', padding: '10px', position: 'relative' }}>
           In default, <Origin name="restricted" className="target auto-top" place="top">redux-tooltip</Origin> supposes you want to do auto-placement within the browser window.<br />
-          Using 'within' prop, you can specify <Origin name="restricted" className="target auto-right" place="right">DOM</Origin> element instead of BODY element.
+          Using <code>within</code> prop, you can specify <Origin name="restricted" className="target auto-right" place="right">DOM</Origin> element instead of BODY element.
           <div style={{ position: 'absolute', bottom: '10px' }}>
             This is a <Origin name="restricted" className="target auto-bottom" place="bottom">bottom</Origin> origin.
           </div>
         </div>
 
-        <div style={{ width: '308px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
-          <Origin className="target auto-more" place={['left', 'top', 'bottom', 'right']}>Two or more</Origin> fallbacks also works well.
+        <Tooltip name="restricted" within={() => this.refs.restricted}>
+          This is a <b>restricted</b> tooltip.
+        </Tooltip>
+
+        <div ref="more" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
+          Two or more <Origin name="more" className="target auto-more" place={['left', 'top', 'bottom', 'right']}>fallbacks</Origin> also works well.
         </div>
 
-        <Tooltip name="restricted" within={() => this.refs.box}>
-          This is a <b>restricted</b> tooltip.
+        <Tooltip name="more" within={() => this.refs.more}>
+          This is a <b>more</b> tooltip.
+        </Tooltip>
+
+        <div ref="disabled" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
+          The <Origin name="disabled" className="target auto-disabled" place="left">auto placement</Origin> feature can be disabled by passing <b>false</b> to <code>auto</code> prop.
+        </div>
+
+        <Tooltip name="disabled" auto={false} within={() => this.refs.disabled}>
+          This is a <b>disabled</b> tooltip.
         </Tooltip>
       </div>
     );

@@ -155,15 +155,19 @@ describe('Place Example', () => {
       const stringTipPos = position(tooltip);
       const stringOriPos = position(string);
       assert(stringOriPos.bottom < stringTipPos.top, 'tooltip should be located on bottom of the origin');
+    });
 
+    it('should be worked for more fallbacks', () => {
       // Mouseover to more
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'more' }).refs.tooltip;
       const more = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-more' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(more);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a more tooltip.\n');
 
-      const moreTipPos = position(tooltip);
-      const moreOriPos = position(more);
-      assert(moreOriPos.right < moreTipPos.left, 'tooltip should be located right of the origin');
+      const tipPos = position(tooltip);
+      const oriPos = position(more);
+      assert(oriPos.right < tipPos.left, 'tooltip should be located right of the origin');
     });
 
     it('should be worked within specified element', () => {
@@ -197,6 +201,17 @@ describe('Place Example', () => {
       assert(bottomTipPos.bottom < bottomOriPos.top, 'tooltip should be located on top of the origin');
     });
 
-    it("should be disabled if auto={false}");
+    it("should be disabled by auto={false}", () => {
+      // Mouseover to disabled
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'disabled' }).refs.tooltip;
+      const disabled = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-disabled' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(disabled);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a disabled tooltip.\n');
+
+      const tipPos = position(tooltip);
+      const oriPos = position(disabled);
+      assert(tipPos.right < oriPos.left, 'tooltip should be located on left of the origin');
+    });
   });
 });

@@ -193,10 +193,10 @@ export function overDirs(tip, el) {
 export function adjust(tooltip, props) {
   const { el: origin, auto, within } = props;
   let { place } = props;
-  if (auto && typeof place === 'string') {
+  if (typeof place === 'string') {
     place = place.split(',').map(p => p.trim());
   }
-  if (place.length === 1) {
+  if (auto && place.length === 1) {
     place.push(opposite(place));
   }
 
