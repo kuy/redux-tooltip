@@ -77,23 +77,28 @@ That's it!
 
 ## API
 
-### `Tooltip`
+### `<Tooltip />`
 
 A tooltip component. Please wrap a content which should be shown in a tooltip.
 
-+ `show` [`Boolean`]
-+ `place` [`String`]
-+ `content` [`String`]
-+ `el` ['DOM element']
-+ `name` [`String`]
-+ `onHover` ['Function']
-+ `onLeave` ['Function']
++ `name` *(`string`)*: A name of tooltip. This is used by `<Origin />` component.
++ `place` *(`string`|`string[]`)*: A default direction of tooltip. This value can be overwritten by `<Origin />`'s `place` prop.
++ `within` *(`DOM Element`)*: A DOM element which is used to restrict the position where this tooltip is placed within.
++ `onHover` *(`Function`)*: A callback function to be called on mouseover at tooltip.
++ `onLeave` *(`Function`)*: A callback function to be called on mouseout at tooltip.
 
-### `Origin`
+### `<Origin />`
 
 An origin component. Please wrap an element which triggers the action of showing a tooltip.
 In most cases, you may use this component without any options.
 For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
+
++ `name` *(`string`|`string[]`)*: A name(s) to specify which tooltip(s) should be used.
++ `content` *(`string`)*:
++ `place` *(`string`|`string[]`)*: 
++ `delay` *(`boolean`|`number`)*: 
++ `onMouseEnter` *(`Function`)*: An event handler of mouseenter.
++ `onMouseLeave` *(`Function`)*: An event handler of mouseleave.
 
 ### `reducer`
 
