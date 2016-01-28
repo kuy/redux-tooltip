@@ -1,4 +1,4 @@
-import { startTimeout, endTimeout } from './actions';
+import { startTimeout, endTimeout, DELAY } from './actions';
 import { resolve } from './utils';
 
 function getToken(state, name) {
@@ -18,7 +18,7 @@ export default function middleware(store) {
       token && clearTimeout(token);
     });
 
-    if (!action.meta || !action.meta.delay) {
+    if (!action.meta || !action.meta[DELAY]) {
       return next(action);
     }
 
@@ -32,10 +32,10 @@ export default function middleware(store) {
           next(endTimeout({ name }));
 
           // Dispatch original action
-          delete action.meta['delay'];
+          delete action.meta[DELAY];
           next(action);
         }
-      }, action.meta.delay);
+      }, action.meta[DELAY]);
 
       // Store timeout token
       next(startTimeout({ name, token: newToken }));

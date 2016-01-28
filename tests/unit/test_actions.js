@@ -18,7 +18,7 @@ describe('actions', () => {
             value: 123
           },
           meta: {
-            delay: 1500,
+            'redux-tooltip/delay': 1500,
           }
         });
       });
@@ -47,7 +47,7 @@ describe('actions', () => {
           },
           meta: {
             gem: 'bundler',
-            delay: 1500,
+            'redux-tooltip/delay': 1500,
           }
         });
       });

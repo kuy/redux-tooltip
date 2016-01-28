@@ -16,6 +16,7 @@ export const keep = createAction(KEEP);
 export const content = createAction(CONTENT);
 export const place = createAction(PLACE);
 
+export const DELAY = prefix('delay');
 const DEFAULT_DURATION = 1500;
 export function delay(action, duration = DEFAULT_DURATION) {
   if (!action.meta) {
@@ -24,7 +25,7 @@ export function delay(action, duration = DEFAULT_DURATION) {
   if (duration === true) {
     duration = DEFAULT_DURATION;
   }
-  action.meta.delay = parseInt(duration);
+  action.meta[DELAY] = parseInt(duration);
   return action;
 }
 
