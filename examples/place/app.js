@@ -59,7 +59,7 @@ class App extends Component {
         </Tooltip>
 
         <div ref="more" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
-          Two or more <Origin name="more" className="target auto-more" place={['left', 'top', 'bottom', 'right']}>fallbacks</Origin> also works well.
+          Two or <Origin name="more" className="target auto-more" place={['left', 'top', 'bottom', 'right']}>more fallbacks</Origin> also works well.
         </div>
 
         <Tooltip name="more" within={() => this.refs.more}>
