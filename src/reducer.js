@@ -26,7 +26,7 @@ const handlers = {
         props[name] = initial[name];
       }
     });
-    return { ...state, show: true, timeout: null, ...props };
+    return { ...state, show: true, ...props };
   },
   [HIDE]: function (state) {
     return { ...state, show: false };

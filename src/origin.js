@@ -7,11 +7,39 @@ class Origin extends Component {
     return 'Origin';
   }
 
+  static get propTypes() {
+    return {
+      name: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]),
+      content: PropTypes.string,
+      place: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]),
+      delay: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.number,
+        PropTypes.string
+      ]),
+      delayOn: PropTypes.oneOf(['show', 'hide']),
+      onMouseEnter: PropTypes.func,
+      onMouseLeave: PropTypes.func,
+    };
+  }
+
+  static get defaultProps() {
+    return {
+      delayOn: 'hide'
+    };
+  }
+
   createWithDelay(creator, extras = {}) {
-    const { delay: delayVal } = this.props;
+    const { delay: duration } = this.props;
     let action = creator({ ...this.props, ...extras });
-    if (delayVal) {
-      action = delay(action, delayVal || undefined);
+    if (duration) {
+      action = delay(action, duration || undefined);
     }
     return action;
   }
@@ -23,7 +51,10 @@ class Origin extends Component {
     if (!props.onMouseEnter) {
       // Set default hover handler
       props.onMouseEnter = e => {
-        this.props.dispatch(show({ ...this.props, el: e.target }));
+        const action = this.props.delayOn === 'show'
+          ? this.createWithDelay(show, { el: e.target })
+          : show({ ...this.props, el: e.target });
+        this.props.dispatch(action);
         this.props.onHover && this.props.onHover(e);
       };
     }
@@ -31,7 +62,10 @@ class Origin extends Component {
     if (!props.onMouseLeave) {
       // Set default leave handler
       props.onMouseLeave = e => {
-        this.props.dispatch(this.createWithDelay(hide));
+        const action = this.props.delayOn === 'hide'
+          ? this.createWithDelay(hide)
+          : hide({ ...this.props });
+        this.props.dispatch(action);
         this.props.onLeave && this.props.onLeave(e);
       };
     }

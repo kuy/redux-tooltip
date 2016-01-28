@@ -22,6 +22,12 @@ class App extends Component {
           For example: <Origin delay={500} className="target">0.5 second</Origin>, <Origin delay="1000" className="target">1 second</Origin>, <Origin delay={2000.0} className="target">2 seconds</Origin>, <Origin delay="3000.0" className="target">3 seconds</Origin>
         </p>
 
+        <h2>Delay on show</h2>
+        <p>
+          Hovering on an <Origin delay delayOn="show" className="target">origin</Origin>, but it is'n shown immediately.<br />
+          You need to stay a while on it.
+        </p>
+
         <Tooltip>
           This is a <b>delay</b> tooltip.
         </Tooltip>

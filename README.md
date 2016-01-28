@@ -89,7 +89,7 @@ A tooltip component. Please wrap a content which should be shown in a tooltip.
 
 ### `<Origin />`
 
-An origin component. Please wrap an element which triggers the action of showing a tooltip.
+An origin component. Please wrap an element which triggers the action to show a tooltip.
 In most cases, you may use this component without any options.
 For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
 
