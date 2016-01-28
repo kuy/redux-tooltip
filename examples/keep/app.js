@@ -17,13 +17,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    inject(this.handleMouseOut, this);
     inject(this.handleHover, this);
     inject(this.handleLeave, this);
-  }
-
-  handleMouseOut(name) {
-    this.props.dispatch(delay(hide({ name })));
   }
 
   handleHover(name, e) {
@@ -41,7 +36,7 @@ class App extends Component {
 
         <h2>Text</h2>
         <ol>
-          <li>Hover on <Origin name="text" className="target" onMouseLeave={this.handleMouseOut.of('text')}>an origin element</Origin></li>
+          <li>Hover on <Origin name="text" className="target" delay>an origin element</Origin></li>
           <li>Hover on a tooltip</li>
           <li>You can keep tooltip!</li>
         </ol>
@@ -52,7 +47,7 @@ class App extends Component {
 
         <h2>SVG</h2>
         <p>
-          This tooltip has <Origin name="svg" className="target" onMouseLeave={this.handleMouseOut.of('svg')}>SVG</Origin> content.
+          This tooltip has <Origin name="svg" className="target" delay>SVG</Origin> content.
         </p>
 
         <Tooltip name="svg" onHover={this.handleHover.of('svg')} onLeave={this.handleLeave.of('svg')}>
