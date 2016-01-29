@@ -1,4 +1,4 @@
-import { startTimeout, endTimeout, DELAY } from './actions';
+import { SHOW, HIDE, DELAY, startTimeout, endTimeout } from './actions';
 import { resolve } from './utils';
 
 function getToken(state, name) {
@@ -9,14 +9,18 @@ function getToken(state, name) {
   }
 }
 
+const CANCEL_TYPES = [SHOW, HIDE];
+
 export default function middleware(store) {
   return next => action => {
-    // Clear timeout
     const names = resolve(action);
-    names.forEach(name => {
-      const token = getToken(store.getState(), name);
-      token && clearTimeout(token);
-    });
+    if (CANCEL_TYPES.indexOf(action.type) !== -1) {
+      // Clear timeout
+      names.forEach(name => {
+        const token = getToken(store.getState(), name);
+        token && clearTimeout(token);
+      });
+    }
 
     if (!action.meta || !action.meta[DELAY]) {
       return next(action);

@@ -158,5 +158,54 @@ describe('Delay Example', () => {
       TestUtils.Simulate.mouseLeave(origin);
       assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden immediately');
     });
+
+    it('should be worked on both', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { delayOn: 'both' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden');
+
+      // 0.5 second later
+      clock.tick(500);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
+
+      // Mouseout before showing
+      TestUtils.Simulate.mouseLeave(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
+
+      // Wait 2 seconds
+      clock.tick(2000);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip is still hidden');
+
+      // Mouseover again
+      TestUtils.Simulate.mouseEnter(origin);
+
+      // 1.5 seconds later
+      clock.tick(1500);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip should be shown');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+
+      // 0.5 second later
+      clock.tick(500);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip is still shown');
+
+      // Mouseover again
+      TestUtils.Simulate.mouseEnter(origin);
+
+      // Wait 2 seconds
+      clock.tick(2000);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible', 'tooltip is still shown');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+
+      // 1.5 seconds later
+      clock.tick(1500);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
+    });
   });
 });

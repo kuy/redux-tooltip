@@ -25,7 +25,7 @@ class App extends Component {
         <h2>Delay on show</h2>
         <p>
           Hovering on an <Origin delay delayOn="show" className="target">origin</Origin>, but it is'n shown immediately.<br />
-          You need to stay a while on it.
+          You need to stay a while on it. Delay on <Origin delay delayOn="both" className="target">both</Origin>.
         </p>
 
         <Tooltip>

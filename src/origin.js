@@ -23,7 +23,7 @@ class Origin extends Component {
         PropTypes.number,
         PropTypes.string
       ]),
-      delayOn: PropTypes.oneOf(['show', 'hide']),
+      delayOn: PropTypes.oneOf(['show', 'hide', 'both']),
       onMouseEnter: PropTypes.func,
       onMouseLeave: PropTypes.func,
     };
@@ -51,7 +51,7 @@ class Origin extends Component {
     if (!props.onMouseEnter) {
       // Set default hover handler
       props.onMouseEnter = e => {
-        const action = this.props.delayOn === 'show'
+        const action = ['show', 'both'].indexOf(this.props.delayOn) !== -1
           ? this.createWithDelay(show, { el: e.target })
           : show({ ...this.props, el: e.target });
         this.props.dispatch(action);
@@ -62,7 +62,7 @@ class Origin extends Component {
     if (!props.onMouseLeave) {
       // Set default leave handler
       props.onMouseLeave = e => {
-        const action = this.props.delayOn === 'hide'
+        const action = ['hide', 'both'].indexOf(this.props.delayOn) !== -1
           ? this.createWithDelay(hide)
           : hide({ ...this.props });
         this.props.dispatch(action);
