@@ -165,11 +165,7 @@ describe('Place Example', () => {
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a more tooltip.\n');
 
-      const frame = document.getElementById('more-frame');
-      const framePos = position(frame);
-
       const tipPos = position(tooltip);
-      assert.deepEqual(framePos, tipPos);
       const oriPos = position(more);
       assert(oriPos.right < tipPos.left, 'tooltip should be located right of the origin');
     });
