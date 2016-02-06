@@ -58,7 +58,7 @@ class App extends Component {
           This is a <b>restricted</b> tooltip.
         </Tooltip>
 
-        <div ref="more" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
+        <div id="more-frame" ref="more" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
           Two or <Origin name="more" className="target auto-more" place={['left', 'top', 'bottom', 'right']}>more fallbacks</Origin> also works well.
         </div>
 
