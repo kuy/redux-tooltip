@@ -46,9 +46,9 @@ class App extends Component {
           The 'place' prop <Origin className="target auto-string" place="left,bottom">can</Origin> be also passed as a comma separated string.
         </p>
 
-        <div ref="restricted" style={{ width: '360px', height: '160px', backgroundColor: 'lightgray', padding: '10px', position: 'relative' }}>
+        <div ref="restricted" style={{ width: '400px', height: '160px', backgroundColor: 'lightgray', padding: '10px', position: 'relative' }}>
           In default, <Origin name="restricted" className="target auto-top" place="top">redux-tooltip</Origin> supposes you want to do auto-placement within the browser window.<br />
-          Using <code>within</code> prop, you can specify <Origin name="restricted" className="target auto-right" place="right">DOM</Origin> element instead of BODY element.
+          Using <code>within</code> prop, you can specify <Origin name="restricted" className="target auto-right" place="right">DOM element</Origin> instead of BODY element.
           <div style={{ position: 'absolute', bottom: '10px' }}>
             This is a <Origin name="restricted" className="target auto-bottom" place="bottom">bottom</Origin> origin.
           </div>
@@ -58,7 +58,7 @@ class App extends Component {
           This is a <b>restricted</b> tooltip.
         </Tooltip>
 
-        <div ref="more" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
+        <div ref="more" style={{ width: '388px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
           Two or <Origin name="more" className="target auto-more" place={['left', 'top', 'bottom', 'right']}>more fallbacks</Origin> also works well.
         </div>
 
@@ -66,7 +66,7 @@ class App extends Component {
           This is a <b>more</b> tooltip.
         </Tooltip>
 
-        <div ref="disabled" style={{ width: '348px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
+        <div ref="disabled" style={{ width: '388px', backgroundColor: 'lightgray', marginTop: '14px', padding: '16px' }}>
           The <Origin name="disabled" className="target auto-disabled" place="left">auto placement</Origin> feature can be disabled by passing <b>false</b> to <code>auto</code> prop.
         </div>
 
