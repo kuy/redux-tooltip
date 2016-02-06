@@ -196,23 +196,31 @@ export function adjust(tooltip, props) {
   if (typeof place === 'string') {
     place = place.split(',').map(p => p.trim());
   }
+  console.log('place: ', place);
   if (auto && place.length === 1) {
+    console.log(`auto enabled, opposite is ${opposite(place)}`);
     place.push(opposite(place));
   }
 
   let pos, dirs, current, first;
   const tries = [ ...place ];
   while (0 < tries.length) {
+    console.log('tries: ', tries);
     current = tries.shift();
+    console.log('current: ', current);
     pos = placement(current, tooltip, origin);
     if (typeof first === 'undefined') {
       first = { offset: pos, place: current };
     }
+    console.log('pos: ', pos);
     dirs = overDirs(pos, within && within());
+    console.log('over: ', dirs);
     if (dirs.length === 0) {
+      console.log('ajusted: ', current);
       return { offset: pos, place: current };
     }
   }
+  console.log('first: ', first);
   return first;
 }
 
