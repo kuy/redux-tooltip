@@ -7,7 +7,7 @@ module.exports = function(config) {
     ],
     exclude: [],
     plugins: [
-      'karma-chrome-launcher',
+      'karma-phantomjs-launcher',
       'karma-mocha',
       'karma-mocha-debug',
       'karma-mocha-reporter',
@@ -45,20 +45,10 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: false,
     concurrency: Infinity,
-    customLaunchers: {
-      Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    }
   };
-
-  if(process.env.TRAVIS){
-    configuration.browsers = ['Chrome_travis_ci'];
-  }
 
   config.set(configuration);
 }
