@@ -46,6 +46,14 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['PhantomJS'],
+    phantomjsLauncher: {
+      options: {
+        viewportSize: {
+          width: 800,
+          height: 600
+        }
+      }
+    },
     singleRun: false,
     concurrency: Infinity,
   };
