@@ -94,11 +94,43 @@ In most cases, you may use this component without any options.
 For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
 
 + `name` *(`string`|`string[]`)*: A name(s) to specify which tooltip(s) should be used.
-+ `content` *(`string`)*:
-+ `place` *(`string`|`string[]`)*: 
-+ `delay` *(`boolean`|`number`)*: 
++ `content` *(`string`)*: A text content for tooltip.
++ `place` *(`string`|`string[]`)*: A name of direction to specify a location of tooltip.
++ `delay` *(`boolean`|`number`)*: A number of duration for delay feature.
++ `delayOn` *(`string`)*: A name of timing to enable the delay. `show`, `hide`, or `both`. Default is `hide`.
++ `tagName` *(`string`)*: A tag name of wrapper element. Default is `span`.
 + `onMouseEnter` *(`Function`)*: An event handler of mouseenter.
 + `onMouseLeave` *(`Function`)*: An event handler of mouseleave.
+
+#### `Origin.wrapBy(*tagName*)`
+
+```
+// Invalid SVG...
+// `Origin` component wraps children with `<span>` tag in default.
+function Shape() {
+  return (
+    <svg width="80" height="80">
+      <Origin>
+        <rect x="10" y="10" width="20" height="30" />
+      </Origin>
+    </svg>
+  );
+}
+
+// Perfect!
+// `Origin.wrapBy()` method can be used to create customized `Origin` component which wraps with your favorite tag.
+const SVGOrigin = Origin.wrapBy('g');
+
+function Shape() {
+  return (
+    <svg width="80" height="80">
+      <SVGOrigin>
+        <rect x="10" y="10" width="20" height="30" />
+      </SVGOrigin>
+    </svg>
+  );
+}
+```
 
 ### `reducer`
 
@@ -110,7 +142,10 @@ Please apply this middleware if you want to use 'delay' feature.
 
 ### `actions`
 
-WIP
+#### `delay(*action*, *duration = `1500`*)`
+
+A helper function to enable 'delay' feature.
+Internally, it sets a duration of delay to the [meta](https://github.com/acdlite/flux-standard-action#meta) section of given action.
 
 ## Development
 
