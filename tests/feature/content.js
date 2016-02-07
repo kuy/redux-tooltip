@@ -38,7 +38,7 @@ describe('Content Example', () => {
 
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a default content.\n', 'should be default content');
+      assert(tooltip.innerText === "This is a default content.\nIt's a second line.\n", 'should be default content');
     });
   });
 
@@ -51,6 +51,25 @@ describe('Content Example', () => {
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
       assert(tooltip.innerText === 'This is a custom content.\n', 'should be custom content');
+    });
+
+    it('should be resized', () => {
+      // Mouseover on custom
+      const custom = firstComponent(tree, Origin.WrappedComponent, { className: 'target custom' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(custom);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      const customPos = position(tooltip);
+      TestUtils.Simulate.mouseLeave(custom);
+
+      // Mouseover on default
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target default' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const defaultPos = position(tooltip);
+      TestUtils.Simulate.mouseLeave(origin);
+ 
+      assert(customPos.height < defaultPos.height, "default's height is higher than custom's height");
     });
   });
 
