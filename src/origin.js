@@ -24,6 +24,7 @@ class Origin extends Component {
         PropTypes.string
       ]),
       delayOn: PropTypes.oneOf(['show', 'hide', 'both']),
+      tagName: PropTypes.string,
       onMouseEnter: PropTypes.func,
       onMouseLeave: PropTypes.func,
     };
@@ -31,8 +32,26 @@ class Origin extends Component {
 
   static get defaultProps() {
     return {
-      delayOn: 'hide'
+      delayOn: 'hide',
+      tagName: 'span',
     };
+  }
+
+  static wrapBy(tagName) {
+    class CustomOrigin extends Origin {
+      static get displayName() {
+        return `${Origin.displayName}.${tagName}`;
+      }
+
+      static get defaultProps() {
+        return {
+          ...Origin.defaultProps,
+          tagName: tagName,
+        };
+      }
+    }
+
+    return connect()(CustomOrigin);
   }
 
   createWithDelay(creator, extras = {}) {
@@ -44,12 +63,11 @@ class Origin extends Component {
     return action;
   }
 
-  render () {
+  render() {
     const props = { ...this.props };
     delete props['dispatch'];
 
     if (!props.onMouseEnter) {
-      // Set default hover handler
       props.onMouseEnter = e => {
         const action = ['show', 'both'].indexOf(this.props.delayOn) !== -1
           ? this.createWithDelay(show, { el: e.target })
@@ -60,7 +78,6 @@ class Origin extends Component {
     }
 
     if (!props.onMouseLeave) {
-      // Set default leave handler
       props.onMouseLeave = e => {
         const action = ['hide', 'both'].indexOf(this.props.delayOn) !== -1
           ? this.createWithDelay(hide)
@@ -70,11 +87,9 @@ class Origin extends Component {
       };
     }
 
-    return (
-      <span ref="wrapper" {...props}>
-        {this.props.children}
-      </span>
-    );
+    return React.createElement(this.props.tagName, {
+      ...props, ref: 'wrapper'
+    });
   }
 }
 
