@@ -38,8 +38,8 @@ class App extends Component {
         <h1>Content Example</h1>
 
         <p>
-          If you provide a <Origin className="target custom" content="This is a custom content.">custom</Origin> content of tooltip via props,
-          it will be used instead of a <Origin className="target default">default</Origin> content of Tooltip component.
+          If you provide a <Origin className="target custom" content="This is a custom content.">custom</Origin> content via Origin component's prop,
+          it will overwrite a <Origin className="target default">default</Origin> content of Tooltip component.
         </p>
 
         <p>
@@ -47,7 +47,8 @@ class App extends Component {
         </p>
 
         <Tooltip>
-          This is a default content.
+          This is a default content.<br />
+          It's a second line.
         </Tooltip>
       </div>
     );
