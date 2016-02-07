@@ -38,16 +38,16 @@ export default class Page extends Component {
         <p>
           <svg width="240" height="70">
             <g transform="translate(40, 10)">
-              <SVGOrigin>
+              <SVGOrigin className="red">
                 <rect fill="red" x="0" y="0" width="50" height="50" />
               </SVGOrigin>
-              <SVGOrigin>
+              <SVGOrigin className="green">
                 <circle fill="green" cx="85" cy="25" r="25" />
               </SVGOrigin>
               <g transform="translate(120, 0)">
                 <rect fill="blue" x="0" y="0" width="50" height="50" />
                 <g transform="translate(15, 15)">
-                  <SVGOrigin>
+                  <SVGOrigin className="blue">
                     <rect fill="lightblue" x="0" y="0" width="20" height="20" />
                   </SVGOrigin>
                 </g>
