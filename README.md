@@ -102,11 +102,11 @@ For advanced usage, you can override the default handlers; `onMouseEnter` and `o
 + `onMouseEnter` *(`Function`)*: An event handler of mouseenter.
 + `onMouseLeave` *(`Function`)*: An event handler of mouseleave.
 
-#### `Origin.wrapBy(*tagName*)`
+#### Origin.wrapBy(*tagName*)
 
 ```
 // Invalid SVG...
-// `Origin` component wraps children with `<span>` tag in default.
+// Origin component wraps children with <span> tag in default.
 function Shape() {
   return (
     <svg width="80" height="80">
@@ -118,7 +118,7 @@ function Shape() {
 }
 
 // Perfect!
-// `Origin.wrapBy()` method can be used to create customized `Origin` component which wraps with your favorite tag.
+// Origin.wrapBy() method can be used to create customized Origin component which wraps with your favorite tag.
 const SVGOrigin = Origin.wrapBy('g');
 
 function Shape() {
@@ -142,7 +142,7 @@ Please apply this middleware if you want to use 'delay' feature.
 
 ### `actions`
 
-#### `delay(*action*, *duration = `1500`*)`
+#### delay(*action*, *duration = `1500`*)
 
 A helper function to enable 'delay' feature.
 Internally, it sets a duration of delay to the [meta](https://github.com/acdlite/flux-standard-action#meta) section of given action.
