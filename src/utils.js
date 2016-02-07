@@ -1,3 +1,8 @@
+function dimension(el) {
+  const rect = el.getBoundingClientRect();
+  return { width: rect.width, height: rect.height };
+}
+
 /**
  * Returns a position of given DOM element.
  *
@@ -25,29 +30,29 @@ export function position(el) {
  * Calculates a position of the tooltip.
  *
  * @param {string} place - 'top', 'right', 'bottom', or 'left'.
- * @param {Object} tooltip - DOM element.
+ * @param {Object} content - DOM element that contains a content.
  * @param {Object} origin - DOM element.
  * @return {Object} contains 'top', 'left', and extra keys.
  */
-export function placement(place, tooltip, origin) {
+export function placement(place, content, origin) {
   const gap = 12;
-  const tip = position(tooltip);
+  const dim = dimension(content);
   const pos = position(origin);
 
-  let offset = { width: tip.width, height: tip.height };
+  let offset = { width: dim.width, height: dim.height };
 
   switch(place) {
   case 'top': case 'bottom':
-    offset.left = `${pos.left + (pos.width * 0.5) - (tip.width * 0.5)}px`;
+    offset.left = `${pos.left + (pos.width * 0.5) - (dim.width * 0.5)}px`;
     break;
   case 'left': case 'right':
-    offset.top = `${pos.top + (pos.height * 0.5) - (tip.height * 0.5)}px`;
+    offset.top = `${pos.top + (pos.height * 0.5) - (dim.height * 0.5)}px`;
     break;
   }
 
   switch(place) {
   case 'top':
-    offset.top = `${pos.top - tip.height - gap}px`;
+    offset.top = `${pos.top - dim.height - gap}px`;
     break;
   case 'right':
     offset.left = `${pos.right + gap}px`;
@@ -56,7 +61,7 @@ export function placement(place, tooltip, origin) {
     offset.top = `${pos.top + pos.height + gap}px`;
     break;
   case 'left':
-    offset.left = `${pos.left - tip.width - gap}px`;
+    offset.left = `${pos.left - dim.width - gap}px`;
     break;
   }
 
@@ -185,12 +190,11 @@ export function overDirs(tip, el) {
 /**
  * Places and adjusts a tooltip.
  *
- * @param {Object} tooltip - DOM element.
- * @param {string|Array} place
- * @param {Object} origin - DOM element.
+ * @param {Object} content - DOM element which contans a content.
+ * @param {Object} props
  * @return {Object} 'offset': style data to locate, 'place': final direction of the tooltip
  */
-export function adjust(tooltip, props) {
+export function adjust(content, props) {
   const { el: origin, auto, within } = props;
   let { place } = props;
   if (typeof place === 'string') {
@@ -204,7 +208,7 @@ export function adjust(tooltip, props) {
   const tries = [ ...place ];
   while (0 < tries.length) {
     current = tries.shift();
-    pos = placement(current, tooltip, origin);
+    pos = placement(current, content, origin);
     if (typeof first === 'undefined') {
       first = { offset: pos, place: current };
     }

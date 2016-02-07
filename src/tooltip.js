@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { adjust, resolve } from './utils';
 import * as styles from './styles';
@@ -38,32 +39,37 @@ class Tooltip extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
-  componentWillUpdate(nextProps) {
-    const { el, place } = nextProps;
-    if (el && (this.props.el != el || this.props.place !== place)) {
+  componentWillReceiveProps(nextProps) {
+    const { el, place, content } = nextProps;
+    if (el && (this.props.el != el || this.props.place !== place || this.props.content !== content)) {
       this.updatePosition(nextProps);
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { content } = prevProps;
-    if (this.props.content !== content) {
-      this.updatePosition(this.props);
-    }
+  updatePosition(props) {
+    // Setup hidden DOM element to determine size of the content
+    const content = this.children(props);
+    ReactDOM.render(<div>{content}</div>, this.refs.shadow, () => {
+      const state = adjust(this.refs.shadow, props);
+      this.setState(state);
+    });
   }
 
-  updatePosition(props) {
-    const state = adjust(this.refs.tooltip, props);
-    this.setState(state);
+  children(props) {
+    if (typeof props === 'undefined') {
+      props = this.props;
+    }
+    const { content } = props;
+    return content ? content : props.children;
   }
 
   render () {
-    const { content, onHover, onLeave } = this.props;
+    const { onHover, onLeave } = this.props;
     const { place, offset } = this.state;
+    const content = this.children();
     const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
     const style = {
       base: { ...styles.base, ...themes.simple.base, visibility, ...offset },
@@ -71,27 +77,24 @@ class Tooltip extends Component {
       arrow: { ...styles.arrow },
       border: { ...styles.border.base, ...styles.border[place], ...themes.simple.border },
     };
-
-    let children;
-    if (content) {
-      children = content;
-    } else {
-      children = this.props.children;
-    }
+    style.shadow = { ...style.content, visibility: 'hidden', position: 'absolute' };
 
     return (
-      <div
-        ref="tooltip"
-        style={style.base}
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-      >
-        <div ref="content" style={style.content}>
-          {children}
+      <div>
+        <div
+          ref="tooltip"
+          style={style.base}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
+          <div ref="content" style={style.content}>
+            {content}
+          </div>
+          <div style={style.arrow} key={`a-${place}`}>
+            <span ref="border" style={style.border} key={`b-${place}`}></span>
+          </div>
         </div>
-        <div style={style.arrow} key={`a-${place}`}>
-          <span ref="border" style={style.border} key={`b-${place}`}></span>
-        </div>
+        <div ref="shadow" style={style.shadow} />
       </div>
     );
   }
