@@ -9,6 +9,7 @@ import {
 const initial = {
   show: false,
   place: 'top',
+  origin: null,
   el: null,
   auto: true,
   content: null,
@@ -17,7 +18,7 @@ const initial = {
 
 const handlers = {
   [SHOW]: function (state, action) {
-    const names = ['el', 'place', 'content'];
+    const names = ['origin', 'el', 'place', 'content'];
     const props = {};
     names.forEach(name => {
       if (action.payload[name]) {

@@ -195,7 +195,8 @@ export function overDirs(tip, el) {
  * @return {Object} 'offset': style data to locate, 'place': final direction of the tooltip
  */
 export function adjust(content, props) {
-  const { el: origin, auto, within } = props;
+  const { auto, within } = props;
+  const origin = originOrEl(props, true);
   let { place } = props;
   if (typeof place === 'string') {
     place = place.split(',').map(p => p.trim());
@@ -241,4 +242,14 @@ export function resolve(obj) {
   }
 
   return names;
+}
+
+export function originOrEl(props, warn = false) {
+  if (warn && props.el) {
+    console.warn(`DEPRECATED: Use 'origin' prop instead of 'el' prop in Tooltip component.`);
+  }
+  if (warn && props.el && props.origin) {
+    console.warn(`Do not pass both 'origin' and 'el' props at the same time.`);
+  }
+  return props.origin || props.el;
 }
