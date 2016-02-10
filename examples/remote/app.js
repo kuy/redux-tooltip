@@ -11,10 +11,11 @@ class App extends Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleShowDeprecated = this.handleShowDeprecated.bind(this);
   }
 
   handleShow(e) {
-    this.props.dispatch(show({ el: this.refs.target }));
+    this.props.dispatch(show({ origin: this.refs.target }));
   }
 
   handleHide() {
@@ -29,10 +30,16 @@ class App extends Component {
     this.props.dispatch(place(newPlace));
   }
 
+  handleShowDeprecated(e) {
+    this.props.dispatch(show({ el: this.refs.target }));
+  }
+
   render() {
     return (
       <div>
         <h1>Remote Example</h1>
+
+        <h2>Basic</h2>
 
         <p>
           A tooltip is controlled by <span ref="target" className="target">following buttons</span>.
@@ -50,6 +57,12 @@ class App extends Component {
           <input type="button" value="Top" onClick={() => this.handlePlace('top')} /> <input type="button" value="Right" onClick={() => this.handlePlace('right')} />
           <span> </span>
           <input type="button" value="Bottom" onClick={() => this.handlePlace('bottom')} /> <input type="button" value="Left" onClick={() => this.handlePlace('left')} />
+        </p>
+
+        <h2>Deprecated</h2>
+
+        <p>
+          <input type="button" value="Show" onClick={this.handleShowDeprecated} />
         </p>
 
         <Tooltip>

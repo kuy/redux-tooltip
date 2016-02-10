@@ -244,12 +244,15 @@ export function resolve(obj) {
   return names;
 }
 
-export function originOrEl(props, warn = false) {
-  if (warn && props.el) {
-    console.warn(`DEPRECATED: Use 'origin' prop instead of 'el' prop in Tooltip component.`);
+export function deprecatedWarning(props) {
+  if (props && props.el) {
+    console.warn(`DEPRECATED: Use 'origin' instead of 'el' in props for Tooltip component or 'show' action.`);
   }
-  if (warn && props.el && props.origin) {
+  if (props && props.el && props.origin) {
     console.warn(`Do not pass both 'origin' and 'el' props at the same time.`);
   }
+}
+
+export function originOrEl(props) {
   return props.origin || props.el;
 }

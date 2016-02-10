@@ -1,4 +1,4 @@
-import { resolve } from './utils';
+import { resolve, deprecatedWarning } from './utils';
 
 import {
   SHOW, HIDE, TOGGLE, KEEP,
@@ -53,6 +53,9 @@ const handlers = {
 };
 
 function tooltip(state = initial, action) {
+  // Check usage of deprecated props
+  deprecatedWarning(action.payload);
+
   const handler = handlers[action.type];
   return handler ? handler(state, action) : state;
 }
