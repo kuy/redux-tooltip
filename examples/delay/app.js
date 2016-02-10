@@ -2,9 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Tooltip, Origin, actions } from '../../src/index';
 
-const { hide, delay } = actions;
+const { show, hide, delay } = actions;
 
 class App extends Component {
+  handleTimeout(type, duration) {
+    this.props.dispatch(show({ origin: this.refs.bold }));
+  }
+
   render() {
     return (
       <div>
@@ -26,6 +30,11 @@ class App extends Component {
         <p>
           Hovering on an <Origin delay delayOn="show" className="target">origin</Origin>, but it is'n shown immediately.<br />
           You need to stay a while on it. Delay on <Origin delay delayOn="both" className="target">both</Origin>.
+        </p>
+
+        <h2>Timeout callback</h2>
+        <p>
+          The callback function is <b ref="bold">called</b> when <Origin delay className="target" onTimeout={this.handleTimeout.bind(this)}>timeout</Origin>.
         </p>
 
         <Tooltip>
