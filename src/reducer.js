@@ -1,4 +1,4 @@
-import { resolve } from './utils';
+import { resolve, deprecatedWarning } from './utils';
 
 import {
   SHOW, HIDE, TOGGLE, KEEP,
@@ -9,17 +9,19 @@ import {
 const initial = {
   show: false,
   place: 'top',
+  origin: null,
   el: null,
   auto: true,
   content: null,
   timeout: null,
 };
 
+const SHOW_PROPS = ['origin', 'el', 'place', 'content'];
+
 const handlers = {
   [SHOW]: function (state, action) {
-    const names = ['el', 'place', 'content'];
     const props = {};
-    names.forEach(name => {
+    SHOW_PROPS.forEach(name => {
       if (action.payload[name]) {
         props[name] = action.payload[name];
       } else {
@@ -52,6 +54,9 @@ const handlers = {
 };
 
 function tooltip(state = initial, action) {
+  // Check usage of deprecated props
+  deprecatedWarning(action.payload);
+
   const handler = handlers[action.type];
   return handler ? handler(state, action) : state;
 }

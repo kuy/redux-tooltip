@@ -70,8 +70,8 @@ class Origin extends Component {
     if (!props.onMouseEnter) {
       props.onMouseEnter = e => {
         const action = ['show', 'both'].indexOf(this.props.delayOn) !== -1
-          ? this.createWithDelay(show, { el: e.target })
-          : show({ ...this.props, el: e.target });
+          ? this.createWithDelay(show, { origin: e.target })
+          : show({ ...this.props, origin: e.target });
         this.props.dispatch(action);
         this.props.onHover && this.props.onHover(e);
       };

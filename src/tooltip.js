@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { adjust, resolve } from './utils';
+import { adjust, resolve, originOrEl } from './utils';
 import * as styles from './styles';
 import * as themes from './themes';
 
@@ -14,10 +14,11 @@ class Tooltip extends Component {
     return {
       // Props from state tree
       show: PropTypes.bool.isRequired,
+      origin: PropTypes.object,
+      el: PropTypes.object,
       place: PropTypes.oneOfType([
         PropTypes.string, PropTypes.array
       ]).isRequired,
-      el: PropTypes.object,
       content: PropTypes.string,
       auto: PropTypes.bool.isRequired,
       within: PropTypes.func,
@@ -43,8 +44,9 @@ class Tooltip extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { el, place, content } = nextProps;
-    if (el && (this.props.el != el || this.props.place !== place || this.props.content !== content)) {
+    const { place, content } = nextProps;
+    const origin = originOrEl(nextProps);
+    if (origin && (originOrEl(this.props) != origin || this.props.place !== place || this.props.content !== content)) {
       this.updatePosition(nextProps);
     }
   }
@@ -67,10 +69,11 @@ class Tooltip extends Component {
   }
 
   render () {
-    const { onHover, onLeave } = this.props;
+    const { show, onHover, onLeave } = this.props;
+    const origin = originOrEl(this.props);
     const { place, offset } = this.state;
     const content = this.children();
-    const visibility = (this.props.el && this.props.show) ? 'visible' : 'hidden';
+    const visibility = (origin && show) ? 'visible' : 'hidden';
     const style = {
       base: { ...styles.base, ...themes.simple.base, visibility, ...offset },
       content: { ...styles.content, ...themes.simple.content },

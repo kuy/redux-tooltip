@@ -13,6 +13,7 @@ module.exports = {
   },
   entry: {
     'simple': './examples/simple/index.js',
+    'origin': './examples/origin/index.js',
     'place': './examples/place/index.js',
     'delay': './examples/delay/index.js',
     'keep': './examples/keep/index.js',
