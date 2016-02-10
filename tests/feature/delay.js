@@ -3,10 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { Provider } from 'react-redux';
-import { Tooltip, Origin } from '../../src/index';
+import { Tooltip, Origin, utils } from '../../src/index';
 import App from '../../examples/delay/app';
 import store from '../../examples/common/store';
 import { firstComponent, getStyleValue } from '../helpers';
+
+const { position } = utils;
 
 describe('Delay Example', () => {
   before(() => {
@@ -206,6 +208,32 @@ describe('Delay Example', () => {
       // 1.5 seconds later
       clock.tick(1500);
       assert(getStyleValue(tooltip, 'visibility') === 'hidden', 'tooltip should be hidden');
+    });
+  });
+
+  describe('timeout callback', () => {
+    it('should be worked', () => {
+      // Mouseover and mouseout
+      const origin = firstComponent(tree, Origin.WrappedComponent, { onTimeout: undefined }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+      TestUtils.Simulate.mouseLeave(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+
+      const pos1 = position(tooltip);
+
+      // 2 seconds later
+      clock.tick(2000);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+
+      const pos2 = position(tooltip);
+      assert(pos2.left < pos1.left);
+      assert(pos2.top === pos1.top);
+
+      // 10 seconds later
+      clock.tick(10000);
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
     });
   });
 });

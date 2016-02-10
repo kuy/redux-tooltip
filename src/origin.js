@@ -18,13 +18,14 @@ class Origin extends Component {
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string)
       ]),
+      tagName: PropTypes.string,
       delay: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number,
         PropTypes.string
       ]),
       delayOn: PropTypes.oneOf(['show', 'hide', 'both']),
-      tagName: PropTypes.string,
+      onTimeout: PropTypes.func,
       onMouseEnter: PropTypes.func,
       onMouseLeave: PropTypes.func,
     };
@@ -55,10 +56,10 @@ class Origin extends Component {
   }
 
   createWithDelay(creator, extras = {}) {
-    const { delay: duration } = this.props;
+    const { delay: duration, onTimeout: callback } = this.props;
     let action = creator({ ...this.props, ...extras });
-    if (duration) {
-      action = delay(action, duration || undefined);
+    if (duration || callback) {
+      action = delay(action, { duration, callback });
     }
     return action;
   }

@@ -17,15 +17,15 @@ export const content = createAction(CONTENT);
 export const place = createAction(PLACE);
 
 export const DELAY = prefix('delay');
-const DEFAULT_DURATION = 1500;
-export function delay(action, duration = DEFAULT_DURATION) {
+const DURATION = 1500;
+export function delay(action, { duration, callback } = { duration: DURATION }) {
   if (!action.meta) {
     action.meta = {};
   }
-  if (duration === true) {
-    duration = DEFAULT_DURATION;
+  if (typeof duration === 'undefined' || duration === true) {
+    duration = DURATION;
   }
-  action.meta[DELAY] = parseInt(duration);
+  action.meta[DELAY] = { duration: parseInt(duration), callback };
   return action;
 }
 

@@ -6,7 +6,11 @@ export function scryComponents(tree, cls, props = {}) {
   const components = TestUtils.scryRenderedComponentsWithType(tree, cls);
   return components.filter(comp => {
     return Object.keys(props).map(key => {
-      return equal(comp.props[key], props[key]);
+      if (typeof props[key] === 'undefined') {
+        return !!comp.props[key];
+      } else {
+        return equal(comp.props[key], props[key]);
+      }
     }).reduce((prev, val) => prev && val, true);
   });
 }

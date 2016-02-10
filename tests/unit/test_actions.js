@@ -18,7 +18,41 @@ describe('actions', () => {
             value: 123
           },
           meta: {
-            'redux-tooltip/delay': 1500,
+            'redux-tooltip/delay': {
+              duration: 1500,
+              callback: undefined,
+            },
+          }
+        });
+      });
+
+      it('overwrites default duration', () => {
+        assert.deepStrictEqual(actions.delay(action, { duration: 500 }), {
+          type: 'WOO',
+          payload: {
+            value: 123
+          },
+          meta: {
+            'redux-tooltip/delay': {
+              duration: 500,
+              callback: undefined,
+            },
+          }
+        });
+      });
+
+      it('overwrites default duration', () => {
+        const fn = () => {};
+        assert.deepStrictEqual(actions.delay(action, { callback: fn }), {
+          type: 'WOO',
+          payload: {
+            value: 123
+          },
+          meta: {
+            'redux-tooltip/delay': {
+              duration: 1500,
+              callback: fn,
+            },
           }
         });
       });
@@ -47,7 +81,10 @@ describe('actions', () => {
           },
           meta: {
             gem: 'bundler',
-            'redux-tooltip/delay': 1500,
+            'redux-tooltip/delay': {
+              duration: 1500,
+              callback: undefined,
+            },
           }
         });
       });
