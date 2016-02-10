@@ -62,7 +62,7 @@ class App extends Component {
         <h2>Deprecated</h2>
 
         <p>
-          <input type="button" value="Show" onClick={this.handleShowDeprecated} />
+          <input type="button" value="Show via 'el'" onClick={this.handleShowDeprecated} />
         </p>
 
         <Tooltip>

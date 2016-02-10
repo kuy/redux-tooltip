@@ -113,4 +113,22 @@ describe('Remote Example', () => {
       assert(leftPos.bottom === rightPos.bottom);
     });
   });
+
+  describe('deprecated usage', () => {
+    it('should show warning in console', () => {
+      // Setup spy
+      const warn = sinon.spy(console, 'warn');
+
+      // Show button
+      const show = document.querySelector('input[type="button"][value="Show via \'el\'"]');
+      TestUtils.Simulate.click(show);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === "This is a tooltip.\n", 'should be default content');
+
+      assert(warn.calledOnce);
+      assert(warn.firstCall.args[0] === "DEPRECATED: Use 'origin' instead of 'el' in props for Tooltip component or 'show' action.");
+    });
+  });
 });
