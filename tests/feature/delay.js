@@ -229,7 +229,6 @@ describe('Delay Example', () => {
 
       const pos2 = position(tooltip);
       assert(pos2.left < pos1.left);
-      assert(pos2.top === pos1.top);
 
       // 10 seconds later
       clock.tick(10000);
