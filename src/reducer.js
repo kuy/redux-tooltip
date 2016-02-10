@@ -16,11 +16,12 @@ const initial = {
   timeout: null,
 };
 
+const SHOW_PROPS = ['origin', 'el', 'place', 'content'];
+
 const handlers = {
   [SHOW]: function (state, action) {
-    const names = ['origin', 'el', 'place', 'content'];
     const props = {};
-    names.forEach(name => {
+    SHOW_PROPS.forEach(name => {
       if (action.payload[name]) {
         props[name] = action.payload[name];
       } else {

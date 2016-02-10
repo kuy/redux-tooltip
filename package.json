@@ -30,6 +30,7 @@
     "tooltip"
   ],
   "dependencies": {
+    "is-dom": "^1.0.5",
     "redux-actions": "^0.9.1"
   },
   "devDependencies": {

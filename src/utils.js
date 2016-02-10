@@ -1,3 +1,5 @@
+import isDOM from 'is-dom';
+
 function dimension(el) {
   const rect = el.getBoundingClientRect();
   return { width: rect.width, height: rect.height };
@@ -31,16 +33,16 @@ export function position(el) {
  *
  * @param {string} place - 'top', 'right', 'bottom', or 'left'.
  * @param {Object} content - DOM element that contains a content.
- * @param {Object} origin - DOM element.
+ * @param {Object} origin - DOM element or position object.
  * @return {Object} contains 'top', 'left', and extra keys.
  */
 export function placement(place, content, origin) {
   const gap = 12;
   const dim = dimension(content);
-  const pos = position(origin);
+  const pos = isDOM(origin) ? position(origin)
+    : { top: origin.y, right: origin.x, bottom: origin.y, left: origin.x, width: 0, height: 0 };
 
   let offset = { width: dim.width, height: dim.height };
-
   switch(place) {
   case 'top': case 'bottom':
     offset.left = `${pos.left + (pos.width * 0.5) - (dim.width * 0.5)}px`;
@@ -196,7 +198,7 @@ export function overDirs(tip, el) {
  */
 export function adjust(content, props) {
   const { auto, within } = props;
-  const origin = originOrEl(props, true);
+  const origin = originOrEl(props);
   let { place } = props;
   if (typeof place === 'string') {
     place = place.split(',').map(p => p.trim());

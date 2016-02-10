@@ -103,36 +103,4 @@ describe('Simple Example', () => {
       TestUtils.Simulate.mouseLeave(domain);
     });
   });
-
-  describe('svg tooltip', () => {
-    it('should be worked', () => {
-      // Mouseover on red
-      const red = TestUtils.findRenderedDOMComponentWithClass(tree, 'red');
-      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
-      TestUtils.Simulate.mouseEnter(red);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      const redPos = position(tooltip);
-      TestUtils.Simulate.mouseLeave(red);
-
-      // Mouseover on green
-      const green = TestUtils.findRenderedDOMComponentWithClass(tree, 'green');
-      TestUtils.Simulate.mouseEnter(green);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      const greenPos = position(tooltip);
-      TestUtils.Simulate.mouseLeave(green);
-
-      assert(redPos.left < greenPos.left);
-      assert(redPos.top === greenPos.top);
-
-      // Mouseover on blue
-      const blue = TestUtils.findRenderedDOMComponentWithClass(tree, 'blue');
-      TestUtils.Simulate.mouseEnter(blue);
-      assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      const bluePos = position(tooltip);
-      TestUtils.Simulate.mouseLeave(blue);
-
-      assert(greenPos.left < bluePos.left);
-      assert(greenPos.top < bluePos.top);
-    });
-  });
 });
