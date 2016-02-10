@@ -27,6 +27,7 @@ export default function middleware(store) {
     }
 
     // Setup timeout
+    const { duration, callback } = action.meta[DELAY];
     names.forEach(name => {
       const newToken = setTimeout(() => {
         // Ignore if token is cleared
@@ -38,8 +39,11 @@ export default function middleware(store) {
           // Dispatch original action
           delete action.meta[DELAY];
           next(action);
+
+          // Notify via callback
+          callback && callback(action.type, duration, action);
         }
-      }, action.meta[DELAY]);
+      }, duration);
 
       // Store timeout token
       next(startTimeout({ name, token: newToken }));
