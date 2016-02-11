@@ -18,10 +18,10 @@ Please check out [examples](https://github.com/kuy/redux-tooltip/tree/master/exa
 
 ## Getting Started
 
-`redux-tooltip` provides a Redux reducer and two React components; `Tooltip` and `Origin`.
-The reducer handles actions dispatched from UI components and changes Redux's state tree.
+`redux-tooltip` provides a Redux reducer and Higher Order components; `Tooltip` and `Origin`.
+The reducer handles actions that are dispatched from the components and changes Redux's state tree.
 Since both components are already connected to Redux store (this also means they can call `store.dispatch()`),
-the `Tooltip` component receives changes of props and updates itself.
+the `Tooltip` component receives changes of props from the store and updates itself.
 
 The recommended setup is that a single (shared) `Tooltip` component and multiple `Origin` components.
 If you hover on the origin element, the tooltip will be shown.
@@ -97,7 +97,7 @@ For advanced usage, you can override the default handlers; `onMouseEnter` and `o
 + `content` *(`string`)*: A text content for tooltip.
 + `place` *(`string`|`string[]`)*: A name of direction to specify a location of tooltip.
 + `tagName` *(`string`)*: A tag name of wrapper element. Default is `span`.
-+ `delay` *(`boolean`|`number`)*: A number of duration for delay feature.
++ `delay` *(`boolean`|`number`|`string`)*: A number of duration for delay feature.
 + `delayOn` *(`string`)*: A name of timing to enable the delay. `show`, `hide`, or `both`. Default is `hide`.
 + `onTimeout` *(`Function`)*: A callback function when timeout by delay feature.
 + `onMouseEnter` *(`Function`)*: An event handler of mouseenter.
@@ -183,8 +183,8 @@ npm run test:unit
 
 #### Integration test
 
-We're currently use Google Chrome for testing environment.
-Following command will launch Chrome browser and run test suite.
+We're currently use PhantomJS 2.1.1 for testing environment.
+Following command will launch the headless browser and run test suite.
 
 ```
 npm run test:feature
@@ -198,8 +198,6 @@ npm run test:feature:ci
 
 ### TODO
 
-+ Options to change offsets
-+ Supports custom themes
 + Introduce ESLint
 + API documentation using ESDoc
 
