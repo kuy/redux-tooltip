@@ -83,7 +83,7 @@ A tooltip component. Please wrap a content which should be shown in a tooltip.
 
 + `name` *(`string`)*: A name of tooltip. This is used by `<Origin />` component.
 + `place` *(`string`|`string[]`)*: A default direction of tooltip. This value can be overwritten by `<Origin />`'s `place` prop.
-+ `within` *(`DOM Element`)*: A DOM element which is used to restrict the position where this tooltip is placed within.
++ `within` *(`DOM`)*: A DOM element which is used to restrict the position where this tooltip is placed within.
 + `onHover` *(`Function`)*: A callback function to be called on mouseover at tooltip.
 + `onLeave` *(`Function`)*: A callback function to be called on mouseout at tooltip.
 
@@ -94,7 +94,7 @@ In most cases, you may use this component without any options.
 For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
 
 + `name` *(`string`|`string[]`)*: A name(s) to specify which tooltip(s) should be used.
-+ `content` *(`string`)*: A text content for tooltip.
++ `content` *(`string`|`DOM`|`DOM[]`)*: A content for tooltip. If string, it's sanitized by [DOMPurify](https://github.com/cure53/DOMPurify).
 + `place` *(`string`|`string[]`)*: A name of direction to specify a location of tooltip.
 + `tagName` *(`string`)*: A tag name of wrapper element. Default is `span`.
 + `delay` *(`boolean`|`number`|`string`)*: A number of duration for delay feature.

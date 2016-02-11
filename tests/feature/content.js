@@ -73,6 +73,32 @@ describe('Content Example', () => {
     });
   });
 
+  describe('HTML or DOM content', () => {
+    it('should be worked if string HTML is passed', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target html' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'This is a html content.\nSanitized by DOMPurify.\n');
+      assert(tooltip.innerHTML.indexOf('</script>') === -1);
+      assert(tooltip.innerHTML.indexOf('</a>') !== -1);
+      assert(tooltip.innerHTML.indexOf('</b>') !== -1);
+    });
+
+    it('should be worked if DOM element is passed', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target dom' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'RedGreenBlue\n');
+      assert(tooltip.innerHTML.indexOf('</span>') !== -1);
+    });
+  });
+
   describe('continuous updating content', () => {
     it('should be worked', () => {
       // Mouseover
