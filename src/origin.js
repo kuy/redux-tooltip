@@ -13,7 +13,11 @@ class Origin extends Component {
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string)
       ]),
-      content: PropTypes.string,
+      content: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.arrayOf(PropTypes.object)
+      ]),
       place: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string)
@@ -27,7 +31,7 @@ class Origin extends Component {
       delayOn: PropTypes.oneOf(['show', 'hide', 'both']),
       onTimeout: PropTypes.func,
       onMouseEnter: PropTypes.func,
-      onMouseLeave: PropTypes.func,
+      onMouseLeave: PropTypes.func
     };
   }
 

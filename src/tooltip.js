@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { sanitize } from 'dompurify';
 import { adjust, resolve, originOrEl } from './utils';
 import * as styles from './styles';
 import * as themes from './themes';
@@ -19,7 +20,11 @@ class Tooltip extends Component {
       place: PropTypes.oneOfType([
         PropTypes.string, PropTypes.array
       ]).isRequired,
-      content: PropTypes.string,
+      content: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.arrayOf(PropTypes.object)
+      ]),
       auto: PropTypes.bool.isRequired,
       within: PropTypes.func,
 
@@ -52,7 +57,7 @@ class Tooltip extends Component {
   }
 
   updatePosition(props) {
-    // Setup hidden DOM element to determine size of the content
+    // Render content into hidden DOM element to determine size
     const content = this.children(props);
     ReactDOM.render(<div>{content}</div>, this.refs.shadow, () => {
       const state = adjust(this.refs.shadow, props);
@@ -60,11 +65,11 @@ class Tooltip extends Component {
     });
   }
 
-  children(props) {
-    if (typeof props === 'undefined') {
-      props = this.props;
+  children(props = this.props) {
+    let { content } = props;
+    if (typeof content === 'string') {
+      content = <div dangerouslySetInnerHTML={{ __html: sanitize(content) }} />;
     }
-    const { content } = props;
     return content ? content : props.children;
   }
 
