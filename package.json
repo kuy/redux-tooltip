@@ -27,7 +27,8 @@
     "redux",
     "react",
     "component",
-    "tooltip"
+    "tooltip",
+    "react-component"
   ],
   "dependencies": {
     "dompurify": "^0.7.3",
@@ -62,7 +63,7 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
-    "redux-logger": "^2.5.1",
+    "redux-logger": "^2.5.2",
     "rimraf": "^2.5.1",
     "sinon": "^1.17.3",
     "webpack": "^1.12.13",
