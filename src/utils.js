@@ -71,32 +71,21 @@ export function placement(place, content, origin) {
 }
 
 /**
- * Returns an opposite direction based on the given.
+ * Completes missing directions in given direction(s).
  *
- * @param {string|Array} dir - 'top', 'right', 'bottom', or 'left'.
- * @return {string} an opposite direction.
- * @throw
+ * @param {string|Array} dir - a direction or a list of directions.
+ * @return {Array}
  */
-export function opposite(dir) {
-  let place = dir;
-
-  // Alrays use first direction if Array is passed
-  if (typeof place === 'object' && typeof place.length === 'number' && 0 < place.length) {
-    place = place[0];
+const DIRS = ['top', 'right', 'bottom', 'left'];
+export function complete(dir) {
+  if (typeof dir === 'string') {
+    dir = [dir];
+  } else {
+    dir = [...dir];
   }
 
-  switch (place) {
-  case 'top':
-    return 'bottom';
-  case 'bottom':
-    return 'top';
-  case 'right':
-    return 'left';
-  case 'left':
-    return 'right';
-  }
-
-  throw new Error(`Unknown direction: "${dir}"`);
+  const missings = DIRS.filter(d => dir.indexOf(d) === -1);
+  return dir.concat(missings);
 }
 
 /**
@@ -193,7 +182,7 @@ export function overDirs(tip, el) {
  * Places and adjusts a tooltip.
  *
  * @param {Object} content - DOM element which contans a content.
- * @param {Object} props
+ * @param {Object} props - props set from Tooltip component.
  * @return {Object} 'offset': style data to locate, 'place': final direction of the tooltip
  */
 export function adjust(content, props) {
@@ -203,8 +192,8 @@ export function adjust(content, props) {
   if (typeof place === 'string') {
     place = place.split(',').map(p => p.trim());
   }
-  if (auto && place.length === 1) {
-    place.push(opposite(place));
+  if (auto) {
+    place = complete(place);
   }
 
   let pos, dirs, current, first;

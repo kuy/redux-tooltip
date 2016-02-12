@@ -102,7 +102,7 @@ describe('Content Example', () => {
   describe('continuous updating content', () => {
     it('should be worked', () => {
       // Mouseover
-      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target right' }).refs.wrapper;
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target time' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
 
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
@@ -123,7 +123,7 @@ describe('Content Example', () => {
 
     it('should re-calculate a position of the tooltip', () => {
       // Mouseover to 'now' origin
-      const now = firstComponent(tree, Origin.WrappedComponent, { className: 'target right' }).refs.wrapper;
+      const now = firstComponent(tree, Origin.WrappedComponent, { className: 'target time' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(now);
 
       clock.tick(500);

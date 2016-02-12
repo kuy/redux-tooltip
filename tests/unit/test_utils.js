@@ -2,29 +2,27 @@ import assert from 'power-assert';
 import * as utils from '../../src/utils';
 
 describe('utils', () => {
-  describe('.opposite', () => {
+  describe('.complete', () => {
     context('with a direction', () => {
-      it('returns an opposite direction', () => {
-        assert(utils.opposite('top') === 'bottom');
-        assert(utils.opposite('right') === 'left');
-        assert(utils.opposite('bottom') === 'top');
-        assert(utils.opposite('left') === 'right');
+      it('returns a completed list', () => {
+        assert.deepStrictEqual(utils.complete('top'), ['top', 'right', 'bottom', 'left']);
+        assert.deepStrictEqual(utils.complete('right'), ['right', 'top', 'bottom', 'left']);
+        assert.deepStrictEqual(utils.complete('bottom'), ['bottom', 'top', 'right', 'left']);
+        assert.deepStrictEqual(utils.complete('left'), ['left', 'top', 'right', 'bottom']);
+
+        assert.deepStrictEqual(utils.complete(['top']), ['top', 'right', 'bottom', 'left']);
+        assert.deepStrictEqual(utils.complete(['right']), ['right', 'top', 'bottom', 'left']);
+        assert.deepStrictEqual(utils.complete(['bottom']), ['bottom', 'top', 'right', 'left']);
+        assert.deepStrictEqual(utils.complete(['left']), ['left', 'top', 'right', 'bottom']);
       });
     });
 
-    context('with directions as Array', () => {
-      it('returns an opposite direction', () => {
-        assert(utils.opposite(['top']) === 'bottom');
-        assert(utils.opposite(['right', 'left']) === 'left');
-      });
-    });
-
-    context('with invalid direction', () => {
-      it('throws an exception', () => {
-        assert.throws(() => utils.opposite(), Error);
-        assert.throws(() => utils.opposite(''), Error);
-        assert.throws(() => utils.opposite(123), Error);
-        assert.throws(() => utils.opposite([]), Error);
+    context('with a list of directions', () => {
+      it('returns a completed list', () => {
+        assert.deepStrictEqual(utils.complete(['top', 'bottom']), ['top', 'bottom', 'right', 'left']);
+        assert.deepStrictEqual(utils.complete(['left', 'right']), ['left', 'right', 'top', 'bottom']);
+        assert.deepStrictEqual(utils.complete(['top', 'right', 'bottom', 'left']), ['top', 'right', 'bottom', 'left']);
+        assert.deepStrictEqual(utils.complete(['top', 'right', 'bottom', 'left']), ['top', 'right', 'bottom', 'left']);
       });
     });
   });

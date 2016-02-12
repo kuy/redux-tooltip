@@ -180,7 +180,7 @@ describe('Place Example', () => {
 
       const topTipPos = position(tooltip);
       const topOriPos = position(top);
-      assert(topOriPos.bottom < topTipPos.top, 'tooltip should be located on bottom of the origin');
+      assert(topOriPos.right < topTipPos.left, 'tooltip should be located on right of the origin');
 
       // Mouseover to right
       const right = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-right' }).refs.wrapper;
@@ -189,7 +189,7 @@ describe('Place Example', () => {
 
       const rightTipPos = position(tooltip);
       const rightOriPos = position(right);
-      assert(rightTipPos.right < rightOriPos.left, 'tooltip should be located left of the origin');
+      assert(rightTipPos.bottom < rightOriPos.top, 'tooltip should be located top of the origin');
 
       // Mouseover to bottom
       const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-bottom' }).refs.wrapper;
@@ -198,7 +198,7 @@ describe('Place Example', () => {
 
       const bottomTipPos = position(tooltip);
       const bottomOriPos = position(bottom);
-      assert(bottomTipPos.bottom < bottomOriPos.top, 'tooltip should be located on top of the origin');
+      assert(bottomOriPos.right < bottomTipPos.left, 'tooltip should be located on right of the origin');
     });
 
     it("should be disabled by auto={false}", () => {

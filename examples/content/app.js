@@ -45,11 +45,11 @@ class App extends Component {
         <p>
           If you provide a <Origin className="target custom" content="This is a custom content.">custom</Origin> content via Origin component's prop,
           it will overwrite a <Origin className="target default">default</Origin> content of Tooltip component.<br />
-          <Origin className="target html" place="right" content="This is a <b>html</b> content.<br />Sanitized by <a href='#'>DOMPurify</a>.<script>console.log('Hello XSS!');</script>">HTML</Origin> as string and <Origin className="target dom" content={dom}>DOM element</Origin> are also supported.
+          <Origin className="target html" content="This is a <b>html</b> content.<br />Sanitized by <a href='#'>DOMPurify</a>.<script>console.log('Hello XSS!');</script>">HTML</Origin> as string and <Origin className="target dom" content={dom}>DOM element</Origin> are also supported.
         </p>
 
         <p>
-          What time is it <Origin className="target right" place="right" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
+          What time is it <Origin className="target time" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
         </p>
 
         <Tooltip>

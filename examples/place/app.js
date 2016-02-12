@@ -46,11 +46,11 @@ class App extends Component {
           The 'place' prop <Origin className="target auto-string" place="left,bottom">can</Origin> be also passed as a comma separated string.
         </p>
 
-        <div ref="restricted" style={{ width: '400px', height: '160px', backgroundColor: 'lightgray', padding: '10px', position: 'relative' }}>
-          In default, <Origin name="restricted" className="target auto-top" place="top">redux-tooltip</Origin> supposes you want to do auto-placement within the browser window.<br />
+        <div ref="restricted" style={{ width: '388px', height: '160px', backgroundColor: 'lightgray', padding: '16px', position: 'relative' }}>
+          In default, <Origin name="restricted" className="target auto-top" place="top">redux-tooltip</Origin> supposes you want to do auto-placement within the browser window.<br /><br />
           Using <code>within</code> prop, you can specify <Origin name="restricted" className="target auto-right" place="right">DOM element</Origin> instead of BODY element.
-          <div style={{ position: 'absolute', bottom: '10px' }}>
-            This is a <Origin name="restricted" className="target auto-bottom" place="bottom">bottom</Origin> origin.
+          <div style={{ position: 'absolute', bottom: '16px' }}>
+            <Origin name="restricted" className="target auto-bottom" place="bottom">This</Origin> is a bottom origin.
           </div>
         </div>
 
