@@ -189,7 +189,7 @@ describe('Place Example', () => {
 
       const rightTipPos = position(tooltip);
       const rightOriPos = position(right);
-      assert(rightTipPos.bottom < rightOriPos.top, 'tooltip should be located top of the origin');
+      assert(rightTipPos.right < rightOriPos.left, 'tooltip should be located left of the origin');
 
       // Mouseover to bottom
       const bottom = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-bottom' }).refs.wrapper;
