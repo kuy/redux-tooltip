@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Tooltip, Origin, actions } from '../../src/index';
 
-const { content } = actions;
+const { show, content } = actions;
 
 function now() {
   const now = new Date();
@@ -12,6 +12,17 @@ function now() {
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { count: [] };
+    setInterval(() => {
+      let { count } = this.state;
+      if (3 < count.length) {
+        count = [];
+      }
+      count = [ ...count, 3 - count.length ];
+      this.setState({ ...this.state, count });
+    }, 1000);
+
     this.handleHover = this.handleHover.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
   }
@@ -38,6 +49,9 @@ class App extends Component {
       <span style={{ color: 'blue', marginRight: '5px' }}>Blue</span>
     </div>;
 
+    const { count } = this.state;
+    const countBody = count.join(', ');
+
     return (
       <div>
         <h1>Content Example</h1>
@@ -52,10 +66,16 @@ class App extends Component {
           What time is it <Origin className="target time" onHover={this.handleHover} onLeave={this.handleLeave}>now</Origin>?
         </p>
 
+        <p>
+          Count down: <Origin name="count" className="target count">Here</Origin>
+        </p>
+
         <Tooltip>
           This is a default content.<br />
           It's a second line.
         </Tooltip>
+
+        <Tooltip name="count">{countBody}</Tooltip>
       </div>
     );
   }
