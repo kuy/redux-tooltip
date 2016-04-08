@@ -1,7 +1,7 @@
 module.exports = function(config) {
   var configuration = {
     basePath: '',
-    frameworks: ['mocha-debug', 'mocha', 'sinon'],
+    frameworks: ['mocha', 'sinon'],
     files: [
       'tests/feature/*.js'
     ],
@@ -9,7 +9,6 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-mocha',
-      'karma-mocha-debug',
       'karma-mocha-reporter',
       'karma-sinon',
       'karma-webpack'
