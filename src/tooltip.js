@@ -49,9 +49,10 @@ class Tooltip extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { place, content } = nextProps;
+    const { place, content, children } = nextProps;
     const origin = originOrEl(nextProps);
-    if (origin && (originOrEl(this.props) != origin || this.props.place !== place || this.props.content !== content)) {
+    if (origin && (originOrEl(this.props) != origin || this.props.place !== place ||
+        this.props.content !== content || this.props.children !== children)) {
       this.updatePosition(nextProps);
     }
   }

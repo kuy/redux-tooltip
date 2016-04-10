@@ -9,22 +9,17 @@ function now() {
   return now.toString();
 }
 
+const COUNT_FROM = 5;
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = { count: [] };
-    setInterval(() => {
-      let { count } = this.state;
-      if (3 < count.length) {
-        count = [];
-      }
-      count = [ ...count, 3 - count.length ];
-      this.setState({ ...this.state, count });
-    }, 1000);
 
     this.handleHover = this.handleHover.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
+    this.handleCountHover = this.handleCountHover.bind(this);
   }
 
   handleHover() {
@@ -40,6 +35,22 @@ class App extends Component {
 
   updateContent() {
     this.props.dispatch(content(now()));
+  }
+
+  handleCountHover() {
+    this.setState({ ...this.state, count: [COUNT_FROM] });
+    this.token = setInterval(() => {
+      let { count } = this.state;
+      if (COUNT_FROM < count.length) {
+        count = [];
+      }
+      count = [ ...count, COUNT_FROM - count.length ];
+      this.setState({ ...this.state, count });
+    }, 1000);
+  }
+
+  handleLeave() {
+    clearInterval(this.token);
   }
 
   render() {
@@ -67,7 +78,7 @@ class App extends Component {
         </p>
 
         <p>
-          Count down: <Origin name="count" className="target count">Here</Origin>
+          Count down: <Origin name="count" className="target count" onHover={this.handleCountHover} onLeave={this.handleLeave}>Here</Origin>
         </p>
 
         <Tooltip>
