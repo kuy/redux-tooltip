@@ -9,7 +9,8 @@ function now() {
   return now.toString();
 }
 
-const COUNT_FROM = 5;
+const COUNT_FROM = 10;
+const INITIAL_TEXT = `Count down from ${COUNT_FROM}`;
 
 class App extends Component {
   constructor(props) {
@@ -38,13 +39,14 @@ class App extends Component {
   }
 
   handleCountHover() {
-    this.setState({ ...this.state, count: [COUNT_FROM] });
+    this.setState({ ...this.state, count: [INITIAL_TEXT] });
     this.token = setInterval(() => {
       let { count } = this.state;
-      if (COUNT_FROM < count.length) {
-        count = [];
+      if (COUNT_FROM <= count.length) {
+        count = [INITIAL_TEXT];
+      } else {
+        count = [ ...count, COUNT_FROM - count.length ];
       }
-      count = [ ...count, COUNT_FROM - count.length ];
       this.setState({ ...this.state, count });
     }, 1000);
   }

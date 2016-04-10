@@ -122,9 +122,9 @@ describe('Content Example', () => {
     });
 
     it('should re-calculate a position of the tooltip', () => {
-      // Mouseover to 'now' origin
-      const now = firstComponent(tree, Origin.WrappedComponent, { className: 'target time' }).refs.wrapper;
-      TestUtils.Simulate.mouseEnter(now);
+      // Mouseover to 'time' origin
+      const time = firstComponent(tree, Origin.WrappedComponent, { className: 'target time' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(time);
 
       clock.tick(500);
 
@@ -137,6 +137,51 @@ describe('Content Example', () => {
       const tipPos = position(tooltip);
       const center = tipPos.left + tipPos.width / 2;
       assert(oriPos.left < center && center < oriPos.right, 'tooltip should be located a center of the origin');
+    });
+  });
+
+  describe('continuous updating children', () => {
+    it('should be worked', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target count' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'count' }).refs.tooltip;
+      assert(getStyleValue(tooltip, 'visibility') === 'visible');
+      assert(tooltip.innerText === 'Count down from 10\n');
+
+      clock.tick(1100);
+      assert(tooltip.innerText === 'Count down from 10, 9\n');
+
+      clock.tick(5000);
+      assert(tooltip.innerText === 'Count down from 10, 9, 8, 7, 6, 5, 4\n');
+
+      clock.tick(4000);
+      assert(tooltip.innerText === 'Count down from 10\n');
+
+      clock.tick(2000);
+      assert(tooltip.innerText === 'Count down from 10, 9, 8\n');
+
+      // Mouseout
+      TestUtils.Simulate.mouseLeave(origin);
+      assert(getStyleValue(tooltip, 'visibility') === 'hidden');
+    });
+
+    it('should re-calculate a position of the tooltip', () => {
+      // Mouseover
+      const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target count' }).refs.wrapper;
+      TestUtils.Simulate.mouseEnter(origin);
+
+      const tooltip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'count' }).refs.tooltip;
+      const tipPos1 = position(tooltip);
+      const oriPos = position(origin);
+
+      assert(tipPos1.bottom < oriPos.top, 'tooltip should be located upon the origin');
+
+      clock.tick(7000);
+      const tipPos2 = position(tooltip);
+
+      assert(oriPos.right < tipPos2.left, 'tooltip should be moved a right of the origin');
     });
   });
 });
