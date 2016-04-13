@@ -80,11 +80,29 @@ import { reducer as tooltip } from 'redux-tooltip';
 // ...
 
 export default combineReducers(
-  { your, reducers, ..., tooltip }
+  { your, awesome, reducers, ..., tooltip }
 );
 ```
 
 That's it!
+
+#### [Optional] 4. Insert `redux-tooltip` middleware with yours
+
+If you want to use 'delay' feature, please insert `redux-tooltip` middleware to enable the feature.
+
+```
+import { middleware as tooltip } from 'redux-tooltip';
+
+// ...
+
+const store = createStore(
+  reducer,
+  initialstate,
+  applyMiddleware(
+    your, awesome, middlewares, ..., tooltip
+  )
+);
+```
 
 ## API
 
