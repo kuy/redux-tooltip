@@ -1,4 +1,5 @@
 import isDOM from 'is-dom';
+import * as actions from './actions';
 
 function dimension(el) {
   const rect = el.getBoundingClientRect();
@@ -235,11 +236,16 @@ export function resolve(obj) {
   return names;
 }
 
-export function deprecatedWarning(props) {
-  if (props && props.el) {
+const actionTypes = Object.keys(actions).map(k => actions[k]).filter(e => typeof e === 'string');
+export function deprecatedWarning(action) {
+  const { type, payload } = action;
+  if (actionTypes.indexOf(action.type) === -1) {
+    return; // Ignore non-related actions
+  }
+  if (payload && payload.el) {
     console.warn(`DEPRECATED: Use 'origin' instead of 'el' in props for Tooltip component or 'show' action.`);
   }
-  if (props && props.el && props.origin) {
+  if (payload && payload.el && payload.origin) {
     console.warn(`Do not pass both 'origin' and 'el' props at the same time.`);
   }
 }

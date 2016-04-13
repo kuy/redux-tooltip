@@ -55,7 +55,7 @@ const handlers = {
 
 function tooltip(state = initial, action) {
   // Check usage of deprecated props
-  deprecatedWarning(action.payload);
+  deprecatedWarning(action);
 
   const handler = handlers[action.type];
   return handler ? handler(state, action) : state;
