@@ -4,7 +4,23 @@
 
 # redux-tooltip
 
-A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/rackt/redux).
+A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/reactjs/redux).
+
+## Features
+
++ Designed for use with [Redux](https://github.com/reactjs/redux)
++ Control by [FSA](https://github.com/acdlite/flux-standard-action)-compliant actions
++ Don't conceal the state
++ Auto-resizing and auto-placement based on the content
++ Support multiple tooltips
++ Fully customizable 'Delay' feature
+
+## Why?
+
+[react-tooltip](https://github.com/wwayne/react-tooltip) is a popular tooltip library and I tried it with Redux.
+It works nice at first, but I struggled when I wanted to implement delay/keep features.
+I noticed the root issue is that all tooltip states should be stored in Redux.
+In addition to this, a tooltip should be controlled by Redux's actions.
 
 ## Installation
 
