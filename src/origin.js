@@ -59,6 +59,11 @@ class Origin extends Component {
     return connect()(CustomOrigin);
   }
 
+  componentWillUnmount(){
+    // hide the tooltip
+    this.props.dispatch(hide({ ...this.props }));
+  }
+
   createWithDelay(creator, extras = {}) {
     const { delay: duration, onTimeout: callback } = this.props;
     let action = creator({ ...this.props, ...extras });
