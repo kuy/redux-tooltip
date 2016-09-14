@@ -34,7 +34,7 @@ describe('Multiple Example', () => {
 
       const greenTip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'green' }).refs.tooltip;
       assert(getStyleValue(greenTip, 'visibility') === 'visible');
-      assert(greenTip.innerText === 'This is a Green tooltip.\n');
+      assert(greenTip.innerText === 'This is a Green tooltip.');
 
       TestUtils.Simulate.mouseLeave(green);
       assert(getStyleValue(greenTip, 'visibility') === 'hidden');
@@ -45,7 +45,7 @@ describe('Multiple Example', () => {
 
       const redTip = firstComponent(tree, Tooltip.WrappedComponent, { name: 'red' }).refs.tooltip;
       assert(getStyleValue(redTip, 'visibility') === 'visible');
-      assert(redTip.innerText === 'This is a Red tooltip.\n');
+      assert(redTip.innerText === 'This is a Red tooltip.');
 
       TestUtils.Simulate.mouseLeave(red);
       assert(getStyleValue(redTip, 'visibility') === 'hidden');
@@ -55,9 +55,9 @@ describe('Multiple Example', () => {
       TestUtils.Simulate.mouseEnter(both);
 
       assert(getStyleValue(greenTip, 'visibility') === 'visible');
-      assert(greenTip.innerText === 'This is a Green tooltip.\n');
+      assert(greenTip.innerText === 'This is a Green tooltip.');
       assert(getStyleValue(redTip, 'visibility') === 'visible');
-      assert(redTip.innerText === 'This is a Red tooltip.\n');
+      assert(redTip.innerText === 'This is a Red tooltip.');
 
       TestUtils.Simulate.mouseLeave(both);
       assert(getStyleValue(greenTip, 'visibility') === 'hidden');

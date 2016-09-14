@@ -38,7 +38,7 @@ describe('Content Example', () => {
 
       const tooltip = firstComponent(tree, Tooltip.WrappedComponent).refs.tooltip;
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === "This is a default content.\nIt's a second line.\n", 'should be default content');
+      assert(tooltip.innerText === "This is a default content.\nIt's a second line.", 'should be default content');
     });
   });
 

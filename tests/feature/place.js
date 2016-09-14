@@ -38,7 +38,7 @@ describe('Place Example', () => {
 
       const rightOri = position(right);
       const rightTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
       assert(rightOri.left < rightTip.left);
 
       // Mouseover to bottom
@@ -48,7 +48,7 @@ describe('Place Example', () => {
 
       const bottomOri = position(bottom);
       const bottomTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
       assert(bottomOri.top < bottomTip.top);
 
       // Mouseover to left
@@ -58,7 +58,7 @@ describe('Place Example', () => {
 
       const leftOri = position(left);
       const leftTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
       assert(leftTip.left < leftOri.left);
 
       // Mouseover to top
@@ -68,7 +68,7 @@ describe('Place Example', () => {
 
       const topOri = position(top);
       const topTip = position(tooltip);
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
       assert(topTip.top < topOri.top);
     });
   });
@@ -83,7 +83,7 @@ describe('Place Example', () => {
 
       const rightOri = position(right);
       const rightTip = position(rightTooltip);
-      assert(rightTooltip.innerText === 'This is a right tooltip.\n');
+      assert(rightTooltip.innerText === 'This is a right tooltip.');
       assert(rightOri.left < rightTip.left);
 
       // Mouseover to bottom
@@ -94,7 +94,7 @@ describe('Place Example', () => {
 
       const bottomOri = position(bottom);
       const bottomTip = position(bottomTooltip);
-      assert(bottomTooltip.innerText === 'This is a bottom tooltip.\n');
+      assert(bottomTooltip.innerText === 'This is a bottom tooltip.');
       assert(bottomOri.top < bottomTip.top);
 
       // Mouseover to left
@@ -105,7 +105,7 @@ describe('Place Example', () => {
 
       const leftOri = position(left);
       const leftTip = position(leftTooltip);
-      assert(leftTooltip.innerText === 'This is a left tooltip.\n');
+      assert(leftTooltip.innerText === 'This is a left tooltip.');
       assert(leftTip.left < leftOri.left);
 
       // Mouseover to top
@@ -116,7 +116,7 @@ describe('Place Example', () => {
 
       const topOri = position(top);
       const topTip = position(topTooltip);
-      assert(topTooltip.innerText === 'This is a top tooltip.\n');
+      assert(topTooltip.innerText === 'This is a top tooltip.');
       assert(topTip.top < topOri.top);
     });
   });
@@ -128,7 +128,7 @@ describe('Place Example', () => {
       const origin = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-basic' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(origin);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
 
       const tipPos = position(tooltip);
       const oriPos = position(origin);
@@ -141,7 +141,7 @@ describe('Place Example', () => {
       const array = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-array' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(array);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a shared tooltip.\n');
+      assert(tooltip.innerText === 'This is a shared tooltip.');
 
       const arrayTipPos = position(tooltip);
       const arrayOriPos = position(array);
@@ -163,7 +163,7 @@ describe('Place Example', () => {
       const more = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-more' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(more);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a more tooltip.\n');
+      assert(tooltip.innerText === 'This is a more tooltip.');
 
       const tipPos = position(tooltip);
       const oriPos = position(more);
@@ -176,7 +176,7 @@ describe('Place Example', () => {
       const top = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-top' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(top);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a restricted tooltip.\n');
+      assert(tooltip.innerText === 'This is a restricted tooltip.');
 
       const topTipPos = position(tooltip);
       const topOriPos = position(top);
@@ -207,7 +207,7 @@ describe('Place Example', () => {
       const disabled = firstComponent(tree, Origin.WrappedComponent, { className: 'target auto-disabled' }).refs.wrapper;
       TestUtils.Simulate.mouseEnter(disabled);
       assert(getStyleValue(tooltip, 'visibility') === 'visible');
-      assert(tooltip.innerText === 'This is a disabled tooltip.\n');
+      assert(tooltip.innerText === 'This is a disabled tooltip.');
 
       const tipPos = position(tooltip);
       const oriPos = position(disabled);
