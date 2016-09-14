@@ -60,14 +60,12 @@ import { Tooltip } from 'redux-tooltip';
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <Page />
-        <Tooltip>
-          Hello Tooltip!
-        </Tooltip>
-      </div>
-    );
+    return <div>
+      <Page />
+      <Tooltip>
+        Hello Tooltip!
+      </Tooltip>
+    </div>;
   }
 }
 ```
@@ -79,11 +77,9 @@ import { Origin } from 'redux-tooltip';
 
 class Page extends React.Component {
   render() {
-    return (
-      <p>
-        Please hover <Origin>here</Origin>.
-      </p>
-    );
+    return <p>
+      Please hover <Origin>here</Origin>.
+    </p>;
   }
 }
 ```
@@ -156,13 +152,11 @@ For advanced usage, you can override the default handlers; `onMouseEnter` and `o
 // Invalid SVG...
 // Origin component wraps children with <span> tag in default.
 function Shape() {
-  return (
-    <svg width="80" height="80">
-      <Origin>
-        <rect x="10" y="10" width="20" height="30" />
-      </Origin>
-    </svg>
-  );
+  return <svg width="80" height="80">
+    <Origin>
+      <rect x="10" y="10" width="20" height="30" />
+    </Origin>
+  </svg>;
 }
 
 // Perfect!
@@ -170,13 +164,11 @@ function Shape() {
 const SVGOrigin = Origin.wrapBy('g');
 
 function Shape() {
-  return (
-    <svg width="80" height="80">
-      <SVGOrigin>
-        <rect x="10" y="10" width="20" height="30" />
-      </SVGOrigin>
-    </svg>
-  );
+  return <svg width="80" height="80">
+    <SVGOrigin>
+      <rect x="10" y="10" width="20" height="30" />
+    </SVGOrigin>
+  </svg>;
 }
 ```
 
@@ -242,11 +234,6 @@ If you prefer 'single-run', which means that the browser is closed after testing
 ```
 npm run test:feature:ci
 ```
-
-### TODO
-
-+ Introduce ESLint
-+ API documentation using ESDoc
 
 ## Changelog
 
