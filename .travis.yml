@@ -5,6 +5,7 @@ sudo: true
 node_js:
   - "4"
   - "5"
+  - "6"
 
 before_install:
   - mkdir travis-phantomjs
