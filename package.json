@@ -31,6 +31,7 @@
     "react-component"
   ],
   "dependencies": {
+    "blacklist": "^1.1.4",
     "dompurify": "^0.8.3",
     "is-dom": "^1.0.5",
     "redux-actions": "^0.12.0"

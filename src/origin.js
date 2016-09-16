@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import blacklist from 'blacklist';
 import { show, hide, delay } from './actions';
 
 class Origin extends Component {
@@ -31,7 +32,9 @@ class Origin extends Component {
       delayOn: PropTypes.oneOf(['show', 'hide', 'both']),
       onTimeout: PropTypes.func,
       onMouseEnter: PropTypes.func,
-      onMouseLeave: PropTypes.func
+      onMouseLeave: PropTypes.func,
+      onHover: PropTypes.func,
+      onLeave: PropTypes.func
     };
   }
 
@@ -74,8 +77,7 @@ class Origin extends Component {
   }
 
   render() {
-    const props = { ...this.props };
-    delete props['dispatch'];
+    const props = blacklist(this.props, 'name', 'content', 'place', 'tagName', 'delay', 'delayOn', 'dispatch', 'onTimeout', 'onHover', 'onLeave');
 
     if (!props.onMouseEnter) {
       props.onMouseEnter = e => {
