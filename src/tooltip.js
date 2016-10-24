@@ -84,7 +84,7 @@ class Tooltip extends Component {
       base: { ...styles.base, ...themes.simple.base, visibility, ...offset },
       content: { ...styles.content, ...themes.simple.content },
       arrow: { ...styles.arrow },
-      border: { ...styles.border.base, ...styles.border[place], ...themes.simple.border },
+      border: { ...themes.simple.border, ...styles.border.base, ...styles.border[place],  },
     };
     style.shadow = { ...style.content, visibility: 'hidden', position: 'absolute' };
 

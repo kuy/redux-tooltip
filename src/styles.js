@@ -1,3 +1,7 @@
+import * as themes from './themes';
+
+const theme = themes.simple;
+
 export const base = {
   padding: 0,
   fontSize: 0,
@@ -42,32 +46,29 @@ export const border = {
     width: 0,
     height: 0,
     position: 'absolute',
+    borderStyle: 'solid',
   },
   top: {
-    borderLeft: '9px solid transparent !important',
-    borderRight: '9px solid transparent !important',
-    borderTop: '9px solid',
+    borderColor: theme.border.borderColor + ' transparent transparent transparent',
+    borderWidth: '9px 9px 0px 9px',
     bottom: '-7px',
     ...vertical,
   },
   right: {
-    borderTop: '9px solid transparent !important',
-    borderBottom: '9px solid transparent !important',
-    borderRight: '9px solid',
+    borderColor: 'transparent ' + theme.border.borderColor + ' transparent transparent',
+    borderWidth: '9px 9px 9px 0px',
     left: '-7px',
     ...horizontal,
   },
   bottom: {
-    borderLeft: '9px solid transparent !important',
-    borderRight: '9px solid transparent !important',
-    borderBottom: '9px solid',
+    borderColor: 'transparent transparent ' + theme.border.borderColor +' transparent',
+    borderWidth: '0px 9px 9px 9px',
     top: '-7px',
     ...vertical,
   },
   left: {
-    borderTop: '9px solid transparent !important',
-    borderBottom: '9px solid transparent !important',
-    borderLeft: '9px solid',
+    borderColor: 'transparent transparent transparent ' + theme.border.borderColor,
+    borderWidth: '9px 0px 9px 9px',
     right: '-7px',
     ...horizontal,
   },
