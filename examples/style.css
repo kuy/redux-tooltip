@@ -8,3 +8,11 @@ body {
   text-decoration: underline;
   cursor: pointer;
 }
+
+#my-id {
+  background: #FFCDD2 !important;
+}
+
+.my-class {
+  background: #BBDEFB !important;
+}

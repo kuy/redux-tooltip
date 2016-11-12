@@ -19,7 +19,8 @@ module.exports = {
     'keep': './examples/keep/index.js',
     'remote': './examples/remote/index.js',
     'content': './examples/content/index.js',
-    'multiple': './examples/multiple/index.js'
+    'multiple': './examples/multiple/index.js',
+    'style': './examples/style/index.js'
   },
   output: {
     path: __dirname + '/build',
