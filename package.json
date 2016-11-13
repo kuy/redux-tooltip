@@ -33,8 +33,7 @@
   "dependencies": {
     "blacklist": "^1.1.4",
     "dompurify": "^0.8.4",
-    "is-dom": "^1.0.5",
-    "redux-actions": "^0.13.0"
+    "is-dom": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

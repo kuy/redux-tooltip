@@ -1,4 +1,4 @@
-import { createAction } from 'redux-actions';
+import { createAction } from './utils';
 
 const prefix = (name) => `redux-tooltip/${name}`;
 

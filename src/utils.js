@@ -253,3 +253,10 @@ export function deprecatedWarning(action) {
 export function originOrEl(props) {
   return props.origin || props.el;
 }
+
+// NOTE: No compatibility with redux-actions.
+export function createAction(type) {
+  return (payload) => {
+    return { type, payload };
+  };
+}
