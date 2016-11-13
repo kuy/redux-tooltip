@@ -10,7 +10,7 @@ class App extends Component {
 
         <p>
           If you want to apply a style defined in external CSS file,<br />
-          you can give <Origin name="id-tip" className="target"><code>class</code></Origin> and <Origin name="class-tip" className="target"><code>id</code></Origin> attributes to the DIV element of a tooltip.
+          you can give <Origin name="id-tip" className="target origin-id"><code>id</code></Origin> and <Origin name="class-tip" className="target origin-class"><code>class</code></Origin> attributes to the DIV element of a tooltip.
         </p>
 
         <Tooltip name="id-tip" id="my-id">

@@ -28,3 +28,8 @@ export function getStyleValue(element, propName) {
   parser.cssText = element.getAttribute('style');
   return parser.getPropertyValue(propName);
 }
+
+export function getComputedStyleValue(element, propName) {
+  const style = getComputedStyle(element);
+  return style.getPropertyValue(propName);
+}

@@ -3,7 +3,8 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha', 'sinon'],
     files: [
-      'tests/feature/*.js'
+      'tests/feature/*.js',
+      'examples/*.css'
     ],
     exclude: [],
     plugins: [
@@ -11,10 +12,12 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-mocha-reporter',
       'karma-sinon',
-      'karma-webpack'
+      'karma-webpack',
+      'karma-html2js-preprocessor'
     ],
     preprocessors: {
       'tests/feature/*.js': ['webpack'],
+      'examples/*.css': ['html2js']
     },
     webpack: {
       devtool: 'inline-source-map',
