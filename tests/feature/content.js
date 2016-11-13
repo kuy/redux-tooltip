@@ -1,4 +1,4 @@
-import assert from 'power-assert';
+import assert from 'assert';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';

@@ -1,4 +1,4 @@
-import assert from 'power-assert';
+import assert from 'assert';
 import sinon from 'sinon';
 import reducer from '../../src/reducer';
 import * as actions from '../../src/actions';

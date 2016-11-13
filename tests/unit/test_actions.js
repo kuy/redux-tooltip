@@ -1,4 +1,4 @@
-import assert from 'power-assert';
+import assert from 'assert';
 import * as actions from '../../src/actions';
 
 describe('actions', () => {

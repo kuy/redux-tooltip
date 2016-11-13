@@ -28,8 +28,7 @@ module.exports = function(config) {
             loader: 'babel',
             exclude: /node_modules/,
             query: {
-              presets: ['react', 'es2015', 'stage-2'],
-              plugins: ['babel-plugin-espower']
+              presets: ['react', 'es2015', 'stage-2', 'power-assert']
             }
           },
           {
