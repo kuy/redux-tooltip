@@ -1,6 +1,13 @@
-import { createAction } from './utils';
+export function prefix(name) {
+  return `redux-tooltip/${name}`;
+}
 
-const prefix = (name) => `redux-tooltip/${name}`;
+// NOTE: No compatibility with redux-actions.
+export function createAction(type) {
+  return payload => {
+    return { type, payload };
+  };
+}
 
 export const SHOW = prefix('SHOW');
 export const HIDE = prefix('HIDE');

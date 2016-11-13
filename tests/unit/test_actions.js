@@ -90,4 +90,20 @@ describe('actions', () => {
       });
     });
   });
+
+  describe('.prefix', () => {
+    it('returns a prefixed action type', () => {
+      const type = actions.prefix('HOGE');
+      assert(type === 'redux-tooltip/HOGE');
+    });
+  });
+
+  describe('.createAction', () => {
+    it('creates an action creator', () => {
+      const creator = actions.createAction('HOGE');
+      assert(typeof creator === 'function');
+      assert.deepStrictEqual(creator(123), { type: 'HOGE', payload: 123 });
+      assert.deepStrictEqual(creator({ nyan: 'cat' }), { type: 'HOGE', payload: { nyan: 'cat' } });
+    });
+  });
 });

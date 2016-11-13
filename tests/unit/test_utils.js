@@ -214,13 +214,4 @@ describe('utils', () => {
       });
     });
   });
-
-  describe('.createAction', () => {
-    it('creates an action creator', () => {
-      const creator = utils.createAction('HOGE');
-      assert(typeof creator === 'function');
-      assert.deepStrictEqual(creator(123), { type: 'HOGE', payload: 123 });
-      assert.deepStrictEqual(creator({ nyan: 'cat' }), { type: 'HOGE', payload: { nyan: 'cat' } });
-    });
-  });
 });
