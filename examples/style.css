@@ -13,6 +13,14 @@ body {
   background: #FFCDD2 !important;
 }
 
+#my-id-arrow > span {
+  border-color: #FFCDD2 transparent transparent transparent !important;
+}
+
 .my-class {
   background: #BBDEFB !important;
+}
+
+.my-class .my-class-arrow > span {
+  border-color: #BBDEFB transparent transparent transparent !important;
 }

@@ -42,6 +42,7 @@ Please check out [examples](https://github.com/kuy/redux-tooltip/tree/master/exa
 + [Remote](http://kuy.github.io/redux-tooltip/remote.html)
 + [Content](http://kuy.github.io/redux-tooltip/content.html)
 + [Multiple](http://kuy.github.io/redux-tooltip/multiple.html)
++ [Style](http://kuy.github.io/redux-tooltip/style.html)
 
 ## Getting Started
 
@@ -128,6 +129,8 @@ A tooltip component. Please wrap a content which should be shown in a tooltip.
 + `within` *(`DOM`)*: A DOM element which is used to restrict the position where this tooltip is placed within.
 + `onHover` *(`Function`)*: A callback function to be called on mouseover at tooltip.
 + `onLeave` *(`Function`)*: A callback function to be called on mouseout at tooltip.
++ `id` *(`string`)*: An `id` attribute passed to `<div>` element of a tooltip.
++ `className` *(`string`)*: A `class` attribute passed to `<div>` element of a tooltip.
 
 ### `<Origin />`
 

@@ -30,6 +30,8 @@ class Tooltip extends Component {
 
       // Props from wrapper props
       name: PropTypes.string,
+      id: PropTypes.string,
+      className: PropTypes.string,
       onHover: PropTypes.func,
       onLeave: PropTypes.func,
     };
@@ -75,7 +77,7 @@ class Tooltip extends Component {
   }
 
   render () {
-    const { show, onHover, onLeave } = this.props;
+    const { id, className, show, onHover, onLeave } = this.props;
     const origin = originOrEl(this.props);
     const { place, offset } = this.state;
     const content = this.children();
@@ -93,17 +95,34 @@ class Tooltip extends Component {
         <div
           ref="tooltip"
           style={style.base}
+          id={id}
+          className={className}
           onMouseEnter={onHover}
           onMouseLeave={onLeave}
         >
-          <div ref="content" style={style.content}>
+          <div
+            ref="content"
+            style={style.content}
+            id={`${id}-content`}
+            className={`${className}-content`}
+          >
             {content}
           </div>
-          <div style={style.arrow} key={`a-${place}`}>
+          <div
+            style={style.arrow}
+            id={`${id}-arrow`}
+            className={`${className}-arrow`}
+            key={`a-${place}`}
+          >
             <span ref="border" style={style.border} key={`b-${place}`}></span>
           </div>
         </div>
-        <div ref="shadow" style={style.shadow} />
+        <div
+          ref="shadow"
+          style={style.shadow}
+          id={`${id}-shadow`}
+          className={`${className}-shadow`}
+        />
       </div>
     );
   }
