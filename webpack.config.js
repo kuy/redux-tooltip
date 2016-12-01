@@ -2,7 +2,7 @@
 
 var webpack = require('webpack');
 
-module.exports = {
+var config = {
   devtool: 'inline-source-map',
   module: {
     loaders: [{
@@ -34,3 +34,14 @@ module.exports = {
     }),
   ]
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': { NODE_ENV: JSON.stringify('production') }
+  }), new webpack.optimize.UglifyJsPlugin({
+      compressor: { warnings: false },
+      sourceMap: false
+  }));
+}
+
+module.exports = config;
