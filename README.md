@@ -208,6 +208,7 @@ npm start
 
 Open `http://localhost:8080/webpack-dev-server/` for auto-reloading.
 If you want to debug with React Dev Tools, `http://localhost:8080/` will be preferred.
+You can also view the store, and see the actions being fired, if you have [Redux DevTools extension](https://github.com/zalmoxisus/redux-devtools-extension) installed.
 
 ### Run test
 
