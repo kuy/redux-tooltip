@@ -71,7 +71,7 @@ class App extends React.Component {
 }
 ```
 
-#### 2. Wrap your content with an `Origin` component in Container or Presentatinal component
+#### 2. Wrap your content with an `Origin` component within a Container or Presentational component
 
 ```javascript
 import { Origin } from 'redux-tooltip';
