@@ -141,7 +141,6 @@ For advanced usage, you can override the default handlers; `onMouseEnter` and `o
 + `name` *(`string`|`string[]`)*: A name(s) to specify which tooltip(s) should be used.
 + `content` *(`string`|`DOM`|`DOM[]`)*: A content for tooltip. If string, it's sanitized by [DOMPurify](https://github.com/cure53/DOMPurify).
 + `place` *(`string`|`string[]`)*: A name of direction to specify a location of tooltip.
-+ `auto` *(`boolean`)*: A switch to enable/disable the auto-placement feature.
 + `tagName` *(`string`)*: A tag name of wrapper element. Default is `span`.
 + `delay` *(`boolean`|`number`|`string`)*: A number of duration for delay feature.
 + `delayOn` *(`string`)*: A name of timing to enable the delay. `show`, `hide`, or `both`. Default is `hide`.
