@@ -18,7 +18,7 @@ describe('actions', () => {
             value: 123
           },
           meta: {
-            'redux-tooltip/delay': {
+            'redux-tooltip/DELAY': {
               duration: 1500,
               callback: undefined,
             },
@@ -33,7 +33,7 @@ describe('actions', () => {
             value: 123
           },
           meta: {
-            'redux-tooltip/delay': {
+            'redux-tooltip/DELAY': {
               duration: 500,
               callback: undefined,
             },
@@ -49,7 +49,7 @@ describe('actions', () => {
             value: 123
           },
           meta: {
-            'redux-tooltip/delay': {
+            'redux-tooltip/DELAY': {
               duration: 1500,
               callback: fn,
             },
@@ -81,7 +81,7 @@ describe('actions', () => {
           },
           meta: {
             gem: 'bundler',
-            'redux-tooltip/delay': {
+            'redux-tooltip/DELAY': {
               duration: 1500,
               callback: undefined,
             },
