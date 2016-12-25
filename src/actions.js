@@ -23,7 +23,7 @@ export const keep = createAction(KEEP);
 export const content = createAction(CONTENT);
 export const place = createAction(PLACE);
 
-export const DELAY = prefix('delay');
+export const DELAY = prefix('DELAY');
 const DURATION = 1500;
 export function delay(action, { duration, callback } = { duration: DURATION }) {
   if (!action.meta) {
