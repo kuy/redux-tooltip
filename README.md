@@ -1,10 +1,9 @@
 [![NPM Package][npm_img]][npm_site]
 [![Travis][ci_img]][ci_site]
 [![Dependency Status][david_img]][david_site]
+[![Greenkeeper badge][gk_img]][gk_site]
 
 # redux-tooltip
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/kuy/redux-tooltip.svg)](https://greenkeeper.io/)
 
 A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/reactjs/redux).
 
@@ -258,3 +257,5 @@ Yuki Kodama / [@kuy](https://twitter.com/kuy)
 [ci_site]: https://travis-ci.org/kuy/redux-tooltip
 [david_img]: https://img.shields.io/david/kuy/redux-tooltip.svg
 [david_site]: https://david-dm.org/kuy/redux-tooltip
+[gk_img]: https://badges.greenkeeper.io/kuy/redux-tooltip.svg
+[gk_site]: https://greenkeeper.io/
