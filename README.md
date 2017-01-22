@@ -4,6 +4,8 @@
 
 # redux-tooltip
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kuy/redux-tooltip.svg)](https://greenkeeper.io/)
+
 A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/reactjs/redux).
 
 ## Features
