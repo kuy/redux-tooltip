@@ -145,8 +145,8 @@ For advanced usage, you can override the default handlers; `onMouseEnter` and `o
 + `delay` *(`boolean`|`number`|`string`)*: A number of duration for delay feature.
 + `delayOn` *(`string`)*: A name of timing to enable the delay. `show`, `hide`, or `both`. Default is `hide`.
 + `onTimeout` *(`Function`)*: A callback function when timeout by delay feature.
-+ `onMouseEnter` *(`Function`)*: An event handler of mouseenter.
-+ `onMouseLeave` *(`Function`)*: An event handler of mouseleave.
++ `onHover` *(`Function`)*: An event handler of mouseenter.
++ `onLeave` *(`Function`)*: An event handler of mouseleave.
 
 #### Origin.wrapBy(*tagName*)
 
