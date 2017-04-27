@@ -15,7 +15,9 @@ class Tooltip extends Component {
     return {
       // Props from state tree
       show: PropTypes.bool.isRequired,
-      origin: PropTypes.object,
+      origin: PropTypes.oneOfType([
+        PropTypes.object, PropTypes.string
+      ]),
       el: PropTypes.object,
       place: PropTypes.oneOfType([
         PropTypes.string, PropTypes.array

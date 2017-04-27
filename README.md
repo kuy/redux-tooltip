@@ -139,6 +139,7 @@ In most cases, you may use this component without any options.
 For advanced usage, you can override the default handlers; `onMouseEnter` and `onMouseLeave`.
 
 + `name` *(`string`|`string[]`)*: A name(s) to specify which tooltip(s) should be used.
++ `id` *(`string`)*: An unique identifier that will be used for tracking when storing a DOM node into the redux store is an issue (e.g using [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension))
 + `content` *(`string`|`DOM`|`DOM[]`)*: A content for tooltip. If string, it's sanitized by [DOMPurify](https://github.com/cure53/DOMPurify).
 + `place` *(`string`|`string[]`)*: A name of direction to specify a location of tooltip.
 + `tagName` *(`string`)*: A tag name of wrapper element. Default is `span`.

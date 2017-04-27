@@ -64,12 +64,14 @@ class Origin extends Component {
 
   componentWillUnmount(){
     // hide the tooltip
-    this.props.dispatch(hide({ ...this.props }));
+    const props = blacklist(this.props, 'children')
+    this.props.dispatch(hide({...props}));
   }
 
   createWithDelay(creator, extras = {}) {
     const { delay: duration, onTimeout: callback } = this.props;
-    let action = creator({ ...this.props, ...extras });
+    const props = blacklist(this.props, 'children')
+    let action = creator({ ...props, ...extras });
     if (duration || callback) {
       action = delay(action, { duration, callback });
     }
@@ -81,9 +83,10 @@ class Origin extends Component {
 
     if (!props.onMouseEnter) {
       props.onMouseEnter = e => {
+        const props = blacklist(this.props, 'children')
         const action = ['show', 'both'].indexOf(this.props.delayOn) !== -1
-          ? this.createWithDelay(show, { origin: e.target })
-          : show({ ...this.props, origin: e.target });
+          ? this.createWithDelay(show, { origin: e.target.id || e.target })
+          : show({ ...props, origin: e.target.id || e.target });
         this.props.dispatch(action);
         this.props.onHover && this.props.onHover(e);
       };
@@ -91,9 +94,10 @@ class Origin extends Component {
 
     if (!props.onMouseLeave) {
       props.onMouseLeave = e => {
+        const props = blacklist(this.props, 'children')
         const action = ['hide', 'both'].indexOf(this.props.delayOn) !== -1
           ? this.createWithDelay(hide)
-          : hide({ ...this.props });
+          : hide({...props});
         this.props.dispatch(action);
         this.props.onLeave && this.props.onLeave(e);
       };
