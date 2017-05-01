@@ -34,14 +34,19 @@ export function position(el) {
  *
  * @param {string} place - 'top', 'right', 'bottom', or 'left'.
  * @param {Object} content - DOM element that contains a content.
- * @param {Object} origin - DOM element or position object.
+ * @param {Object} origin - DOM element, element id or position object.
  * @return {Object} contains 'top', 'left', and extra keys.
  */
 export function placement(place, content, origin) {
   const gap = 12;
   const dim = dimension(content);
-  const pos = isDOM(origin) ? position(origin)
-    : { top: origin.y, right: origin.x, bottom: origin.y, left: origin.x, width: 0, height: 0 };
+  let pos = { top: origin.y, right: origin.x, bottom: origin.y, left: origin.x, width: 0, height: 0 }
+
+  if (isDOM(origin)) {
+    pos = position(origin)
+  } else if (typeof origin === 'string') {
+    pos = position(document.getElementById(origin))
+  }
 
   let offset = { width: dim.width, height: dim.height };
   switch(place) {
