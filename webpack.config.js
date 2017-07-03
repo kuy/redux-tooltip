@@ -5,7 +5,7 @@ var webpack = require('webpack');
 var config = {
   devtool: 'inline-source-map',
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
