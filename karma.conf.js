@@ -25,7 +25,7 @@ module.exports = function(config) {
         loaders: [
           {
             test: /\.js$/,
-            loader: 'babel',
+            loader: 'babel-loader',
             exclude: /node_modules/,
             query: {
               presets: ['react', 'es2015', 'stage-2', 'power-assert']
@@ -33,7 +33,7 @@ module.exports = function(config) {
           },
           {
             test: /\.json$/,
-            loader: 'json'
+            loader: 'json-loader'
           }
         ]
       },
