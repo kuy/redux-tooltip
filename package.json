@@ -19,7 +19,7 @@
     "test:feature:ci": "./node_modules/.bin/karma start karma.conf.js --single-run",
     "clean": "./node_modules/.bin/rimraf lib",
     "prepublish": "npm run clean && npm run build",
-    "postinstall": "npm run prepublish"
+    "postinstall": "npm run clean && npm run build"
   },
   "authors": [
     "Yuki Kodama <endflow.net@gmail.com>"
