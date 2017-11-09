@@ -58,7 +58,7 @@
     "mocha": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "power-assert": "^1.4.2",
-    "react": "^15.4.1",
+    "react": "^16.1.0",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
