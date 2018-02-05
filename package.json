@@ -34,7 +34,10 @@
   "dependencies": {
     "blacklist": "^1.1.4",
     "dompurify": "^0.8.4",
-    "is-dom": "^1.0.5"
+    "is-dom": "^1.0.5",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -58,9 +61,7 @@
     "mocha": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "power-assert": "^1.4.2",
-    "react": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
-    "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
