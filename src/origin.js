@@ -24,10 +24,8 @@ class Origin extends Component {
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.string)
       ]),
-      tag: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.func
-      ]),
+      tagName: PropTypes.string,
+      component: PropTypes.func,
       delay: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number,
@@ -45,20 +43,20 @@ class Origin extends Component {
   static get defaultProps() {
     return {
       delayOn: 'hide',
-      tag: 'span',
+      tagName: 'span',
     };
   }
 
-  static wrapBy(tag) {
+  static wrapBy(tagName) {
     class CustomOrigin extends Origin {
       static get displayName() {
-        return `${Origin.displayName}.${tag}`;
+        return `${Origin.displayName}.${tagName}`;
       }
 
       static get defaultProps() {
         return {
           ...Origin.defaultProps,
-          tag,
+          tagName,
         };
       }
     }
@@ -83,7 +81,7 @@ class Origin extends Component {
   }
 
   render() {
-    const props = blacklist(this.props, 'name', 'content', 'place', 'tag', 'delay', 'delayOn', 'dispatch', 'onTimeout', 'onHover', 'onLeave');
+    const props = blacklist(this.props, 'name', 'content', 'place', 'tagName', 'delay', 'delayOn', 'dispatch', 'onTimeout', 'onHover', 'onLeave');
 
     if (!props.onMouseEnter) {
       props.onMouseEnter = e => {
@@ -107,15 +105,15 @@ class Origin extends Component {
       };
     }
 
-    const WrappedComponent = this.props.tag;
+    const WrappedComponent = this.props.component;
 
     if (typeof WrappedComponent == 'function') {
-      return <WrappedComponent {...props} ref='wrapper'>
+      return <WrappedComponent onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} ref='wrapper'>
         {props.children}
       </WrappedComponent>
     }
 
-    return React.createElement(this.props.tag, {
+    return React.createElement(this.props.tagName, {
       ...props, ref: 'wrapper'
     });
   }
