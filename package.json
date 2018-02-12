@@ -34,7 +34,8 @@
   "dependencies": {
     "blacklist": "^1.1.4",
     "dompurify": "^0.8.4",
-    "is-dom": "^1.0.5"
+    "is-dom": "^1.0.5",
+    "prop-types": "15.6.0",
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
