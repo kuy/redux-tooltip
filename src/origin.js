@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import blacklist from 'blacklist';
 import { show, hide, delay } from './actions';
@@ -24,6 +25,7 @@ class Origin extends Component {
         PropTypes.arrayOf(PropTypes.string)
       ]),
       tagName: PropTypes.string,
+      component: PropTypes.func,
       delay: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number,
@@ -54,7 +56,7 @@ class Origin extends Component {
       static get defaultProps() {
         return {
           ...Origin.defaultProps,
-          tagName: tagName,
+          tagName,
         };
       }
     }
@@ -101,6 +103,14 @@ class Origin extends Component {
         this.props.dispatch(action);
         this.props.onLeave && this.props.onLeave(e);
       };
+    }
+
+    const WrappedComponent = this.props.component;
+
+    if (typeof WrappedComponent == 'function') {
+      return <WrappedComponent onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} ref='wrapper'>
+        {props.children}
+      </WrappedComponent>
     }
 
     return React.createElement(this.props.tagName, {
