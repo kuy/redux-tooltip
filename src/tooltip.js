@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { sanitize } from 'dompurify';
@@ -64,8 +65,8 @@ class Tooltip extends Component {
   updatePosition(props) {
     // Render content into hidden DOM element to determine size
     const content = this.children(props);
-    ReactDOM.render(<div>{content}</div>, this.refs.shadow, () => {
-      const state = adjust(this.refs.shadow, props);
+    ReactDOM.render(<div>{content}</div>, this.shadow, () => {
+      const state = adjust(this.shadow, props);
       this.setState(state);
     });
   }
@@ -95,7 +96,7 @@ class Tooltip extends Component {
     return (
       <div>
         <div
-          ref="tooltip"
+          ref={e => {this.tooltip = e;}}
           style={style.base}
           id={id}
           className={className}
@@ -103,7 +104,7 @@ class Tooltip extends Component {
           onMouseLeave={onLeave}
         >
           <div
-            ref="content"
+            ref={e => {this.content = e;}}
             style={style.content}
             id={`${id}-content`}
             className={`${className}-content`}
@@ -116,11 +117,11 @@ class Tooltip extends Component {
             className={`${className}-arrow`}
             key={`a-${place}`}
           >
-            <span ref="border" style={style.border} key={`b-${place}`}></span>
+            <span ref={e => {this.border = e;}} style={style.border} key={`b-${place}`}></span>
           </div>
         </div>
         <div
-          ref="shadow"
+          ref={e => {this.shadow = e;}}
           style={style.shadow}
           id={`${id}-shadow`}
           className={`${className}-shadow`}
