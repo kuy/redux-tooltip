@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import blacklist from 'blacklist';
 import { show, hide, delay } from './actions';
@@ -104,7 +105,7 @@ class Origin extends Component {
     }
 
     return React.createElement(this.props.tagName, {
-      ...props, ref: 'wrapper'
+      ...props, ref: e => {this.wrapper = e;}
     });
   }
 }
