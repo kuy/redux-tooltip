@@ -45,7 +45,7 @@
     "babel-preset-power-assert": "^1.0.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
-    "cssstyle": "^0.2.37",
+    "cssstyle": "^0.3.0",
     "deep-equal": "^1.0.1",
     "espower-babel": "^4.0.3",
     "json-loader": "^0.5.4",
