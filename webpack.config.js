@@ -5,11 +5,21 @@ var webpack = require('webpack');
 var config = {
   devtool: 'inline-source-map',
   module: {
-    loaders: [{
+    rules:  [{
       test: /\.js$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
     }],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        shared: {
+          name: "shared",
+          chunks: "all"
+        }
+      }
+    }
   },
   entry: {
     'simple': './examples/simple/index.js',
@@ -27,12 +37,6 @@ var config = {
     filename: '[name].bundle.js',
     publicPath: '/build'
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'shared',
-      filename: 'shared.js',
-    }),
-  ]
 };
 
 if (process.env.NODE_ENV === 'production') {

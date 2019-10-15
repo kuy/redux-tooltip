@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers';
-import logger from 'redux-logger';
+import {createLogger as logger} from 'redux-logger';
 import { middleware as tooltip } from '../../src/index';
 
 const list = [tooltip];

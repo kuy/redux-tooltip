@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {sanitize} from 'dompurify';
@@ -53,7 +54,7 @@ class Tooltip extends Component {
         this.state = {};
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const {place, content, children} = nextProps;
         const origin = originOrEl(nextProps);
         if (origin && (originOrEl(this.props) != origin || this.props.place !== place ||
