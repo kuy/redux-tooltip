@@ -1,6 +1,7 @@
 import * as themes from './themes';
 
-const theme = themes.simple;
+const lightTheme = themes.simple;
+const darkTheme = themes.dark;
 
 export const base = {
   padding: 0,
@@ -40,36 +41,40 @@ const horizontal = {
   marginTop: '-8px',
 };
 
-export const border = {
-  base: {
-    display: 'block',
-    width: 0,
-    height: 0,
-    position: 'absolute',
-    borderStyle: 'solid',
-  },
-  top: {
-    borderColor: theme.border.borderColor + ' transparent transparent transparent',
-    borderWidth: '9px 9px 0px 9px',
-    bottom: '-7px',
-    ...vertical,
-  },
-  right: {
-    borderColor: 'transparent ' + theme.border.borderColor + ' transparent transparent',
-    borderWidth: '9px 9px 9px 0px',
-    left: '-7px',
-    ...horizontal,
-  },
-  bottom: {
-    borderColor: 'transparent transparent ' + theme.border.borderColor +' transparent',
-    borderWidth: '0px 9px 9px 9px',
-    top: '-7px',
-    ...vertical,
-  },
-  left: {
-    borderColor: 'transparent transparent transparent ' + theme.border.borderColor,
-    borderWidth: '9px 0px 9px 9px',
-    right: '-7px',
-    ...horizontal,
-  },
+export const border = (isDarkTheme) => {
+
+    let borderColor = isDarkTheme ? darkTheme.border.borderColor : lightTheme.border.borderColor;
+    return {
+        base: {
+            display: 'block',
+            width: 0,
+            height: 0,
+            position: 'absolute',
+            borderStyle: 'solid',
+        },
+        top: {
+            borderColor: borderColor + ' transparent transparent transparent',
+            borderWidth: '9px 9px 0px 9px',
+            bottom: '-7px',
+            ...vertical,
+        },
+        right: {
+            borderColor: 'transparent ' + borderColor + ' transparent transparent',
+            borderWidth: '9px 9px 9px 0px',
+            left: '-7px',
+            ...horizontal,
+        },
+        bottom: {
+            borderColor: 'transparent transparent ' + borderColor + ' transparent',
+            borderWidth: '0px 9px 9px 9px',
+            top: '-7px',
+            ...vertical,
+        },
+        left: {
+            borderColor: 'transparent transparent transparent ' + borderColor,
+            borderWidth: '9px 0px 9px 9px',
+            right: '-7px',
+            ...horizontal,
+        },
+    };
 };
