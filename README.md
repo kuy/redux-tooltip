@@ -3,10 +3,6 @@
 [![Dependency Status][david_img]][david_site]
 [![Greenkeeper badge][gk_img]][gk_site]
 
-# MAINTAINER WANTED
-
-I'm looking for maintainers who lead the development of this package. Please contact me on [Issues](https://github.com/kuy/redux-tooltip/issues).
-
 # redux-tooltip
 
 A tooltip [React](https://facebook.github.io/react/) component for [Redux](https://github.com/reactjs/redux).
