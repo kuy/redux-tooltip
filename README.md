@@ -136,6 +136,7 @@ A tooltip component. Please wrap a content which should be shown in a tooltip.
 + `onLeave` *(`Function`)*: A callback function to be called on mouseout at tooltip.
 + `id` *(`string`)*: An `id` attribute passed to `<div>` element of a tooltip.
 + `className` *(`string`)*: A `class` attribute passed to `<div>` element of a tooltip.
++ `darkTheme` *(`boolean`)*: Specify whether dark mode should be used or not
 
 ### `<Origin />`
 
